@@ -190,8 +190,10 @@
     <None Include="Test.bat" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Empty-out.txt" />
     <Text Include="Hello-out.txt" />
     <Text Include="Hello.txt" />
+    <Text Include="Empty.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

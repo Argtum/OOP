@@ -42,5 +42,11 @@
     <Text Include="Hello-out.txt">
       <Filter>tests</Filter>
     </Text>
+    <Text Include="Empty.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="Empty-out.txt">
+      <Filter>tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>

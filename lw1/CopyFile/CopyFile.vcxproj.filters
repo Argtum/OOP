@@ -54,7 +54,10 @@
     <Text Include="MultiLine-out.txt">
       <Filter>tests</Filter>
     </Text>
-    <Text Include="expected-output-when-one-of-the-input-files-is-missing.txt">
+    <Text Include="expected-output-when-output-file-is-missing.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="expected-output-when-input-file-is-missing.txt">
       <Filter>tests</Filter>
     </Text>
   </ItemGroup>

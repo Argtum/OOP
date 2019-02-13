@@ -23,12 +23,12 @@ int main(int argc, char* argv[])
 	}
 
 	ofstream output(argv[2]);
-	/*
+	
 	if (!output.is_open())
 	{
 		cout << "Failed to open " << argv[2] << " for writing\n";
 		return 1;
-	}*/
+	}
 
 	string str = "";
 
@@ -38,13 +38,13 @@ int main(int argc, char* argv[])
 		if (!input.eof())
 			output << endl;
 	}
-	/*
+	
 	if (!output.flush())
 	{
 		cout << "Failed to save data on disk\n";
 		return 1;
 	}
-	*/
+	
 	input.close();
 	output.close();
 

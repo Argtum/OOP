@@ -191,8 +191,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Empty-out.txt" />
-    <Text Include="expected-output-when-one-of-the-input-files-is-missing.txt" />
     <Text Include="Empty.txt" />
+    <Text Include="expected-output-when-input-file-is-missing.txt" />
+    <Text Include="expected-output-when-output-file-is-missing.txt" />
     <Text Include="MultiLine-out.txt" />
     <Text Include="MultiLine.txt" />
     <Text Include="OneLine-out.txt" />

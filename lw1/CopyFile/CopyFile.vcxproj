@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{7C487CB5-FEFD-44F3-8A63-97BBAA2C3C22}</ProjectGuid>
+    <ProjectGuid>{9148FA03-0FB5-4334-9D88-BD720EBB81AE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CopyFile</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
@@ -191,9 +191,12 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Empty-out.txt" />
-    <Text Include="Hello-out.txt" />
-    <Text Include="Hello.txt" />
+    <Text Include="expected-output-when-one-of-the-input-files-is-missing.txt" />
     <Text Include="Empty.txt" />
+    <Text Include="MultiLine-out.txt" />
+    <Text Include="MultiLine.txt" />
+    <Text Include="OneLine-out.txt" />
+    <Text Include="OneLine.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

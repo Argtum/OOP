@@ -1,11 +1,18 @@
 set PROGRAM="%~1"
 set OUT="out.txt"
 
-%PROGRAM% Hello.txt OUT || goto err
-fc OUT Hello-out.txt || goto err
-
 %PROGRAM% Empty.txt OUT || goto err
 fc OUT Empty-out.txt || goto err
+
+%PROGRAM% OneLine.txt OUT || goto err
+fc OUT OneLine-out.txt || goto err
+
+%PROGRAM% MultiLine.txt OUT || goto err
+fc OUT MultiLine-out.txt 
+
+%PROGRAM% non-existing-file-name.txt %TEMP%\non-existing-file-name.txt > "%TEMP%\output.txt"
+if NOT ERRORLEVEL 1 goto err
+fc.exe "%TEMP%\output.txt" expected-output-when-input-file-is-missing.txt || goto err
 
 echo Program testing succeeded
 exit 0

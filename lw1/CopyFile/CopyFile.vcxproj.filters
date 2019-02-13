@@ -36,16 +36,25 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Hello.txt">
-      <Filter>tests</Filter>
-    </Text>
-    <Text Include="Hello-out.txt">
-      <Filter>tests</Filter>
-    </Text>
     <Text Include="Empty.txt">
       <Filter>tests</Filter>
     </Text>
     <Text Include="Empty-out.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="OneLine.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="OneLine-out.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="MultiLine.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="MultiLine-out.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="expected-output-when-one-of-the-input-files-is-missing.txt">
       <Filter>tests</Filter>
     </Text>
   </ItemGroup>

@@ -6,13 +6,13 @@
 using namespace std;
 
 int main(int argc, char* argv[])
-{ /*
+{ 
 	if (argc != 3)
 	{
 		cout << "Invalid arguments count\n"
 			 << "Usage: copyfile.exe <input file> <output file>\n";
 		return 1;
-	}*/
+	}
 
 	ifstream input(argv[1]);
 	

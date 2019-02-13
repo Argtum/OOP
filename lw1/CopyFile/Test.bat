@@ -14,6 +14,10 @@ fc OUT MultiLine-out.txt || goto err
 if NOT ERRORLEVEL 1 goto err
 fc "%TEMP%\output.txt" expected-output-when-input-file-is-missing.txt || goto err
 
+%PROGRAM% OneLine.txt > "%TEMP%\output.txt"
+if NOT ERRORLEVEL 1 goto err
+fc "%TEMP%\output.txt" expected-output-when-number-of-arguments-is-not-3.txt || goto err
+
 echo Program testing succeeded
 exit 0
 

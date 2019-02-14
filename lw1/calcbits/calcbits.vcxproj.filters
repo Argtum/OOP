@@ -42,5 +42,8 @@
     <Text Include="five-out.txt">
       <Filter>Tests</Filter>
     </Text>
+    <Text Include="expected-output-when-argument-wrong_type.txt">
+      <Filter>Tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>

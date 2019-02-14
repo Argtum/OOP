@@ -14,7 +14,19 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	cout << argv[1];
+	long number;
+
+	try
+	{
+		number = stoi(argv[1]);
+	}
+	catch (const exception &e)
+	{
+		cout << e.what() << '\n';
+		return 1;
+	}
+
+	cout << number;
 
 	return 0;
 }

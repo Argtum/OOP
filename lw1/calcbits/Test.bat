@@ -1,12 +1,20 @@
 set PROGRAM="%~1"
+set OUT="%TEMP%\out.txt"
 
-%PROGRAM% 5 > "%TEMP%\output.txt" || goto err
-fc "%TEMP%\output.txt" five-out.txt || goto err
+%PROGRAM% 5 > %OUT% || goto err
+fc %OUT% five-out.txt || goto err
 
 :: Проверка количества аргументов. Если не соответствует 2-м, то выводит сообщение об ошибке
-%PROGRAM% > "%TEMP%\output.txt"
+%PROGRAM% > %OUT%
 if NOT ERRORLEVEL 1 goto err
-fc "%TEMP%\output.txt" expected-output-when-number-of-arguments-is-not-2.txt || goto err
+fc %OUT% expected-output-when-number-of-arguments-is-not-2.txt || goto err
+
+:: Проверка типа аргументов. Если тип не соответствует, то выводит сообщение об ошибке
+%PROGRAM% Привет > %OUT%
+if NOT ERRORLEVEL 1 goto err
+fc %OUT% expected-output-when-argument-wrong_type.txt || goto err
+
+
 
 echo Program testing succeeded
 exit 0

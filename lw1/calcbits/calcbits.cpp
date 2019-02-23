@@ -14,11 +14,14 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	long number;
+
+	// всё неправильно, обработать вход посимвольно. Провирить символ вхдит ли в данню систему иисчисления
+
+	long long number;
 
 	try
 	{
-		number = stoi(argv[1]);
+		number = stoull(argv[1]);
 	}
 	catch (const exception &e)
 	{

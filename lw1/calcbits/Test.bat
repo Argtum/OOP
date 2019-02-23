@@ -14,7 +14,9 @@ fc %OUT% expected-output-when-number-of-arguments-is-not-2.txt || goto err
 if NOT ERRORLEVEL 1 goto err
 fc %OUT% expected-output-when-argument-wrong_type.txt || goto err
 
-
+%PROGRAM% -5 > %OUT%
+if NOT ERRORLEVEL 1 goto err
+fc %OUT% expected-output-when-argument-wrong_type.txt || goto err
 
 echo Program testing succeeded
 exit 0

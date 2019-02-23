@@ -1,1 +1,1 @@
-invalid stoi argument
+invalid stoull argument

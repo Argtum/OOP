@@ -19,6 +19,11 @@ fc "%TEMP%\output.txt" expected-output-when-input-file-is-missing.txt || goto er
 if NOT ERRORLEVEL 1 goto err
 fc "%TEMP%\output.txt" expected-output-when-number-of-arguments-is-not-3.txt || goto err
 
+:: Проверка количества аргументов. Если не соответствует 3-м, то выводит сообщение об ошибке
+%PROGRAM% OneLine.txt Empty.txt MultiLine.txt > "%TEMP%\output.txt"
+if NOT ERRORLEVEL 1 goto err
+fc "%TEMP%\output.txt" expected-output-when-number-of-arguments-is-not-3.txt || goto err
+
 echo Program testing succeeded
 exit 0
 

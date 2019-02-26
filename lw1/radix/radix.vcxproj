@@ -190,6 +190,7 @@
     <None Include="Test.bat" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="expected-output-when-incorrect-notation.txt" />
     <Text Include="expected-output-when-number-of-arguments-is-not-4.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

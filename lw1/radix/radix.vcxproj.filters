@@ -39,5 +39,8 @@
     <Text Include="expected-output-when-number-of-arguments-is-not-4.txt">
       <Filter>Tests</Filter>
     </Text>
+    <Text Include="expected-output-when-incorrect-notation.txt">
+      <Filter>Tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>

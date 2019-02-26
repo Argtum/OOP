@@ -13,8 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Tests">
-      <UniqueIdentifier>{6b40096f-1749-43cf-9099-68c79e107bea}</UniqueIdentifier>
+    <Filter Include="tests">
+      <UniqueIdentifier>{5672ac2b-687f-4ffc-b90d-720d8de6c796}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -26,7 +26,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="calcbits.cpp">
+    <ClCompile Include="multmatrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,14 +36,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="expected-output-when-number-of-arguments-is-not-2.txt">
-      <Filter>Tests</Filter>
+    <Text Include="expected-output-when-number-of-arguments-is-not-3.txt">
+      <Filter>tests</Filter>
     </Text>
-    <Text Include="five-out.txt">
-      <Filter>Tests</Filter>
+    <Text Include="empty.txt">
+      <Filter>tests</Filter>
     </Text>
-    <Text Include="expected-output-when-argument-wrong_type.txt">
-      <Filter>Tests</Filter>
+    <Text Include="expected-output-when-one-of-arguments-is-missing.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="matrix.txt">
+      <Filter>tests</Filter>
     </Text>
   </ItemGroup>
 </Project>

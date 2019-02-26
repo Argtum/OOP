@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{8F564F83-996D-431F-8623-805F589F2396}</ProjectGuid>
+    <ProjectGuid>{1BAC96DD-B918-48E5-AD8B-FDFD85F4F4E2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>calcbits</RootNamespace>
+    <RootNamespace>multmatrix</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -97,10 +97,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Running tests</Message>
+      <Command>Test.bat "$(TargetPath)"</Command>
+      <Message>Start Testing</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,10 +116,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Running tests</Message>
+      <Command>Test.bat "$(TargetPath)"</Command>
+      <Message>Start Testing</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,10 +139,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Running tests</Message>
+      <Command>Test.bat "$(TargetPath)"</Command>
+      <Message>Start Testing</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -168,17 +162,15 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Running tests</Message>
+      <Command>Test.bat "$(TargetPath)"</Command>
+      <Message>Start Testing</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="calcbits.cpp" />
+    <ClCompile Include="multmatrix.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -190,9 +182,10 @@
     <None Include="Test.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="expected-output-when-argument-wrong_type.txt" />
-    <Text Include="expected-output-when-number-of-arguments-is-not-2.txt" />
-    <Text Include="five-out.txt" />
+    <Text Include="empty.txt" />
+    <Text Include="expected-output-when-number-of-arguments-is-not-3.txt" />
+    <Text Include="expected-output-when-one-of-arguments-is-missing.txt" />
+    <Text Include="matrix.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

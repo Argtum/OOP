@@ -13,15 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="tests">
-      <UniqueIdentifier>{64e84c80-d835-4b4d-918b-cd24068e86f6}</UniqueIdentifier>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{3947f503-af25-4231-a5a6-4d9e956e6544}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dec2bin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,7 +26,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dec2bin.cpp">
+    <ClCompile Include="radix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,17 +36,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="expected-output-when-number-of-arguments-is-not-2.txt">
-      <Filter>tests</Filter>
-    </Text>
-    <Text Include="expected-output-when-arguments-is-not-decimal.txt">
-      <Filter>tests</Filter>
-    </Text>
-    <Text Include="expected-output-when-arguments-is-out-of-range.txt">
-      <Filter>tests</Filter>
-    </Text>
-    <Text Include="ten-out.txt">
-      <Filter>tests</Filter>
+    <Text Include="expected-output-when-number-of-arguments-is-not-4.txt">
+      <Filter>Tests</Filter>
     </Text>
   </ItemGroup>
 </Project>

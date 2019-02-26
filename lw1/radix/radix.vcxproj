@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{061CEB3A-6557-458C-8D79-7E98A9D36394}</ProjectGuid>
+    <ProjectGuid>{2AFD4EFB-4164-4424-B080-F311A3AA096A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>dec2bin</RootNamespace>
+    <RootNamespace>radix</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -97,8 +97,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
-      <Message>Running tests</Message>
+      <Command>Test.bat "$(TargetPath)"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Testing start</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -116,8 +118,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
-      <Message>Running tests</Message>
+      <Command>Test.bat "$(TargetPath)"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Testing start</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,8 +143,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
-      <Message>Running tests</Message>
+      <Command>Test.bat "$(TargetPath)"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Testing start</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -162,31 +168,29 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat "$(TargetPath)"</Command>
-      <Message>Running tests</Message>
+      <Command>Test.bat "$(TargetPath)"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Testing start</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="dec2bin.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dec2bin.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="radix.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Test.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="expected-output-when-arguments-is-not-decimal.txt" />
-    <Text Include="expected-output-when-arguments-is-out-of-range.txt" />
-    <Text Include="expected-output-when-number-of-arguments-is-not-2.txt" />
-    <Text Include="ten-out.txt" />
+    <Text Include="expected-output-when-number-of-arguments-is-not-4.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

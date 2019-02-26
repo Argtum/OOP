@@ -17,6 +17,10 @@ fc "%TEMP%\output.txt" expected-output-when-arguments-is-not-decimal.txt || goto
 if NOT ERRORLEVEL 1 goto err
 fc "%TEMP%\output.txt" expected-output-when-arguments-is-out-of-range.txt || goto err
 
+%PROGRAM% 10 > "%TEMP%\output.txt"
+if NOT ERRORLEVEL 1 goto err
+fc "%TEMP%\output.txt" ten-out.txt || goto err
+
 echo Program testing succeeded
 exit 0
 

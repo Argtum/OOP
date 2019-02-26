@@ -5,10 +5,11 @@
 
 using namespace std;
 
+const unsigned int ARGUMENT_COUNT = 3;
+
 bool CopyFile(ifstream& inputFile, ofstream& outputFile)
 {
 	string str = "";
-	bool isSuccessfulСopied = true;
 
 	while (getline(inputFile, str))
 	{
@@ -17,15 +18,12 @@ bool CopyFile(ifstream& inputFile, ofstream& outputFile)
 			outputFile << endl;
 	}
 
-	if (!inputFile.eof())
-		isSuccessfulСopied = false;
-
-	return isSuccessfulСopied;
+	return inputFile.eof();
 }
 
 int main(int argc, char* argv[])
 {
-	if (argc != 3)
+	if (argc != ARGUMENT_COUNT)
 	{
 		cout << "Invalid arguments count\n"
 			 << "Usage: copyfile.exe <input file> <output file>\n";

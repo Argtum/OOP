@@ -42,5 +42,11 @@
     <Text Include="expected-output-when-incorrect-notation.txt">
       <Filter>Tests</Filter>
     </Text>
+    <Text Include="expected-output-when-incorrect-value.txt">
+      <Filter>Tests</Filter>
+    </Text>
+    <Text Include="Ten.txt">
+      <Filter>Tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -9,6 +9,10 @@ fc "%TEMP%\output.txt" expected-output-when-number-of-arguments-is-not-4.txt || 
 if NOT ERRORLEVEL 1 goto err
 fc "%TEMP%\output.txt" expected-output-when-number-of-arguments-is-not-4.txt || goto err
 
+%PROGRAM% 10 2 10 > "%TEMP%\output.txt"
+if NOT ERRORLEVEL 1 goto err
+fc "%TEMP%\output.txt" expected-output-when-incorrect-notation.txt || goto err
+
 %PROGRAM% 1 10 0 > "%TEMP%\output.txt"
 if NOT ERRORLEVEL 1 goto err
 fc "%TEMP%\output.txt" expected-output-when-incorrect-notation.txt || goto err
@@ -17,9 +21,15 @@ fc "%TEMP%\output.txt" expected-output-when-incorrect-notation.txt || goto err
 if NOT ERRORLEVEL 1 goto err
 fc "%TEMP%\output.txt" expected-output-when-incorrect-notation.txt || goto err
 
-%PROGRAM% 2 10 3 > "%TEMP%\output.txt"
+%PROGRAM% 2 Привет 1 > "%TEMP%\output.txt"
 if NOT ERRORLEVEL 1 goto err
-fc "%TEMP%\output.txt" expected-output-when-incorrect-number.txt || goto err
+fc "%TEMP%\output.txt" expected-output-when-incorrect-notation.txt || goto err
+
+%PROGRAM% 2 10 Hello > "%TEMP%\output.txt"
+if NOT ERRORLEVEL 1 goto err
+fc "%TEMP%\output.txt" expected-output-when-incorrect-value.txt || goto err
+
+
 
 echo Program testing succeeded
 exit 0

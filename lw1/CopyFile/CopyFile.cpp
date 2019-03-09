@@ -7,46 +7,34 @@ using namespace std;
 
 const unsigned int ARGUMENT_COUNT = 3;
 
-bool CopyFile(ifstream& inputFile, ofstream& outputFile)
+int CopyFile(const string& inputFileName, const string& outputFileName)
 {
-	string str = "";
-
-	while (getline(inputFile, str))
-	{
-		outputFile << str;
-		if (!inputFile.eof())
-			outputFile << endl;
-	}
-
-	return inputFile.eof();
-}
-
-int main(int argc, char* argv[])
-{
-	if (argc != ARGUMENT_COUNT)
-	{
-		cout << "Invalid arguments count\n"
-			 << "Usage: copyfile.exe <input file> <output file>\n";
-		return 1;
-	}
-
-	ifstream input(argv[1]);
+	ifstream input(inputFileName);
 
 	if (!input.is_open())
 	{
-		cout << "Failed to open " << argv[1] << " for reading\n";
+		cout << "Failed to open " << inputFileName << " for reading\n";
 		return 1;
 	}
 
-	ofstream output(argv[2]);
+	ofstream output(outputFileName);
 
 	if (!output.is_open())
 	{
-		cout << "Failed to open " << argv[2] << " for writing\n";
+		cout << "Failed to open " << outputFileName << " for writing\n";
 		return 1;
 	}
 
-	if (!CopyFile(input, output))
+	string str;
+
+	while (getline(input, str))
+	{
+		output << str;
+		if (!input.eof())
+			output << endl;
+	}
+
+	if (!input.eof())
 	{
 		cout << "Failed to copy\n";
 		return 1;
@@ -59,4 +47,16 @@ int main(int argc, char* argv[])
 	}
 
 	return 0;
+}
+
+int main(int argc, char* argv[])
+{
+	if (argc != ARGUMENT_COUNT)
+	{
+		cout << "Invalid arguments count\n"
+			 << "Usage: copyfile.exe <input file> <output file>\n";
+		return 1;
+	}
+
+	return CopyFile(argv[1], argv[2]);
 }

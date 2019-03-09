@@ -191,7 +191,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="expected-output-when-incorrect-notation.txt" />
+    <Text Include="expected-output-when-incorrect-value.txt" />
     <Text Include="expected-output-when-number-of-arguments-is-not-4.txt" />
+    <Text Include="Ten.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

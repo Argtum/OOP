@@ -14,8 +14,7 @@ enum class Status
 	Ok,
 	WrongArgumentCount,
 	InvalidInputFile,
-	WrongInputData,
-	CanNotInvertMatrix
+	WrongInputData
 };
 
 const unsigned int ARGUMENT_COUNT = 2;
@@ -40,11 +39,6 @@ void printError(Status error)
 		cout << "Invalid input data\n"
 			 << "Program works with 3x3 matrix\n";
 	}
-	else if (error == Status::CanNotInvertMatrix)
-	{
-		cout << "Invalid matrix\n"
-			 << "Discriminant is 0. This matrix cannot be inverted\n";
-	}
 }
 
 void readMatrix(string fileName, Matrix& matrix, Status& status)
@@ -60,17 +54,20 @@ void readMatrix(string fileName, Matrix& matrix, Status& status)
 	}
 	else
 	{
-		while (getline(inputFile, line) && status == Status::Ok)
+		while (getline(inputFile, line) && status == Status::Ok && row < MATRIX_SIZE + 1)
 		{
-			col = 0;
-
 			if (row < MATRIX_SIZE)
 			{
-				stringstream stringIterator(line);
-				
-				while (!stringIterator.eof())
+				col = 0;
+				istringstream stringIterator(line);
+
+				while (stringIterator && col < MATRIX_SIZE + 1)
 				{
-					stringIterator >> matrix[row][col];
+					if (col < MATRIX_SIZE)
+					{
+						stringIterator >> matrix[row][col];
+					}
+
 					col++;
 				}
 
@@ -111,28 +108,11 @@ void PrintMatrix(const Matrix& resultMatrix)
 		cout << endl;
 	}
 }
-/*
-bool isDeterminantNotNull(Matrix& matrix)
-{
-	return matrix[0][0] * matrix[1][1] * matrix[2][2] + matrix[0][1] * matrix[1][2] * matrix[2][0] + matrix[0][2] * matrix[1][0] * matrix[2][1] - matrix[0][2] * matrix[1][1] * matrix[2][0] - matrix[0][0] * matrix[1][2] * matrix[2][1] - matrix[0][1] * matrix[1][0] * matrix[2][2] != 0;
-}
 
-void invertMatrix(Matrix& inputMatrix, Matrix& resultMatrix, Status& status)
-{
-	if (isDeterminantNotNull(inputMatrix))
-	{
-
-	}
-	else
-	{
-		status = Status::CanNotInvertMatrix;
-	}
-}
-*/
 int main(int argc, char* argv[])
 {
 	Status status = Status::Ok;
-	Matrix inputMatrix;//, resultMatrix;
+	Matrix inputMatrix, resultMatrix;
 
 	checkArgumentNumber(argc, status);
 

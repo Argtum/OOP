@@ -43,7 +43,7 @@ void printError(Status error)
 	else if (error == Status::CanNotInvertMatrix)
 	{
 		cout << "Invalid matrix\n"
-			 << "Discriminant is 0. This matrix cannot be inverted\n";
+			 << "Determinant is 0. This matrix cannot be inverted\n";
 	}
 }
 
@@ -67,7 +67,7 @@ void readMatrix(string fileName, Matrix& matrix, Status& status)
 			if (row < MATRIX_SIZE)
 			{
 				stringstream stringIterator(line);
-				
+
 				while (!stringIterator.eof())
 				{
 					stringIterator >> matrix[row][col];
@@ -111,28 +111,41 @@ void PrintMatrix(const Matrix& resultMatrix)
 		cout << endl;
 	}
 }
-/*
-bool isDeterminantNotNull(Matrix& matrix)
+
+bool isDeterminantNotNull(Matrix& matrix, double& determinant)
 {
-	return matrix[0][0] * matrix[1][1] * matrix[2][2] + matrix[0][1] * matrix[1][2] * matrix[2][0] + matrix[0][2] * matrix[1][0] * matrix[2][1] - matrix[0][2] * matrix[1][1] * matrix[2][0] - matrix[0][0] * matrix[1][2] * matrix[2][1] - matrix[0][1] * matrix[1][0] * matrix[2][2] != 0;
+	for (int i = 0; i < MATRIX_SIZE; i++)
+	{
+		determinant = determinant + (matrix[0][i] * (matrix[1][(i + 1) % MATRIX_SIZE] * matrix[2][(i + 2) % MATRIX_SIZE] - matrix[1][(i + 2) % MATRIX_SIZE] * matrix[2][(i + 1) % MATRIX_SIZE]));
+	}
+
+	return determinant != 0;
 }
 
 void invertMatrix(Matrix& inputMatrix, Matrix& resultMatrix, Status& status)
 {
-	if (isDeterminantNotNull(inputMatrix))
-	{
+	double determinant = 0;
 
+	if (isDeterminantNotNull(inputMatrix, determinant))
+	{
+		for (int col = 0; col < MATRIX_SIZE; col++)
+		{
+			for (int row = 0; row < MATRIX_SIZE; row++)
+			{
+				resultMatrix[row][col] = ((inputMatrix[(row + 1) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE] * inputMatrix[(row + 2) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE]) - (inputMatrix[(row + 1) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE] * inputMatrix[(row + 2) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE])) / determinant;
+			}
+		}
 	}
 	else
 	{
 		status = Status::CanNotInvertMatrix;
 	}
 }
-*/
+
 int main(int argc, char* argv[])
 {
 	Status status = Status::Ok;
-	Matrix inputMatrix;//, resultMatrix;
+	Matrix inputMatrix, resultMatrix;
 
 	checkArgumentNumber(argc, status);
 
@@ -143,12 +156,12 @@ int main(int argc, char* argv[])
 
 	if (status == Status::Ok)
 	{
-		//invertMatrix(inputMatrix, resultMatrix, status);
+		invertMatrix(inputMatrix, resultMatrix, status);
 	}
 
 	if (status == Status::Ok)
 	{
-		PrintMatrix(inputMatrix);
+		PrintMatrix(resultMatrix);
 	}
 	else
 	{

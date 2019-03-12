@@ -1,0 +1,2 @@
+Invalid matrix
+Determinant is 0. This matrix cannot be inverted

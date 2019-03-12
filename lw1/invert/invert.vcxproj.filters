@@ -66,5 +66,11 @@
     <Text Include="3x2-matrix-out.txt">
       <Filter>tests</Filter>
     </Text>
+    <Text Include="matrix-with-determinant-equale-null.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="expected-output-when-matrix-determinate-is-0.txt">
+      <Filter>tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>

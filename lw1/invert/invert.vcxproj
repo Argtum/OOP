@@ -198,8 +198,10 @@
     <Text Include="3x3-matrix.txt" />
     <Text Include="4x4-matrix-out.txt" />
     <Text Include="4x4-matrix.txt" />
+    <Text Include="expected-output-when-matrix-determinate-is-0.txt" />
     <Text Include="expected-output-when-number-of-arguments-is-not-2.txt" />
     <Text Include="expected-output-when-one-of-arguments-is-missing.txt" />
+    <Text Include="matrix-with-determinant-equale-null.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,22 +1,7 @@
 #include "pch.h"
-#include <array>
-#include <fstream>
-#include <iomanip>
-#include <iostream>
-#include <iterator>
-#include <sstream>
-#include <string>
+#include "invert.h"
 
 using namespace std;
-
-enum class Status
-{
-	Ok,
-	WrongArgumentCount,
-	InvalidInputFile,
-	WrongInputData,
-	CanNotInvertMatrix
-};
 
 const unsigned int ARGUMENT_COUNT = 2;
 const unsigned int MATRIX_SIZE = 3;

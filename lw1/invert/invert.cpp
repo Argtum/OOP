@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "invert.h"
+#include "errors.h"
 
 using namespace std;
 
@@ -7,30 +8,6 @@ const unsigned int ARGUMENT_COUNT = 2;
 const unsigned int MATRIX_SIZE = 3;
 
 using Matrix = array<array<double, MATRIX_SIZE + 1>, MATRIX_SIZE + 1>;
-
-void printError(Status error)
-{
-	if (error == Status::WrongArgumentCount)
-	{
-		cout << "Invalid arguments count\n"
-			 << "Usage: invert.exe <matrix file>\n";
-	}
-	else if (error == Status::InvalidInputFile)
-	{
-		cout << "Invalid input file\n"
-			 << "Can't open input files\n";
-	}
-	else if (error == Status::WrongInputData)
-	{
-		cout << "Invalid input data\n"
-			 << "Program works with 3x3 matrix\n";
-	}
-	else if (error == Status::CanNotInvertMatrix)
-	{
-		cout << "Invalid matrix\n"
-			 << "Determinant is 0. This matrix cannot be inverted\n";
-	}
-}
 
 void readMatrix(string fileName, Matrix& matrix, Status& status)
 {

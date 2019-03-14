@@ -10,3 +10,5 @@ enum class Status
 	WrongInputData,
 	CanNotInvertMatrix
 };
+
+void printError(Status error);

@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "invert.h"
 
 using namespace std;
 

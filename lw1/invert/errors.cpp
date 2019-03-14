@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "errors.h"
 
 void printError(Status error)
 {

@@ -180,7 +180,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="errors.h" />
-    <ClInclude Include="invert.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

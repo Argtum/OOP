@@ -9,6 +9,14 @@
 #ifndef PCH_H
 #define PCH_H
 
-// TODO: add headers that you want to pre-compile here
+#include "errors.h"
+
+#include <array>
+#include <fstream>
+#include <iomanip>
+#include <iterator>
+#include <sstream>
+#include <string>
+#include <iostream>
 
 #endif //PCH_H

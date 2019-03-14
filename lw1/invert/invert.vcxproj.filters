@@ -78,5 +78,11 @@
     <Text Include="expected-output-when-matrix-determinate-is-0.txt">
       <Filter>tests</Filter>
     </Text>
+    <Text Include="empty.txt">
+      <Filter>tests</Filter>
+    </Text>
+    <Text Include="empty-out.txt">
+      <Filter>tests</Filter>
+    </Text>
   </ItemGroup>
 </Project>

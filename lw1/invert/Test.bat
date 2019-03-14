@@ -25,6 +25,9 @@ fc %OUT% 3x2-matrix-out.txt || goto err
 %PROGRAM% matrix-with-determinant-equale-null.txt > %OUT% || goto err
 fc %OUT% expected-output-when-matrix-determinate-is-0.txt || goto err
 
+%PROGRAM% empty.txt > %OUT% || goto err
+fc %OUT% empty-out.txt || goto err
+
 echo Program testing succeeded
 exit 0
 

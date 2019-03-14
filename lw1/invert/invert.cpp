@@ -5,10 +5,19 @@ using namespace std;
 const unsigned int ARGUMENT_COUNT = 2;
 const unsigned int MATRIX_SIZE = 3;
 
+enum class Status
+{
+	Ok,
+	InvalidInputFile,
+	WrongInputData
+};
+
 using Matrix = array<array<double, MATRIX_SIZE + 1>, MATRIX_SIZE + 1>;
 
-void readMatrix(string fileName, Matrix& matrix, Status& status)
+Status ReadMatrix(const string& fileName, Matrix& matrix)
 {
+	Status status = Status::Ok;
+
 	ifstream inputFile(fileName);
 	string line;
 	int row = 0;
@@ -20,7 +29,7 @@ void readMatrix(string fileName, Matrix& matrix, Status& status)
 	}
 	else
 	{
-		while (getline(inputFile, line) && status == Status::Ok)
+		while (getline(inputFile, line))
 		{
 			col = 0;
 
@@ -28,9 +37,12 @@ void readMatrix(string fileName, Matrix& matrix, Status& status)
 			{
 				stringstream stringIterator(line);
 
-				while (!stringIterator.eof())
+				while (!stringIterator.eof()&& status != Status::WrongInputData)
 				{
-					stringIterator >> matrix[row][col];
+					if (!(stringIterator >> matrix[row][col]))
+					{
+						status = Status::WrongInputData;
+					}
 					col++;
 				}
 
@@ -48,14 +60,20 @@ void readMatrix(string fileName, Matrix& matrix, Status& status)
 			status = Status::WrongInputData;
 		}
 	}
+
+	return status;
 }
 
-void checkArgumentNumber(int argc, Status& status)
+bool CheckArgumentNumber(int argc)
 {
+	bool isMatchNumberOfArguments = true;
+
 	if (argc != ARGUMENT_COUNT)
 	{
-		status = Status::WrongArgumentCount;
+		isMatchNumberOfArguments = false;
 	}
+
+	return isMatchNumberOfArguments;
 }
 
 void PrintMatrix(const Matrix& resultMatrix)
@@ -72,61 +90,81 @@ void PrintMatrix(const Matrix& resultMatrix)
 	}
 }
 
-bool isDeterminantNotNull(Matrix& matrix, double& determinant)
-{
-	for (int i = 0; i < MATRIX_SIZE; i++)
-	{
-		determinant = determinant + (matrix[0][i] * (matrix[1][(i + 1) % MATRIX_SIZE] * matrix[2][(i + 2) % MATRIX_SIZE] - matrix[1][(i + 2) % MATRIX_SIZE] * matrix[2][(i + 1) % MATRIX_SIZE]));
-	}
-
-	return determinant != 0;
-}
-
-void invertMatrix(Matrix& inputMatrix, Matrix& resultMatrix, Status& status)
+double CalcDeterminant(const Matrix& matrix)
 {
 	double determinant = 0;
 
-	if (isDeterminantNotNull(inputMatrix, determinant))
+	for (int i = 0; i < MATRIX_SIZE; i++)
+	{
+		determinant = determinant
+			+ (matrix[0][i] * (matrix[1][(i + 1) % MATRIX_SIZE] * matrix[2][(i + 2) % MATRIX_SIZE]
+				- matrix[1][(i + 2) % MATRIX_SIZE] * matrix[2][(i + 1) % MATRIX_SIZE]));
+	}
+
+	return determinant;
+}
+
+bool InvertMatrix(const Matrix& inputMatrix, Matrix& resultMatrix)
+{
+	double determinant = CalcDeterminant(inputMatrix);
+	bool isDeterminantNotEqualeNull = true;
+
+	if (determinant == 0)
+	{
+		isDeterminantNotEqualeNull = false;
+	}
+	else
 	{
 		for (int col = 0; col < MATRIX_SIZE; col++)
 		{
 			for (int row = 0; row < MATRIX_SIZE; row++)
 			{
-				resultMatrix[row][col] = ((inputMatrix[(row + 1) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE] * inputMatrix[(row + 2) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE]) - (inputMatrix[(row + 1) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE] * inputMatrix[(row + 2) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE])) / determinant;
+				resultMatrix[col][row] = ((inputMatrix[(row + 1) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE]
+											  * inputMatrix[(row + 2) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE])
+											 - (inputMatrix[(row + 1) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE]
+												 * inputMatrix[(row + 2) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE]))
+					/ determinant;
 			}
 		}
 	}
-	else
-	{
-		status = Status::CanNotInvertMatrix;
-	}
+
+	return isDeterminantNotEqualeNull;
 }
 
 int main(int argc, char* argv[])
 {
-	Status status = Status::Ok;
 	Matrix inputMatrix, resultMatrix;
 
-	checkArgumentNumber(argc, status);
-
-	if (status == Status::Ok)
+	if (!CheckArgumentNumber(argc))
 	{
-		readMatrix(argv[1], inputMatrix, status);
+		cout << "Invalid arguments count\n"
+			 << "Usage: invert.exe <matrix file>\n";
+		return 1;
 	}
 
-	if (status == Status::Ok)
+	Status readStatus = ReadMatrix(argv[1], inputMatrix);
+
+	if (readStatus == Status::InvalidInputFile)
 	{
-		invertMatrix(inputMatrix, resultMatrix, status);
+		cout << "Invalid input file\n"
+			 << "Can't open input files\n";
+		return 1;
+	}
+	else if (readStatus == Status::WrongInputData)
+	{
+		cout << "Invalid input data\n"
+			 << "Program works with 3x3 matrix consisting of numbers\n";
+		return 1;
 	}
 
-	if (status == Status::Ok)
+	if (!InvertMatrix(inputMatrix, resultMatrix))
 	{
-		PrintMatrix(resultMatrix);
+		std::cout << "Invalid matrix\n"
+				  << "Determinant is 0. This matrix cannot be inverted\n";
+		return 1;
 	}
-	else
-	{
-		printError(status);
-	}
+
+	PrintMatrix(resultMatrix);
 
 	return 0;
 }

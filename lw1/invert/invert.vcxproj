@@ -179,11 +179,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="errors.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="errors.cpp" />
     <ClCompile Include="invert.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -210,6 +208,8 @@
     <Text Include="expected-output-when-number-of-arguments-is-not-2.txt" />
     <Text Include="expected-output-when-one-of-arguments-is-missing.txt" />
     <Text Include="matrix-with-determinant-equale-null.txt" />
+    <Text Include="matrix-with-word-out.txt" />
+    <Text Include="matrix-with-word.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

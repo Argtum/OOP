@@ -1,2 +1,2 @@
 Invalid input data
-Program works with 3x3 matrix
+Program works with 3x3 matrix consisting of numbers

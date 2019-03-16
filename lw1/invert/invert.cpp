@@ -107,28 +107,25 @@ double CalcDeterminant(const Matrix& matrix)
 bool InvertMatrix(const Matrix& inputMatrix, Matrix& resultMatrix)
 {
 	double determinant = CalcDeterminant(inputMatrix);
-	bool isDeterminantNotEqualeNull = true;
 
 	if (determinant == 0)
 	{
-		isDeterminantNotEqualeNull = false;
+		return false;
 	}
-	else
+
+	for (int col = 0; col < MATRIX_SIZE; col++)
 	{
-		for (int col = 0; col < MATRIX_SIZE; col++)
+		for (int row = 0; row < MATRIX_SIZE; row++)
 		{
-			for (int row = 0; row < MATRIX_SIZE; row++)
-			{
-				resultMatrix[col][row] = ((inputMatrix[(row + 1) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE]
-											  * inputMatrix[(row + 2) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE])
-											 - (inputMatrix[(row + 1) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE]
-												 * inputMatrix[(row + 2) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE]))
-					/ determinant;
-			}
+			resultMatrix[col][row] = ((inputMatrix[(row + 1) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE]
+											* inputMatrix[(row + 2) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE])
+										- (inputMatrix[(row + 1) % MATRIX_SIZE][(col + 2) % MATRIX_SIZE]
+											* inputMatrix[(row + 2) % MATRIX_SIZE][(col + 1) % MATRIX_SIZE]))
+				/ determinant;
 		}
 	}
 
-	return isDeterminantNotEqualeNull;
+	return true;
 }
 
 int main(int argc, char* argv[])

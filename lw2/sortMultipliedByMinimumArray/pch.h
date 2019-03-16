@@ -5,8 +5,8 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include <stdio.h>
 #include <iterator>
+#include <algorithm>
 
 using namespace std;
 

@@ -20,7 +20,15 @@ vector<double> ReadVector(istream& inputStream)
 	return vec;
 }
 
-void PrintVector(vector<double> vec)
+void ProcessVector(vector<double> vec)
 {
+	vector<double>::iterator minValue = min_element(vec.begin(), vec.end());
+	vector<double>::iterator vectorElement;
 
+	sort(vec.begin(), vec.end());
+}
+
+void PrintVector(vector<double>& vec)
+{
+	copy(vec.begin(), vec.end(), ostream_iterator<double>(cout, " "));
 }

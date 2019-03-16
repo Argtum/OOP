@@ -3,7 +3,8 @@
 
 int main()
 {
-	vector<double> vec = ReadInputVector(cin);
+	vector<double> vec = ReadVector(cin);
+	PrintVector(vec);
 
 	return 0;
 }

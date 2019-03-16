@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "process_vector.h"
 
-vector<double> ReadInputVector(istream& inputStream)
+vector<double> ReadVector(istream& inputStream)
 {
 	vector<double> vec;
 	double value;
@@ -12,4 +12,9 @@ vector<double> ReadInputVector(istream& inputStream)
 	}
 
 	return vec;
+}
+
+void PrintVector(vector<double> vec)
+{
+
 }

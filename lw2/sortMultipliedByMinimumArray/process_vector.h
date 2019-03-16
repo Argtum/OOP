@@ -2,4 +2,5 @@
 
 #include "pch.h"
 
-vector<double> ReadInputVector(istream& inputStream);
+vector<double> ReadVector(istream& inputStream);
+void PrintVector(vector<double> vec);

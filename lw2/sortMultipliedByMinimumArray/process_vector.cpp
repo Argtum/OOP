@@ -4,11 +4,17 @@
 vector<double> ReadVector(istream& inputStream)
 {
 	vector<double> vec;
-	double value;
 
-	while (inputStream >> value)
+	string line;
+	if (getline(inputStream, line))
 	{
-		vec.push_back(value);
+		istringstream stringIterator(line);
+		vec = vector<double>(istream_iterator<double>(stringIterator), istream_iterator<double>());
+
+		if (!stringIterator.eof())
+		{
+			vec.clear();
+		}
 	}
 
 	return vec;

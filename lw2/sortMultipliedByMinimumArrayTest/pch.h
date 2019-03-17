@@ -4,12 +4,12 @@
 #include <catch2/catch.hpp>
 
 #include <algorithm>
+#include <functional>
 #include <iostream>
 #include <iterator>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <functional> 
 
 using namespace std;
 

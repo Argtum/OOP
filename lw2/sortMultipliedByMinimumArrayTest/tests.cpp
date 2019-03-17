@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "../sortMultipliedByMinimumArray/process_vector.h"
-#include "../sortMultipliedByMinimumArray/utility.h"
+#include "lw2/sortMultipliedByMinimumArray/process_vector.h"
+#include "lw2/sortMultipliedByMinimumArray/utility.h"
 
 TEST_CASE("ReadVector - funcrion must return vector<double>")
 {
@@ -17,14 +17,14 @@ TEST_CASE("ReadVector - funcrion must return vector<double>")
 	inputStream.clear();
 	inputStream.str("        -2 3.14           0");
 	expectedResult = { -2, 3.14, 0 };
-	
+
 	CHECK(expectedResult == ReadVector(inputStream));
 
 	/*incorrect input: have row*/
 	inputStream.clear();
 	inputStream.str("2 and 4");
 	expectedResult = {};
-	
+
 	CHECK(expectedResult == ReadVector(inputStream));
 }
 
@@ -41,8 +41,8 @@ TEST_CASE("VectorScalarMultiplication - return a vector, each element of which i
 	vector<double> incomingVector, outcomingVector;
 	double multiplier = -1.5;
 
-	incomingVector = {-2.5, 3, 1.5};
-	outcomingVector = {3.75, -4.5, -2.25};
+	incomingVector = { -2.5, 3, 1.5 };
+	outcomingVector = { 3.75, -4.5, -2.25 };
 
 	CHECK(outcomingVector == GetVectorScalarMultiplication(incomingVector, multiplier));
 }
@@ -51,7 +51,7 @@ TEST_CASE("MultipliedByMinimum - return a vector, each element of which is multi
 {
 	vector<double> incomingVector, outcomingVector;
 
-	incomingVector = { -2.5, 3, 1.5, 0};
+	incomingVector = { -2.5, 3, 1.5, 0 };
 	outcomingVector = { 6.25, -7.5, -3.75, 0 };
 
 	CHECK(outcomingVector == GetMultipliedByMinimum(incomingVector));

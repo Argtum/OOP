@@ -29,9 +29,10 @@ double GetMinValue(vector<double>& vec)
 
 bool VectorScalarMultiplication(vector<double>& vec, double multiplier)
 {
-	for (auto& item : vec)
+	for (double& item : vec)
 	{
-		if (multiplier * item > numeric_limits<double>::max())
+		if (multiplier * item > numeric_limits<double>::max() 
+			|| multiplier * item < numeric_limits<double>::lowest())
 		{
 			return false;
 		}

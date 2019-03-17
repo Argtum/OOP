@@ -56,14 +56,13 @@ TEST_CASE("MultipliedByMinimum - return a vector, each element of which is multi
 
 	CHECK(outcomingVector == GetMultipliedByMinimum(incomingVector));
 
-	/* incoming vector where minimum value equal 0 */
-	incomingVector = { 2.5, 3, 1.5, 0 };
-	outcomingVector = { 0, 0, 0, 0 };
-
-	CHECK(outcomingVector == GetMultipliedByMinimum(incomingVector));
-
-	/* overflow */
+	/* overflow max */
 	incomingVector = { 2.5, DBL_MAX };
+
+	CHECK(false == MultipliedByMinimum(incomingVector));
+
+	/* overflow min */
+	incomingVector = { -2.5, DBL_MAX };
 
 	CHECK(false == MultipliedByMinimum(incomingVector));
 }

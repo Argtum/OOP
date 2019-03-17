@@ -20,31 +20,49 @@ vector<double> ReadVector(istream& inputStream)
 	return vec;
 }
 
-double GetMinValue(vector<double> vec)
+double GetMinValue(vector<double>& vec)
 {
 	vector<double>::iterator minValue = min_element(vec.begin(), vec.end());
 
 	return *minValue;
 }
 
-void VectorScalarMultiplication(vector<double> vec, double multiplier)
+void VectorScalarMultiplication(vector<double>& vec, double multiplier)
 {
-
+	for (auto& item : vec)
+	{
+		item *= multiplier;
+	}
 }
-
+/*
 void SortVector(vector<double> vec)
 {
 	sort(vec.begin(), vec.end());
 }
-
-void ProcessVector(vector<double> vec)
+*/
+void ProcessVector(vector<double>& vec)
 {
 	double minValue = GetMinValue(vec);
-	//transform(vec.begin(), vec.end(), vec.begin(), bind(multiplies<double>(), placeholders::_1, minValue));
-	SortVector(vec);
+	VectorScalarMultiplication(vec, minValue);
+	//SortVector(vec);
 }
 
-void PrintVector(vector<double>& vec)
+void PrintVector(const vector<double> vec)
 {
 	copy(vec.begin(), vec.end(), ostream_iterator<double>(cout, " "));
+}
+
+/*For test*/
+vector<double> GetVectorScalarMultiplication(const vector<double>& vec, double multiplier)
+{
+	vector<double> localVector = vec;
+	VectorScalarMultiplication(localVector, multiplier);
+	return localVector;
+}
+
+vector<double> GetProcessVector(const vector<double>& vec)
+{
+	vector<double> localVector = vec;
+	ProcessVector(localVector);
+	return localVector;
 }

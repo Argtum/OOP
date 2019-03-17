@@ -27,18 +27,24 @@ double GetMinValue(vector<double>& vec)
 	return *minValue;
 }
 
-void VectorScalarMultiplication(vector<double>& vec, double multiplier)
+bool VectorScalarMultiplication(vector<double>& vec, double multiplier)
 {
 	for (auto& item : vec)
 	{
+		if (multiplier * item > numeric_limits<double>::max())
+		{
+			return false;
+		}
 		item *= multiplier;
 	}
+
+	return true;
 }
 
-void MultipliedByMinimum(vector<double>& vec)
+bool MultipliedByMinimum(vector<double>& vec)
 {
 	double minValue = GetMinValue(vec);
-	VectorScalarMultiplication(vec, minValue);
+	return VectorScalarMultiplication(vec, minValue);
 }
 
 void PrintVector(const vector<double> vec)

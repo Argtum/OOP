@@ -8,10 +8,14 @@ int main()
 	if (vec.size() == 0)
 	{
 		cout << "Invalid input data\n"
-			 << "Correct input: <double number> [<double numbers separated by space>]";
+			 << "Correct input: <double number> [<double numbers separated by space>]\n";
 		return 1;
 	}
-	MultipliedByMinimum(vec);
+	if (!MultipliedByMinimum(vec))
+	{
+		cout << "multiplication overflow\n";
+		return 1;
+	}
 	SortVector(vec);
 	PrintVector(vec);
 

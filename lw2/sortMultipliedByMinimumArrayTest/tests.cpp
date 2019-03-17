@@ -7,20 +7,20 @@ TEST_CASE("ReadVector - funcrion must return vector<double>")
 	istringstream inputStream;
 	vector<double> result, expectedResult;
 
-	/*Empty input*/
+	/* Empty input */
 	inputStream.str("");
 	expectedResult = {};
 
 	CHECK(expectedResult == ReadVector(inputStream));
 
-	/*correct input*/
+	/* correct input */
 	inputStream.clear();
 	inputStream.str("        -2 3.14           0");
 	expectedResult = { -2, 3.14, 0 };
 
 	CHECK(expectedResult == ReadVector(inputStream));
 
-	/*incorrect input: have row*/
+	/* incorrect input: have row */
 	inputStream.clear();
 	inputStream.str("2 and 4");
 	expectedResult = {};
@@ -56,10 +56,16 @@ TEST_CASE("MultipliedByMinimum - return a vector, each element of which is multi
 
 	CHECK(outcomingVector == GetMultipliedByMinimum(incomingVector));
 
+	/* incoming vector where minimum value equal 0 */
 	incomingVector = { 2.5, 3, 1.5, 0 };
 	outcomingVector = { 0, 0, 0, 0 };
 
 	CHECK(outcomingVector == GetMultipliedByMinimum(incomingVector));
+
+	/* overflow */
+	incomingVector = { 2.5, DBL_MAX };
+
+	CHECK(false == MultipliedByMinimum(incomingVector));
 }
 
 TEST_CASE("SortVector - return sorted vector")

@@ -4,8 +4,8 @@
 
 vector<double> ReadVector(istream& inputStream);
 double GetMinValue(vector<double>& vec);
-void VectorScalarMultiplication(vector<double>& vec, double multiplier);
-void MultipliedByMinimum(vector<double>& vec);
+bool VectorScalarMultiplication(vector<double>& vec, double multiplier);
+bool MultipliedByMinimum(vector<double>& vec);
 void PrintVector(vector<double> vec);
 
 vector<double> GetVectorScalarMultiplication(const vector<double>& vec, double multiplier);

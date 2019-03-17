@@ -21,6 +21,9 @@
     <ClInclude Include="..\sortMultipliedByMinimumArray\process_vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\sortMultipliedByMinimumArray\utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\sortMultipliedByMinimumArray\process_vector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sortMultipliedByMinimumArray\utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -168,10 +168,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\sortMultipliedByMinimumArray\process_vector.h" />
+    <ClInclude Include="..\sortMultipliedByMinimumArray\utility.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\sortMultipliedByMinimumArray\process_vector.cpp" />
+    <ClCompile Include="..\sortMultipliedByMinimumArray\utility.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

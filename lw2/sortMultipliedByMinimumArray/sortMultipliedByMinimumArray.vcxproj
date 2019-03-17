@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="process_vector.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -167,6 +168,7 @@
     </ClCompile>
     <ClCompile Include="process_vector.cpp" />
     <ClCompile Include="sortMultipliedByMinimumArray.cpp" />
+    <ClCompile Include="utility.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
-#include "process_vector.h"
 #include "pch.h"
+#include "process_vector.h"
 
 vector<double> ReadVector(istream& inputStream)
 {
@@ -34,17 +34,11 @@ void VectorScalarMultiplication(vector<double>& vec, double multiplier)
 		item *= multiplier;
 	}
 }
-/*
-void SortVector(vector<double> vec)
-{
-	sort(vec.begin(), vec.end());
-}
-*/
-void ProcessVector(vector<double>& vec)
+
+void MultipliedByMinimum(vector<double>& vec)
 {
 	double minValue = GetMinValue(vec);
 	VectorScalarMultiplication(vec, minValue);
-	//SortVector(vec);
 }
 
 void PrintVector(const vector<double> vec)
@@ -60,9 +54,9 @@ vector<double> GetVectorScalarMultiplication(const vector<double>& vec, double m
 	return localVector;
 }
 
-vector<double> GetProcessVector(const vector<double>& vec)
+vector<double> GetMultipliedByMinimum(const vector<double>& vec)
 {
 	vector<double> localVector = vec;
-	ProcessVector(localVector);
+	MultipliedByMinimum(localVector);
 	return localVector;
 }

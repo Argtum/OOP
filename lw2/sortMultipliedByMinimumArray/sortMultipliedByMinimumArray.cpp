@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "process_vector.h"
+#include "utility.h"
 
 int main()
 {
@@ -10,7 +11,8 @@ int main()
 			 << "Correct input: <double number> [<double numbers separated by space>]";
 		return 1;
 	}
-	ProcessVector(vec);
+	MultipliedByMinimum(vec);
+	SortVector(vec);
 	PrintVector(vec);
 
 	return 0;

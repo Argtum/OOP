@@ -8,7 +8,7 @@ map<string, string> replacement{
 
 void replaceHtmlEntity(string& html, const string& htmlEntity)
 {
-	for (string::iterator position = html.begin(); position != html.end() - htmlEntity.length(); ++position)
+	for (string::iterator position = html.begin(); *position < html.length(); ++position)
 	{
 		html.replace(*position, htmlEntity.length(), replacement[htmlEntity]);
 	}

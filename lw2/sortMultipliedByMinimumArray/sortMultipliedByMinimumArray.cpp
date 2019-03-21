@@ -4,8 +4,9 @@
 
 int main()
 {
-	vector<double> vec = ReadVector(cin);
-	if (vec.size() == 0)
+	vector<double> vec;
+	
+	if (ReadVector(cin, vec))
 	{
 		cout << "Invalid input data\n"
 			 << "Correct input: <double number> [<double numbers separated by space>]\n";
@@ -13,7 +14,7 @@ int main()
 	}
 	if (!MultipliedByMinimum(vec))
 	{
-		cout << "multiplication overflow\n";
+		cout << "vector is empty\n";
 		return 1;
 	}
 	SortVector(vec);

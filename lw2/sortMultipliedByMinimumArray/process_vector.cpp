@@ -1,10 +1,8 @@
-#include "pch.h"
 #include "process_vector.h"
+#include "pch.h"
 
-vector<double> ReadVector(istream& inputStream)
+bool ReadVector(istream& inputStream, vector<double>& vec)
 {
-	vector<double> vec;
-
 	string line;
 	if (getline(inputStream, line))
 	{
@@ -13,11 +11,11 @@ vector<double> ReadVector(istream& inputStream)
 
 		if (!stringIterator.eof())
 		{
-			vec.clear();
+			return false;
 		}
 	}
 
-	return vec;
+	return true;
 }
 
 double GetMinValue(vector<double>& vec)
@@ -27,25 +25,24 @@ double GetMinValue(vector<double>& vec)
 	return *minValue;
 }
 
-bool VectorScalarMultiplication(vector<double>& vec, double multiplier)
+void VectorScalarMultiplication(vector<double>& vec, double multiplier)
 {
-	for (double& item : vec)
+	transform(vec.begin(), vec.end(), vec.begin(), [multiplier](double current)
 	{
-		if (multiplier * item > numeric_limits<double>::max() 
-			|| multiplier * item < numeric_limits<double>::lowest())
-		{
-			return false;
-		}
-		item *= multiplier;
-	}
-
-	return true;
+		return current * multiplier;
+	});
 }
 
 bool MultipliedByMinimum(vector<double>& vec)
 {
+	if (vec.empty())
+	{
+		return false;
+	}
 	double minValue = GetMinValue(vec);
-	return VectorScalarMultiplication(vec, minValue);
+	VectorScalarMultiplication(vec, minValue);
+
+	return true;
 }
 
 void PrintVector(const vector<double> vec)
@@ -54,6 +51,13 @@ void PrintVector(const vector<double> vec)
 }
 
 /*For test*/
+vector<double> GetReadVector(istream& inputStream, vector<double>& vec)
+{
+	vector<double> localVector = vec;
+	ReadVector(inputStream, localVector);
+	return localVector;
+}
+
 vector<double> GetVectorScalarMultiplication(const vector<double>& vec, double multiplier)
 {
 	vector<double> localVector = vec;

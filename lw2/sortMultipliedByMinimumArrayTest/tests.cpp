@@ -5,27 +5,39 @@
 TEST_CASE("ReadVector - funcrion must return vector<double>")
 {
 	istringstream inputStream;
-	vector<double> result, expectedResult;
+	vector<double> result, inputVector, expectedResult;
+	bool isRead, isGood;
 
 	/* Empty input */
 	inputStream.str("");
+	inputVector = {};
 	expectedResult = {};
-
-	CHECK(expectedResult == ReadVector(inputStream));
+	isGood = false;
+	if (expectedResult == GetReadVector(inputStream, inputVector) && ReadVector(inputStream, inputVector))
+	{
+		isGood = true;
+	}
+	CHECK(isGood);
 
 	/* correct input */
 	inputStream.clear();
 	inputStream.str("        -2 3.14           0");
+	inputVector = {};
 	expectedResult = { -2, 3.14, 0 };
-
-	CHECK(expectedResult == ReadVector(inputStream));
+	isGood = false;
+	if (expectedResult == GetReadVector(inputStream, inputVector) && ReadVector(inputStream, inputVector))
+	{
+		isGood = true;
+	}
+	CHECK(isGood);
 
 	/* incorrect input: have row */
 	inputStream.clear();
 	inputStream.str("2 and 4");
-	expectedResult = {};
+	inputVector = {};
+	isRead = ReadVector(inputStream, inputVector);
 
-	CHECK(expectedResult == ReadVector(inputStream));
+	CHECK(!isRead);
 }
 
 TEST_CASE("GetMinValue - return the value of the minimum element of a vector")
@@ -56,13 +68,8 @@ TEST_CASE("MultipliedByMinimum - return a vector, each element of which is multi
 
 	CHECK(outcomingVector == GetMultipliedByMinimum(incomingVector));
 
-	/* overflow max */
-	incomingVector = { 2.5, DBL_MAX };
 
-	CHECK(false == MultipliedByMinimum(incomingVector));
-
-	/* overflow min */
-	incomingVector = { -2.5, DBL_MAX };
+	incomingVector = {};
 
 	CHECK(false == MultipliedByMinimum(incomingVector));
 }

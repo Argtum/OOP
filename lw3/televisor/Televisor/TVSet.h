@@ -15,6 +15,10 @@ public:
 	{
 		m_isOn = false;
 	}
+	int GetCurrentChannel() const
+	{
+		return 1;
+	}
 
 private:
 	bool m_isOn = false;

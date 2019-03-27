@@ -32,3 +32,10 @@ SCENARIO("TVSet can be turned on and off", "[tv]")
 		}
 	}
 }
+
+SCENARIO("A TV after first turning-on is at channel 1")
+{
+	TVSet tv;
+	tv.TurnOn();
+	CHECK(tv.GetCurrentChannel() == 1);
+}

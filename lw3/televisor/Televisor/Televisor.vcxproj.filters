@@ -21,6 +21,9 @@
     <ClInclude Include="TVSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InvalidOperation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -30,6 +33,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TVSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InvalidOperation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

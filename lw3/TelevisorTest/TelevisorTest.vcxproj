@@ -171,10 +171,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\televisor\Televisor\InvalidOperation.h" />
     <ClInclude Include="..\televisor\Televisor\TVSet.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\televisor\Televisor\InvalidOperation.cpp" />
     <ClCompile Include="..\televisor\Televisor\TVSet.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

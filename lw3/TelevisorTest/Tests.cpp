@@ -1,5 +1,5 @@
-#include "pch.h"
 #include "lw3/televisor/Televisor/TVSet.h"
+#include "pch.h"
 
 SCENARIO("TVSet can be turned on and off", "[tv]")
 {

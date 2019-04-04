@@ -18,10 +18,10 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TVSet.h">
+    <ClInclude Include="..\Televisor\Error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InvalidOperation.h">
+    <ClInclude Include="..\Televisor\CTVSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,13 +29,16 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Televisor.cpp">
+    <ClCompile Include="TelevisorTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TVSet.cpp">
+    <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InvalidOperation.cpp">
+    <ClCompile Include="..\Televisor\Error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Televisor\CTVSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

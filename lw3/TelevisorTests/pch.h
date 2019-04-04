@@ -4,7 +4,7 @@
 #include <catch2/catch.hpp>
 #include <iostream>
 #include <stdexcept>
-#include <string>
+#include <sstream>
 
 using namespace std;
 

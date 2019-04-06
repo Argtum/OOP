@@ -155,13 +155,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Televisor\CError.h" />
+    <ClInclude Include="..\Televisor\CRemoteControl.h" />
     <ClInclude Include="..\Televisor\CTVSet.h" />
-    <ClInclude Include="..\Televisor\Error.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Televisor\CError.cpp" />
+    <ClCompile Include="..\Televisor\CRemoteControl.cpp" />
     <ClCompile Include="..\Televisor\CTVSet.cpp" />
-    <ClCompile Include="..\Televisor\Error.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

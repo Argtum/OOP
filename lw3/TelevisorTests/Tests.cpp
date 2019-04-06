@@ -1,8 +1,35 @@
 #include "pch.h"
+#include "lw3/Televisor/CError.h"
+#include "lw3/Televisor/CRemoteControl.h"
 #include "lw3/Televisor/CTVSet.h"
-#include "lw3/Televisor/Error.h"
 
-SCENARIO("TVSet can be turned on and off", "[tv]")
+SCENARIO("Remote control can turn on a TV", "[remote]")
+{
+	GIVEN("A remote control connected to the TV which is turned off")
+	{
+		CTVSet tv;
+		std::stringstream input, output;
+		CRemoteControl rc(tv, input, output);
+
+		REQUIRE(!tv.IsTurnedOn());
+
+		WHEN("user enters TurnOn command")
+		{
+			input << "TurnOn";
+			CHECK(rc.HandleCommand());
+			THEN("tv switches on")
+			{
+				CHECK(tv.IsTurnedOn());
+				AND_THEN("user gets notification")
+				{
+					CHECK(output.str() == "TV is turned on\n");
+				}
+			}
+		}
+	}
+}
+/*
+SCENARIO("TVSet can be turned on and off", "[remote]")
 {
 	GIVEN("A turned off TV")
 	{
@@ -123,3 +150,4 @@ SCENARIO("A TV must restore the previously selected channel")
 		}
 	}
 }
+*/

@@ -21,7 +21,10 @@
     <ClInclude Include="CTVSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Error.h">
+    <ClInclude Include="CError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CRemoteControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,7 +38,10 @@
     <ClCompile Include="CTVSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Error.cpp">
+    <ClCompile Include="CError.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CRemoteControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

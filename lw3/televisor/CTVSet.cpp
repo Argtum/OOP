@@ -1,7 +1,7 @@
 #include "pch.h"
 
+#include "CError.h"
 #include "CTVSet.h"
-#include "Error.h"
 
 CTVSet::CTVSet()
 {
@@ -24,7 +24,7 @@ void CTVSet::TurnOff()
 {
 	m_isOn = false;
 }
-
+/*
 int CTVSet::GetCurrentChannel() const
 {
 	return m_isOn ? m_channel : 0;
@@ -42,3 +42,4 @@ void CTVSet::SelectChannel(int channel)
 	}
 	m_channel = channel;
 }
+*/

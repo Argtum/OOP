@@ -18,10 +18,13 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Televisor\Error.h">
+    <ClInclude Include="..\Televisor\CTVSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Televisor\CTVSet.h">
+    <ClInclude Include="..\Televisor\CError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Televisor\CRemoteControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,10 +38,13 @@
     <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Televisor\Error.cpp">
+    <ClCompile Include="..\Televisor\CTVSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Televisor\CTVSet.cpp">
+    <ClCompile Include="..\Televisor\CError.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Televisor\CRemoteControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -52,8 +52,7 @@ bool CRemoteControl::TurnOff(istream& args)
 
 bool CRemoteControl::Info(istream& args)
 {
-	int currentChannel = m_tv.GetCurrentChannel();
-	string info = (m_tv.IsTurnedOn()) ? ("TV is turned on\nChannel is: " + to_string(currentChannel) + "\n") : "TV is turned off";
+	string info = (m_tv.IsTurnedOn()) ? ("TV is turned on\nChannel is: " + to_string(m_tv.GetCurrentChannel()) + "\n") : "TV is turned off\n";
 
 	m_output << info;
 
@@ -68,14 +67,7 @@ bool CRemoteControl::SelectChannel(istream& args)
 
 	m_tv.SelectChannel(channelNumber);
 
-	if (!m_tv.IsTurnedOn())
-	{
-		m_output << "ERROR: Turned off TV can't switches channel\n";
-	}
-	else
-	{
-		m_output << "Channel changed to " + to_string(m_tv.GetCurrentChannel()) + "\n";
-	}
+	m_output << "Channel changed to " + to_string(m_tv.GetCurrentChannel()) + "\n";
 
 	return true;
 }

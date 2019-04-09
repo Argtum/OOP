@@ -13,7 +13,7 @@ public:
 
 private:
 	static constexpr int MIN_CHANNEL = 1;
-	static constexpr int MAX_CHANNEL = 999;
+	static constexpr int MAX_CHANNEL = 99;
 	bool m_isOn = false;
 	int m_channel = 1;
 };

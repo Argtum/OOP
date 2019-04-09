@@ -17,35 +17,54 @@ SCENARIO("Remote control can turn on a TV", "[remote]")
 		{
 			input << "TurnOn";
 			CHECK(rc.HandleCommand());
+
 			THEN("tv switches on")
 			{
 				CHECK(tv.IsTurnedOn());
+
 				AND_THEN("user gets notification")
 				{
 					CHECK(output.str() == "TV is turned on\n");
 				}
 			}
 		}
+
+		WHEN("user enters TurnOff command")
+		{
+			input << "TurnOff";
+			CHECK(rc.HandleCommand());
+
+			THEN("tv switches off")
+			{
+				CHECK(!tv.IsTurnedOn());
+
+				AND_THEN("user gets notification")
+				{
+					CHECK(output.str() == "TV is turned off\n");
+				}
+			}
+		}
 	}
 }
 
-SCENARIO("Remote control provides information about TV", "[remote]")
+SCENARIO("Remote control provides information about TV. TV turn on channel number 1", "[remote]")
 {
 	CTVSet tv;
-	stringstream input;
-	ostringstream output;
-	input << "Info";
+	stringstream input, output;
 	CRemoteControl rc(tv, input, output);
 
 	GIVEN("A turned off TV")
 	{
 		REQUIRE(!tv.IsTurnedOn());
+		input << "Info";
+
 		WHEN("user enter Info command")
 		{
-			rc.HandleCommand();
+			CHECK(rc.HandleCommand());
+
 			THEN("it is notified that TV is off")
 			{
-				CHECK(output.str() == "TV is turned off");
+				CHECK(output.str() == "TV is turned off\n");
 			}
 		}
 	}
@@ -54,9 +73,12 @@ SCENARIO("Remote control provides information about TV", "[remote]")
 	{
 		tv.TurnOn();
 		REQUIRE(tv.IsTurnedOn());
-		WHEN("user enter Info command")
+		input << "Info";
+
+		WHEN("user turned on TV and enter Info command")
 		{
 			CHECK(rc.HandleCommand());
+
 			THEN("it is notified that TV is on the current channel")
 			{
 				CHECK(output.str() == "TV is turned on\nChannel is: 1\n");
@@ -65,116 +87,82 @@ SCENARIO("Remote control provides information about TV", "[remote]")
 	}
 }
 
-SCENARIO("Remote control: switched-on TV - can switches channels from 1 to 999, switched-off TV - can't")
+SCENARIO("Switched-on TV - can switches channels from 1 to 999, switched-off TV - can't", "[remote]")
 {
-	GIVEN("A remote control connected to the TV")
-	{
-		CTVSet tv;
-		stringstream input, output;
-		CRemoteControl rc(tv, input, output);
+	CTVSet tv;
+	stringstream input, output;
+	CRemoteControl rc(tv, input, output);
 
-		WHEN("TV is turned On")
+	GIVEN("A turned on TV")
+	{
+		tv.TurnOn();
+		REQUIRE(tv.IsTurnedOn());
+		input << "SelectChannel 42";
+
+		WHEN("user enter SelectChannel command")
 		{
-			tv.TurnOn();
-			REQUIRE(tv.IsTurnedOn());
-			input << "SelectChannel 42";
-			WHEN("user enter SelectChannel command")
+			CHECK(rc.HandleCommand());
+			THEN("TV switches channel")
 			{
-				CHECK(rc.HandleCommand());
-				THEN("TV switches channel")
+				CHECK(tv.GetCurrentChannel() == 42);
+				AND_THEN("it is notified that TV switches channel")
 				{
-					CHECK(tv.GetCurrentChannel() == 42);
-					AND_THEN("it is notified that TV switches channel")
-					{
-						CHECK(output.str() == "Channel changed to 42\n");
-					}
+					CHECK(output.str() == "Channel changed to 42\n");
 				}
 			}
 		}
+	}
+
+	GIVEN("A turned off TV")
+	{
 		WHEN("TV is turned Off")
 		{
+			tv.TurnOff();
 			REQUIRE(!tv.IsTurnedOn());
 			input << "SelectChannel 42";
+
 			WHEN("user enter SelectChannel command")
 			{
-				CHECK(rc.HandleCommand());
-				CHECK(output.str() == "ERROR: Turned off TV can't switches channel\n");
+				CHECK_THROWS_WITH(rc.HandleCommand(), "ERROR: Turned off TV can't switches channel\n");
 			}
 		}
 	}
 }
 
-/*
-SCENARIO("A turned on TV can select channel from 1 to 999")
+SCENARIO("TV can't select a channel beyond the 1..99 range", "[remote]")
 {
-	GIVEN("A tv")
-	{
-		WHEN("tv is turned on")
-		{
-			CTVSet tv;
-			tv.TurnOn();
-			WHEN("It can select channel from 1 to 999")
-			{
-				tv.SelectChannel(1);
-				CHECK(tv.GetCurrentChannel() == 1);
-				tv.SelectChannel(999);
-				CHECK(tv.GetCurrentChannel() == 999);
-				tv.SelectChannel(666);
-				CHECK(tv.GetCurrentChannel() == 666);
-			}
-		}
-	}
-}
+	CTVSet tv;
+	stringstream input, output;
+	CRemoteControl rc(tv, input, output);
 
-SCENARIO("A turned off TV can't select channels ")
-{
-	GIVEN("A tv")
+	GIVEN("A turned on TV")
 	{
-		INFO("A turned off TV can't select channels");
-		CTVSet tv;
-		WHEN("tv is turned off")
-		{
-			THEN("It is at channel 0")
-			{
-				CHECK(tv.GetCurrentChannel() == 0);
-			}
-
-			THEN("It can't select channels")
-			{
-				CHECK_THROWS_AS(tv.SelectChannel(1), Error);
-				CHECK_THROWS_WITH(tv.SelectChannel(1), "TV is turned off");
-				CHECK(tv.GetCurrentChannel() == 0);
-			}
-		}
-	}
-}
-
-SCENARIO("TV can't select a channel beyond the 1..999 range")
-{
-	SECTION("A turned on TV")
-	{
-		CTVSet tv;
 		tv.TurnOn();
-		SECTION("can't select channel less than 1")
+		REQUIRE(tv.IsTurnedOn());
+		input << "SelectChannel 0";
+
+		WHEN("user enter SelectChannel to 0 TV can't switches channel")
 		{
-			CHECK_THROWS_AS(tv.SelectChannel(0), Error);
-			CHECK(tv.GetCurrentChannel() == 1);
+			CHECK_THROWS_WITH(rc.HandleCommand(), "ERROR: Channel is out of range\n");
 		}
-		SECTION("can't select channel greater than 999")
+
+		input << "SelectChannel 100";
+		WHEN("user enter SelectChannel to 100")
 		{
-			CHECK_THROWS_AS(tv.SelectChannel(1000), Error);
-			CHECK(tv.GetCurrentChannel() == 1);
+			CHECK_THROWS_WITH(rc.HandleCommand(), "ERROR: Channel is out of range\n");
 		}
 	}
 }
 
-SCENARIO("A TV must restore the previously selected channel")
+SCENARIO("A TV must restore the previously selected channel", "[tv]")
 {
+	CTVSet tv;
+	tv.TurnOn();
+	tv.SelectChannel(33);
+
 	GIVEN("A TV with selected channel")
 	{
-		CTVSet tv;
-		tv.TurnOn();
-		tv.SelectChannel(33);
+
 		WHEN("TV is turned off and on")
 		{
 			tv.TurnOff();
@@ -186,4 +174,3 @@ SCENARIO("A TV must restore the previously selected channel")
 		}
 	}
 }
-*/

@@ -32,13 +32,13 @@ int CTVSet::GetCurrentChannel() const
 
 void CTVSet::SelectChannel(int channel)
 {
-	/*if (!m_isOn)
+	if (!m_isOn)
 	{
 		throw CError("ERROR: Turned off TV can't switches channel\n");
 	}
 	if (channel < MIN_CHANNEL || channel > MAX_CHANNEL)
 	{
-		throw CError("Channel is out of range");
-	}*/
+		throw CError("ERROR: Channel is out of range\n");
+	}
 	m_channel = channel;
 }

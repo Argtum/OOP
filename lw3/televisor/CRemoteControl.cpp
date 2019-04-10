@@ -10,7 +10,8 @@ CRemoteControl::CRemoteControl(CTVSet& tv, istream& input, ostream& output)
 	, m_actionMap({ { "TurnOn", [this](istream& strm) { return TurnOn(strm); } },
 		  { "TurnOff", bind(&CRemoteControl::TurnOff, this, _1) },
 		  { "Info", bind(&CRemoteControl::Info, this, _1) },
-		  { "SelectChannel", bind(&CRemoteControl::SelectChannel, this, _1) } })
+		  { "SelectChannel", bind(&CRemoteControl::SelectChannel, this, _1) },
+		  { "PreviousChannel", bind(&CRemoteControl::PreviousChannel, this, _1) } })
 {
 }
 
@@ -66,6 +67,15 @@ bool CRemoteControl::SelectChannel(istream& args)
 	int channelNumber = atoi(inputString.c_str());
 
 	m_tv.SelectChannel(channelNumber);
+
+	m_output << "Channel changed to " + to_string(m_tv.GetCurrentChannel()) + "\n";
+
+	return true;
+}
+
+bool CRemoteControl::PreviousChannel(istream& args)
+{
+	m_tv.SelectPreviousChannel();
 
 	m_output << "Channel changed to " + to_string(m_tv.GetCurrentChannel()) + "\n";
 

@@ -174,3 +174,33 @@ SCENARIO("A TV must restore the previously selected channel", "[tv]")
 		}
 	}
 }
+
+SCENARIO("A TV selected previous channel", "[remote]")
+{
+	CTVSet tv;
+	stringstream input, output;
+	CRemoteControl rc(tv, input, output);
+
+	GIVEN("A double-channel TV")
+	{
+		tv.TurnOn();
+		tv.SelectChannel(33);
+		tv.SelectChannel(50);
+		input << "PreviousChannel";
+
+		WHEN("user enter PreviousChannel")
+		{
+			CHECK(rc.HandleCommand());
+
+			THEN("TV switches to previous channel")
+			{
+				CHECK(tv.GetCurrentChannel() == 33);
+
+				AND_THEN("user gets notification")
+				{
+					CHECK(output.str() == "Channel changed to 33\n");
+				}
+			}
+		}
+	}
+}

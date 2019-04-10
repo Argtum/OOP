@@ -15,6 +15,7 @@ private:
 	bool TurnOff(istream& args);
 	bool Info(istream& args);
 	bool SelectChannel(istream& args);
+	bool PreviousChannel(istream& args);
 	typedef map<string, function<bool(istream& args)>> ActionMap;
 
 	CTVSet& m_tv;

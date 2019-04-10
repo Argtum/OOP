@@ -40,5 +40,15 @@ void CTVSet::SelectChannel(int channel)
 	{
 		throw CError("ERROR: Channel is out of range\n");
 	}
+	m_previousChannel = m_channel;
 	m_channel = channel;
+}
+
+void CTVSet::SelectPreviousChannel()
+{
+	if (!m_isOn)
+	{
+		throw CError("ERROR: Turned off TV can't switches channel\n");
+	}
+	m_channel = m_previousChannel;
 }

@@ -3,12 +3,12 @@
 
 #include <functional>
 #include <iostream>
+#include <iterator>
 #include <map>
 #include <sstream>
 #include <stdexcept>
 #include <string>
 
 using namespace std;
-using namespace std::placeholders;
 
 #endif //PCH_H

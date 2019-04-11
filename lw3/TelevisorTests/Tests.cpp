@@ -204,3 +204,31 @@ SCENARIO("A TV selected previous channel", "[remote]")
 		}
 	}
 }
+
+SCENARIO("A user can save channel by name", "[remote]")
+{
+	CTVSet tv;
+	stringstream input, output;
+	CRemoteControl rc(tv, input, output);
+
+	GIVEN("A turned on TV with select channel")
+	{
+		tv.TurnOn();
+		input << "SetChannel 33 Sport";
+
+		WHEN("user enter set channel name")
+		{
+			CHECK(rc.HandleCommand());
+
+			THEN("TV store channel name")
+			{
+				CHECK(tv.GetChannelName(33) == "Sport");
+
+				AND_THEN("user gets notification")
+				{
+					CHECK(output.str() == "Channel saved: 33 - Sport\n");
+				}
+			}
+		}
+	}
+}

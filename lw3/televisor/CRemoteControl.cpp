@@ -14,6 +14,8 @@ CRemoteControl::CRemoteControl(CTVSet& tv, istream& input, ostream& output)
 		  { "SelectChannel", bind(&CRemoteControl::SelectChannel, this, placeholders::_1) },
 		  { "PreviousChannel", bind(&CRemoteControl::PreviousChannel, this, placeholders::_1) },
 		  { "SetChannel", bind(&CRemoteControl::SaveChannel, this, placeholders::_1) },
+		  { "WhatChannelNumber", bind(&CRemoteControl::WhatChannelNumber, this, placeholders::_1) },
+		  { "WhatChannelName", bind(&CRemoteControl::WhatChannelName, this, placeholders::_1) },
 
 	  })
 {
@@ -66,9 +68,7 @@ bool CRemoteControl::Info(istream& args)
 
 bool CRemoteControl::SelectChannel(istream& args)
 {
-	string inputString;
-	getline(args, inputString);
-	int channelNumber = atoi(inputString.c_str());
+	int channelNumber = *istream_iterator<int>(args);
 
 	m_tv.SelectChannel(channelNumber);
 
@@ -94,6 +94,28 @@ bool CRemoteControl::SaveChannel(istream& args)
 	m_tv.SetChannelName(channelNumber, channelName);
 
 	m_output << "Channel saved: " + to_string(channelNumber) + " - " + channelName + "\n";
+
+	return true;
+}
+
+bool CRemoteControl::WhatChannelNumber(istream& args)
+{
+	string channelName = *istream_iterator<string>(args);
+
+	m_tv.GetChannelByName(channelName);
+
+	m_output << to_string(m_tv.GetChannelByName(channelName)) + " - " + channelName << endl;
+
+	return true;
+}
+
+bool CRemoteControl::WhatChannelName(istream& args)
+{
+	int channelNumber = *istream_iterator<int>(args);
+
+	m_tv.GetChannelName(channelNumber);
+
+	m_output << to_string(channelNumber) + " - " + m_tv.GetChannelName(channelNumber) << endl;
 
 	return true;
 }

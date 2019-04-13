@@ -7,10 +7,6 @@ CTVSet::CTVSet()
 {
 }
 
-CTVSet::~CTVSet()
-{
-}
-
 bool CTVSet::IsTurnedOn() const
 {
 	return m_isOn;
@@ -30,7 +26,7 @@ int CTVSet::GetCurrentChannel() const
 	return m_isOn ? m_channel : 0;
 }
 
-void CTVSet::SelectChannel(const int& channelNumber)
+void CTVSet::SelectChannel(const int channelNumber)
 {
 	if (!m_isOn)
 	{
@@ -53,7 +49,7 @@ void CTVSet::SelectPreviousChannel()
 	m_channel = m_previousChannel;
 }
 
-void CTVSet::SetChannelName(const int& channelNumber, const string& channelName)
+void CTVSet::SetChannelName(const int channelNumber, const string& channelName)
 {
 	if (!m_isOn)
 	{
@@ -63,10 +59,15 @@ void CTVSet::SetChannelName(const int& channelNumber, const string& channelName)
 	{
 		throw CError("ERROR: Channel is out of range\n");
 	}
-	m_channelList.insert(ñhannelHasName(channelNumber, channelName));
+	m_channelList.insert(ChannelAndName(channelNumber, channelName));
 }
 
-string CTVSet::GetChannelName(const int& channelNumber) const
+string CTVSet::GetChannelName(const int channelNumber) const
 {
 	return m_channelList.left.at(channelNumber);
+}
+
+int CTVSet::GetChannelByName(const string& channelName) const
+{
+	return m_channelList.right.at(channelName);
 }

@@ -1,5 +1,5 @@
-#include "process_vector.h"
 #include "pch.h"
+#include "process_vector.h"
 
 bool ReadVector(istream& inputStream, vector<double>& vec)
 {
@@ -27,8 +27,7 @@ double GetMinValue(vector<double>& vec)
 
 void VectorScalarMultiplication(vector<double>& vec, double multiplier)
 {
-	transform(vec.begin(), vec.end(), vec.begin(), [multiplier](double current)
-	{
+	transform(vec.begin(), vec.end(), vec.begin(), [multiplier](double current) {
 		return current * multiplier;
 	});
 }

@@ -2,22 +2,22 @@
 
 #include <boost/bimap.hpp>
 
-typedef boost::bimap<int, string> bm_type;
-typedef bm_type::value_type ñhannelHasName;
+typedef boost::bimap<int, string> BMType;
+typedef BMType::value_type ChannelAndName;
 
 class CTVSet
 {
 public:
 	CTVSet();
-	~CTVSet();
 	bool IsTurnedOn() const;
 	void TurnOn();
 	void TurnOff();
 	int GetCurrentChannel() const;
-	void SelectChannel(const int& channel);
+	void SelectChannel(const int channel);
 	void SelectPreviousChannel();
-	void SetChannelName(const int& channelNumber, const string& channelName);
-	string GetChannelName(const int& channel) const;
+	void SetChannelName(const int channelNumber, const string& channelName);
+	string GetChannelName(const int channel) const;
+	int GetChannelByName(const string& channel) const;
 
 private:
 	static constexpr int MIN_CHANNEL = 1;
@@ -25,5 +25,5 @@ private:
 	bool m_isOn = false;
 	int m_channel = 1;
 	int m_previousChannel = 1;
-	bm_type m_channelList;
+	BMType m_channelList;
 };

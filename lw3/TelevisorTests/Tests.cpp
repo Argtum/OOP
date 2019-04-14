@@ -307,6 +307,21 @@ SCENARIO("A turned off TV can't selected previous channel", "[remote]")
 	}
 }
 
+SCENARIO("RemoveExtraSpaces must remove extra spaces from any input string")
+{
+	string str = "    A some   string on input      ";
+
+	WHEN("Input: strin with extra spaces")
+	{
+		RemoveExtraSpaces(str);
+
+		THEN("Output: without extra spaces")
+		{
+			CHECK(str == "A some string on input");
+		}
+	}
+}
+
 SCENARIO("A user can save channel by name", "[remote]")
 {
 	CTVSet tv;
@@ -378,6 +393,29 @@ SCENARIO("User wants to know that on channel 33", "[remote]")
 			THEN("User get notification")
 			{
 				CHECK(output.str() == "33 - Sport\n");
+			}
+		}
+	}
+}
+
+SCENARIO("A user can't save channel by name if channel number outside the range", "[remote]")
+{
+	CTVSet tv;
+	stringstream input, output;
+	CRemoteControl rc(tv, input, output);
+
+	GIVEN("A turned on TV with select channel")
+	{
+		tv.TurnOn();
+		input << "SetChannel 101    Sport  2   ";
+
+		WHEN("user enter set channel name on channel outside the range")
+		{
+			CHECK(rc.HandleCommand());
+
+			THEN("user gets notification")
+			{
+				CHECK(output.str() == "ERROR: Channel is out of range\n");
 			}
 		}
 	}

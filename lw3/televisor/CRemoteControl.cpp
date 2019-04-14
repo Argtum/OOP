@@ -59,7 +59,9 @@ bool CRemoteControl::TurnOff(istream& args)
 
 bool CRemoteControl::Info(istream& args)
 {
-	string info = (m_tv.IsTurnedOn()) ? ("TV is turned on\nChannel is: " + to_string(m_tv.GetCurrentChannel()) + "\n") : "TV is turned off\n";
+	string info = (m_tv.IsTurnedOn())
+		? ("TV is turned on\nChannel is: " + to_string(m_tv.GetCurrentChannel()) + "\n")
+		: "TV is turned off\n";
 
 	m_output << info;
 
@@ -70,18 +72,30 @@ bool CRemoteControl::SelectChannel(istream& args)
 {
 	int channelNumber = *istream_iterator<int>(args);
 
-	m_tv.SelectChannel(channelNumber);
-
-	m_output << "Channel changed to " + to_string(m_tv.GetCurrentChannel()) + "\n";
+	try
+	{
+		m_tv.SelectChannel(channelNumber);
+		m_output << "Channel changed to " + to_string(m_tv.GetCurrentChannel()) + "\n";
+	}
+	catch (CError e)
+	{
+		m_output << e.GetErrorMessage();
+	}
 
 	return true;
 }
 
 bool CRemoteControl::PreviousChannel(istream& args)
 {
-	m_tv.SelectPreviousChannel();
-
-	m_output << "Channel changed to " + to_string(m_tv.GetCurrentChannel()) + "\n";
+	try
+	{
+		m_tv.SelectPreviousChannel();
+		m_output << "Channel changed to " + to_string(m_tv.GetCurrentChannel()) + "\n";
+	}
+	catch (CError e)
+	{
+		m_output << e.GetErrorMessage();
+	}
 
 	return true;
 }
@@ -89,11 +103,20 @@ bool CRemoteControl::PreviousChannel(istream& args)
 bool CRemoteControl::SaveChannel(istream& args)
 {
 	int channelNumber = *istream_iterator<int>(args);
-	string channelName = *istream_iterator<string>(args);
+	string channelName;
 
-	m_tv.SetChannelName(channelNumber, channelName);
+	getline(args, channelName);
+	RemoveExtraSpaces(channelName);
 
-	m_output << "Channel saved: " + to_string(channelNumber) + " - " + channelName + "\n";
+	try
+	{
+		m_tv.SetChannelName(channelNumber, channelName);
+		m_output << "Channel saved: " + to_string(channelNumber) + " - " + channelName + "\n";
+	}
+	catch (CError e)
+	{
+		m_output << e.GetErrorMessage();
+	}
 
 	return true;
 }

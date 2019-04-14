@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "CError.h"
 
-CError::CError(const string& msg)
-	: runtime_error(msg)
+string CError::GetErrorMessage() const
 {
+	return m_message;
 }
 
-CError::~CError()
+void CError::PrintErrorMessage() const
 {
+	cout << m_message;
 }

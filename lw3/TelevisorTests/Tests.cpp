@@ -130,10 +130,10 @@ SCENARIO("Switched-on TV - can switches channels from 1 to 99", "[remote]")
 	{
 		tv.TurnOn();
 		REQUIRE(tv.IsTurnedOn());
-		input << "SelectChannel 42";
 
-		WHEN("user enter SelectChannel command")
+		WHEN("user select channel to 42 with SelectChannel command")
 		{
+			input << "SelectChannel 42";
 			CHECK(rc.HandleCommand());
 
 			THEN("TV switches channel")
@@ -143,6 +143,38 @@ SCENARIO("Switched-on TV - can switches channels from 1 to 99", "[remote]")
 				AND_THEN("it is notified that TV switches channel")
 				{
 					CHECK(output.str() == "Channel changed to 42\n");
+				}
+			}
+		}
+
+		WHEN("user select channel to 1 with SelectChannel command")
+		{
+			input << "SelectChannel 1";
+			CHECK(rc.HandleCommand());
+
+			THEN("TV switches channel")
+			{
+				CHECK(tv.GetCurrentChannel() == 1);
+
+				AND_THEN("it is notified that TV switches channel")
+				{
+					CHECK(output.str() == "Channel changed to 1\n");
+				}
+			}
+		}
+
+		WHEN("user select channel to 99 with SelectChannel command")
+		{
+			input << "SelectChannel 99";
+			CHECK(rc.HandleCommand());
+
+			THEN("TV switches channel")
+			{
+				CHECK(tv.GetCurrentChannel() == 99);
+
+				AND_THEN("it is notified that TV switches channel")
+				{
+					CHECK(output.str() == "Channel changed to 99\n");
 				}
 			}
 		}
@@ -165,7 +197,12 @@ SCENARIO("Switched-off TV - can't switches channels", "[remote]")
 
 			WHEN("user enter SelectChannel command")
 			{
-				CHECK_THROWS_WITH(rc.HandleCommand(), "ERROR: Turned off TV can't switches channel\n");
+				rc.HandleCommand();
+
+				AND_THEN("it is notified that TV turn off")
+				{
+					CHECK(output.str() == "ERROR: Turned off TV can't switches channel\n");
+				}
 			}
 		}
 	}
@@ -181,44 +218,43 @@ SCENARIO("TV can't select a channel beyond the 1..99 range", "[remote]")
 	{
 		tv.TurnOn();
 		REQUIRE(tv.IsTurnedOn());
-		input << "SelectChannel 0";
 
 		WHEN("user enter SelectChannel to 0 TV can't switches channel")
 		{
-			CHECK_THROWS_WITH(rc.HandleCommand(), "ERROR: Channel is out of range\n");
-		}
+			input << "SelectChannel 0";
+			rc.HandleCommand();
 
-		input << "SelectChannel 100";
+			AND_THEN("it is notified that TV turn off")
+			{
+				CHECK(output.str() == "ERROR: Channel is out of range\n");
+			}
+		}
 
 		WHEN("user enter SelectChannel to 100")
 		{
-			CHECK_THROWS_WITH(rc.HandleCommand(), "ERROR: Channel is out of range\n");
-		}
-	}
-}
+			input << "SelectChannel 100";
+			rc.HandleCommand();
 
-SCENARIO("A TV must restore the previously selected channel", "[tv]")
-{
-	CTVSet tv;
-	tv.TurnOn();
-	tv.SelectChannel(33);
-
-	GIVEN("A TV with selected channel")
-	{
-
-		WHEN("TV is turned off and on")
-		{
-			tv.TurnOff();
-			tv.TurnOn();
-			THEN("it restore previously selected channel")
+			AND_THEN("it is notified that TV turn off")
 			{
-				CHECK(tv.GetCurrentChannel() == 33);
+				CHECK(output.str() == "ERROR: Channel is out of range\n");
+			}
+		}
+
+		WHEN("user enter SelectChannel to -10")
+		{
+			input << "SelectChannel -10";
+			rc.HandleCommand();
+
+			AND_THEN("it is notified that TV turn off")
+			{
+				CHECK(output.str() == "ERROR: Channel is out of range\n");
 			}
 		}
 	}
 }
 
-SCENARIO("A TV selected previous channel", "[remote]")
+SCENARIO("A TV restore the previously selected channel", "[remote]")
 {
 	CTVSet tv;
 	stringstream input, output;
@@ -261,7 +297,12 @@ SCENARIO("A turned off TV can't selected previous channel", "[remote]")
 
 		WHEN("user enter PreviousChannel")
 		{
-			CHECK_THROWS_WITH(rc.HandleCommand(), "ERROR: Turned off TV can't switches channel\n");
+			rc.HandleCommand();
+
+			AND_THEN("it is notified that TV turn off")
+			{
+				CHECK(output.str() == "ERROR: Turned off TV can't switches channel\n");
+			}
 		}
 	}
 }
@@ -275,7 +316,7 @@ SCENARIO("A user can save channel by name", "[remote]")
 	GIVEN("A turned on TV with select channel")
 	{
 		tv.TurnOn();
-		input << "SetChannel 33 Sport";
+		input << "SetChannel 33    Sport  2   ";
 
 		WHEN("user enter set channel name")
 		{
@@ -283,18 +324,18 @@ SCENARIO("A user can save channel by name", "[remote]")
 
 			THEN("TV store channel name")
 			{
-				CHECK(tv.GetChannelName(33) == "Sport");
+				CHECK(tv.GetChannelName(33) == "Sport 2");
 
 				AND_THEN("user gets notification")
 				{
-					CHECK(output.str() == "Channel saved: 33 - Sport\n");
+					CHECK(output.str() == "Channel saved: 33 - Sport 2\n");
 				}
 			}
 		}
 	}
 }
 
-SCENARIO("À user wants to know which channel is sport", "[remote]")
+SCENARIO("User wants to know which channel is sport", "[remote]")
 {
 	CTVSet tv;
 	stringstream input, output;
@@ -318,7 +359,7 @@ SCENARIO("À user wants to know which channel is sport", "[remote]")
 	}
 }
 
-SCENARIO("A user wants to know that on channel 33", "[remote]")
+SCENARIO("User wants to know that on channel 33", "[remote]")
 {
 	CTVSet tv;
 	stringstream input, output;

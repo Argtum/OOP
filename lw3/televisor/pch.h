@@ -1,6 +1,7 @@
 #ifndef PCH_H
 #define PCH_H
 
+#include <cctype>
 #include <functional>
 #include <iostream>
 #include <iterator>

@@ -27,6 +27,9 @@
     <ClInclude Include="CRemoteControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RemoveExtraSpaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CRemoteControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoveExtraSpaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

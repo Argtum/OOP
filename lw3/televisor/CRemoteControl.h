@@ -1,4 +1,5 @@
 #pragma once
+#include "RemoveExtraSpaces.h"
 #include <boost/noncopyable.hpp>
 
 class CTVSet;

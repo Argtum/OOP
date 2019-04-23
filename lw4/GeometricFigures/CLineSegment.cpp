@@ -2,7 +2,9 @@
 #include "CLineSegment.h"
 #include "CPoint.h"
 
-CLineSegment::CLineSegment(CPoint& point1, CPoint& point2)
+using namespace std;
+
+CLineSegment::CLineSegment(const CPoint& point1, const CPoint& point2)
 	: m_startPoint(point1)
 	, m_endPoint(point2)
 {
@@ -11,7 +13,7 @@ CLineSegment::CLineSegment(CPoint& point1, CPoint& point2)
 string CLineSegment::ToString() const
 {
 	ostringstream s;
-	s << GetType() << " length: " << GetLength();
+	s << GetType() << " length: " << GetPerimeter();
 	return s.str();
 }
 
@@ -30,11 +32,6 @@ CPoint CLineSegment::GetEndPoint() const
 	return m_endPoint;
 }
 
-double CLineSegment::GetLength() const
-{
-	return round(sqrt(pow(m_endPoint.GetX() - m_startPoint.GetX(), 2) + pow(m_endPoint.GetY() - m_startPoint.GetY(), 2)) * 100) / 100;
-}
-
 double CLineSegment::GetArea() const
 {
 	return 0;
@@ -42,5 +39,5 @@ double CLineSegment::GetArea() const
 
 double CLineSegment::GetPerimeter() const
 {
-	return 0;
+	return round(sqrt(pow(m_endPoint.GetX() - m_startPoint.GetX(), 2) + pow(m_endPoint.GetY() - m_startPoint.GetY(), 2)) * 100) / 100;
 }

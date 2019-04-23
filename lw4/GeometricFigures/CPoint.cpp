@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CPoint.h"
 
-CPoint::CPoint(double x, double y)
+CPoint::CPoint(const double x, const double y)
 	: m_x(x)
 	, m_y(y)
 {

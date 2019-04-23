@@ -2,9 +2,9 @@
 #include "CPoint.h"
 
 CPoint::CPoint(double x, double y)
+	: m_x(x)
+	, m_y(y)
 {
-	m_x = x;
-	m_y = y;
 }
 
 double CPoint::GetX() const
@@ -14,5 +14,5 @@ double CPoint::GetX() const
 
 double CPoint::GetY() const
 {
-	return m_x;
+	return m_y;
 }

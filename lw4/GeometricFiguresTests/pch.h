@@ -2,6 +2,13 @@
 #define PCH_H
 
 #include <catch2/catch.hpp>
+#include <cmath>
+#include <functional>
 #include <iostream>
+#include <istream>
+#include <iterator>
+#include <map>
+#include <sstream>
+#include <string>
 
 #endif

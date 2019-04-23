@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "lw4/GeometricFigures/CPoint.h"
 
-TEST_CASE("CPoint - create a point, GetX and GetY - get coordinates", "[CPoint]")
+TEST_CASE("CPoint - create a point", "[CPoint]")
 {
 	CPoint point(1, 2);
 

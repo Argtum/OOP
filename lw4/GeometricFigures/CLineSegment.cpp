@@ -4,22 +4,29 @@
 
 using namespace std;
 
-CLineSegment::CLineSegment(const CPoint& point1, const CPoint& point2)
+CLineSegment::CLineSegment(const string& type, const CPoint& point1, const CPoint& point2, const uint32_t color)
 	: m_startPoint(point1)
 	, m_endPoint(point2)
+	, m_color(color)
+	, m_type(type)
 {
 }
 
 string CLineSegment::ToString() const
 {
 	ostringstream s;
-	s << GetType() << " length: " << GetPerimeter();
+	s << GetType() << ":" << endl;
+	AppendProperties(s);
+	s << setprecision(3)
+	  << "\tlength = " << GetPerimeter() << endl
+	  << "\tcolor = " << GetOutlineColor() << endl;
+
 	return s.str();
 }
 
 string CLineSegment::GetType() const
 {
-	return "Line segment";
+	return m_type;
 }
 
 CPoint CLineSegment::GetStartPoint() const
@@ -32,12 +39,18 @@ CPoint CLineSegment::GetEndPoint() const
 	return m_endPoint;
 }
 
-double CLineSegment::GetArea() const
-{
-	return 0;
-}
-
 double CLineSegment::GetPerimeter() const
 {
-	return round(sqrt(pow(m_endPoint.GetX() - m_startPoint.GetX(), 2) + pow(m_endPoint.GetY() - m_startPoint.GetY(), 2)) * 100) / 100;
+	return sqrt(pow(m_endPoint.GetX() - m_startPoint.GetX(), 2) + pow(m_endPoint.GetY() - m_startPoint.GetY(), 2));
+}
+
+uint32_t CLineSegment::GetOutlineColor() const
+{
+	return m_color;
+}
+
+void CLineSegment::AppendProperties(ostream& s) const
+{
+	s << "\tbegins = ( " << GetStartPoint().GetX() << " , " << GetStartPoint().GetY()
+	  << " ), ends = ( " << GetEndPoint().GetX() << " , " << GetEndPoint().GetY() << " )" << endl;
 }

@@ -28,21 +28,13 @@ TEST_CASE("CLineSegment - create a line segment", "[CLineSegment]")
 			}
 		}
 
-		WHEN("Created line segment")
+		WHEN("Created line segment of color #123456")
 		{
-			CLineSegment ls(point1, point2);
+			CLineSegment ls("Line segment", point1, point2, 123456);
 
-			THEN("We can get the length of the segment")
+			THEN("Can get all parameters of segment")
 			{
-				CHECK(ls.GetPerimeter() == 6.22);
-			}
-			AND_THEN("The segment has no area")
-			{
-				CHECK(ls.GetArea() == 0);
-			}
-			AND_THEN("CLineSegment print info about new line segment")
-			{
-				CHECK(ls.ToString() == "Line segment length: 6.22");
+				CHECK(ls.ToString() == "Line segment:\n\tbegins = ( 1.2 , 3.4 ), ends = ( 5.6 , 7.8 )\n\tlength = 6.22\n\tcolor = 123456\n");
 			}
 		}
 	}

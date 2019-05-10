@@ -5,10 +5,10 @@
 using namespace std;
 
 CLineSegment::CLineSegment(const string& type, const CPoint& point1, const CPoint& point2, const uint32_t color)
-	: m_startPoint(point1)
+	: m_type(type)
+	, m_startPoint(point1)
 	, m_endPoint(point2)
 	, m_color(color)
-	, m_type(type)
 {
 }
 

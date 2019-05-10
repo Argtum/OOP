@@ -19,8 +19,8 @@ public:
 private:
 	void AppendProperties(std::ostream& strm) const override;
 
+	std::string m_type;
 	CPoint m_startPoint;
 	CPoint m_endPoint;
 	uint32_t m_color;
-	std::string m_type;
 };

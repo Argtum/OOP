@@ -169,12 +169,16 @@
   <ItemGroup>
     <ClInclude Include="..\GeometricFigures\CLineSegment.h" />
     <ClInclude Include="..\GeometricFigures\CPoint.h" />
+    <ClInclude Include="..\GeometricFigures\CRectangle.h" />
+    <ClInclude Include="..\GeometricFigures\CTriangle.h" />
     <ClInclude Include="..\GeometricFigures\IShape.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\GeometricFigures\CLineSegment.cpp" />
     <ClCompile Include="..\GeometricFigures\CPoint.cpp" />
+    <ClCompile Include="..\GeometricFigures\CRectangle.cpp" />
+    <ClCompile Include="..\GeometricFigures\CTriangle.cpp" />
     <ClCompile Include="GeometricFiguresTests.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -188,7 +192,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RectangleTest.cpp" />
     <ClCompile Include="Tests.cpp" />
+    <ClCompile Include="TriangleTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

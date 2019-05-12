@@ -36,6 +36,14 @@ bool CCommandHandler::HandleCommand()
 	return false;
 }
 
+void CCommandHandler::Info(std::ostream& output)
+{
+	for (const auto& shape : m_shapeList)
+	{
+		output << shape->ToString();
+	}
+}
+
 bool CCommandHandler::CreateLineSegment(istream& args)
 {
 	vector<string> shapeDescription;
@@ -70,9 +78,9 @@ bool CCommandHandler::CreateLineSegment(istream& args)
 		return false;
 	}
 
-	auto lineSegment = make_unique<CLineSegment>(shapeDescription[0], point1, point2, lineColor);
+	auto lineSegment = make_unique<CLineSegment>("LineSegment", point1, point2, lineColor);
 	m_shapeList.push_back(move(lineSegment));
-	m_output << shapeDescription[0] << " is created\n";
+	m_output << shapeDescription[0] << "Line segment is created\n";
 
 	return true;
 }

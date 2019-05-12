@@ -17,13 +17,13 @@ CTriangle::CTriangle(const std::string& type, const CPoint& point1, const CPoint
 string CTriangle::ToString() const
 {
 	ostringstream s;
-	s << GetType() << ":" << endl;
+	s << m_type << ":" << endl;
 	AppendProperties(s);
 	s << setprecision(4)
 	  << "\tperimeter = " << GetPerimeter() << endl
 	  << "\tarea = " << GetArea() << endl
-	  << "\tline color = " << GetOutlineColor() << endl
-	  << "\tfill color = " << GetFillColor() << endl;
+	  << "\tline color = " << m_lineColor << endl
+	  << "\tfill color = " << m_fillColor << endl;
 
 	return s.str();
 }
@@ -76,7 +76,7 @@ uint32_t CTriangle::GetFillColor() const
 
 void CTriangle::AppendProperties(ostream& s) const
 {
-	s << "\tfirst vertex = ( " << GetVertex1().GetX() << " , " << GetVertex1().GetY()
-	  << " ), second vertex = ( " << GetVertex2().GetX() << " , " << GetVertex2().GetY()
-	  << " ), third vertex = ( " << GetVertex3().GetX() << " , " << GetVertex3().GetY() << " )" << endl;
+	s << "\tfirst vertex = ( " << m_vertex1.GetX() << " , " << m_vertex1.GetY()
+	  << " ), second vertex = ( " << m_vertex2.GetX() << " , " << m_vertex2.GetY()
+	  << " ), third vertex = ( " << m_vertex3.GetX() << " , " << m_vertex3.GetY() << " )" << endl;
 }

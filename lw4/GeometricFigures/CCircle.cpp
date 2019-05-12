@@ -16,13 +16,13 @@ CCircle::CCircle(const std::string& type, const CPoint& center, const double rad
 string CCircle::ToString() const
 {
 	ostringstream s;
-	s << GetType() << ":" << endl;
+	s << m_type << ":" << endl;
 	AppendProperties(s);
 	s << setprecision(4)
 	  << "\tperimeter = " << GetPerimeter() << endl
 	  << "\tarea = " << GetArea() << endl
-	  << "\tline color = " << GetOutlineColor() << endl
-	  << "\tfill color = " << GetFillColor() << endl;
+	  << "\tline color = " << m_lineColor << endl
+	  << "\tfill color = " << m_fillColor << endl;
 
 	return s.str();
 }
@@ -64,6 +64,6 @@ uint32_t CCircle::GetFillColor() const
 
 void CCircle::AppendProperties(ostream& s) const
 {
-	s << "\tcenter = ( " << GetCenter().GetX() << " , " << GetCenter().GetY()
-	  << " ), radius = " << GetRadius() << endl;
+	s << "\tcenter = ( " << m_center.GetX() << " , " << m_center.GetY()
+	  << " ), radius = " << m_radius << endl;
 }

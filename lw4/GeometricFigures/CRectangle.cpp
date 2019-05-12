@@ -18,13 +18,13 @@ CRectangle::CRectangle(const std::string& type, const CPoint& leftTop, const CPo
 string CRectangle::ToString() const
 {
 	ostringstream s;
-	s << GetType() << ":" << endl;
+	s << m_type << ":" << endl;
 	AppendProperties(s);
 	s << setprecision(4)
 	  << "\tperimeter = " << GetPerimeter() << endl
 	  << "\tarea = " << GetArea() << endl
-	  << "\tline color = " << GetOutlineColor() << endl
-	  << "\tfill color = " << GetFillColor() << endl;
+	  << "\tline color = " << m_lineColor << endl
+	  << "\tfill color = " << m_fillColor << endl;
 
 	return s.str();
 }
@@ -76,7 +76,7 @@ uint32_t CRectangle::GetFillColor() const
 
 void CRectangle::AppendProperties(ostream& s) const
 {
-	s << "\tleft top vertex = ( " << GetLeftTop().GetX() << " , " << GetLeftTop().GetY()
-	  << " ), right bottom vertex = ( " << GetRightBottom().GetX() << " , " << GetRightBottom().GetY()
-	  << " ), width = " << GetWidth() << ", height = " << GetHeight() << endl;
+	s << "\tleft top vertex = ( " << m_leftTopVertex.GetX() << " , " << m_leftTopVertex.GetY()
+	  << " ), right bottom vertex = ( " << m_rightBottomVertex.GetX() << " , " << m_rightBottomVertex.GetY()
+	  << " ), width = " << m_width << ", height = " << m_height << endl;
 }

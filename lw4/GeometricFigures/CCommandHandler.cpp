@@ -15,6 +15,7 @@ CCommandHandler::CCommandHandler(istream& input, ostream& output)
 	, m_actionMap({
 		  { "LineSegment", bind(&CCommandHandler::CreateLineSegment, this, placeholders::_1) },
 		  { "Triangle", bind(&CCommandHandler::CreateTriangle, this, placeholders::_1) },
+		  { "Rectangle", bind(&CCommandHandler::CreateRectangle, this, placeholders::_1) },
 
 	  })
 {
@@ -127,6 +128,51 @@ bool CCommandHandler::CreateTriangle(istream& args)
 	auto triangle = make_unique<CTriangle>("Triangle", vertex1, vertex2, vertex3, lineColor, fillColor);
 	m_shapeList.push_back(move(triangle));
 	m_output << "Triangle is created\n";
+
+	return true;
+}
+
+bool CCommandHandler::CreateRectangle(istream& args)
+{
+	vector<string> shapeDescription;
+	string description;
+	getline(args, description);
+
+	if (description.empty())
+	{
+		m_output << "No arguments!\nUsage: Rectangle leftTopVertex.x leftTopVertex.y rightBottomVertex.x rightBottomVertex.y width height lineColor fillColor\n";
+		return false;
+	}
+
+	boost::split(shapeDescription, description, boost::is_any_of(" "));
+
+	if (shapeDescription.size() != 9)
+	{
+		m_output << "Incorrect count of arguments!\nUsage: Rectangle leftTopVertex.x leftTopVertex.y rightBottomVertex.x rightBottomVertex.y width height lineColor fillColor\n";
+		return false;
+	}
+
+	CPoint leftTopVertex = { stod(shapeDescription[1]), stod(shapeDescription[2]) };
+	CPoint rightBottomVertex = { stod(shapeDescription[3]), stod(shapeDescription[4]) };
+	double width = stod(shapeDescription[5]);
+	double height = stod(shapeDescription[6]);
+	uint32_t lineColor;
+	uint32_t fillColor;
+
+	try
+	{
+		lineColor = strtoul(shapeDescription[7].substr(0, 2).c_str(), NULL, 16);
+		fillColor = strtoul(shapeDescription[8].substr(0, 2).c_str(), NULL, 16);
+	}
+	catch (CError e)
+	{
+		m_output << e.GetErrorMessage();
+		return false;
+	}
+
+	auto rectangle = make_unique<CRectangle>("Rectangle", leftTopVertex, rightBottomVertex, width, height, lineColor, fillColor);
+	m_shapeList.push_back(move(rectangle));
+	m_output << "Rectangle is created\n";
 
 	return true;
 }

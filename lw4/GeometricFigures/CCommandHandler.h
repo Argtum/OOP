@@ -14,8 +14,8 @@ public:
 private:
 	bool CreateLineSegment(std::istream& args);
 	bool CreateTriangle(std::istream& args);
-	/*bool CreateRectangle(std::istream& args);
-	bool CreateCircle(std::istream& args);*/
+	bool CreateRectangle(std::istream& args);
+	//bool CreateCircle(std::istream& args);
 	typedef std::map<std::string, std::function<bool(std::istream& args)>> ActionMap;
 
 	std::istream& m_input;

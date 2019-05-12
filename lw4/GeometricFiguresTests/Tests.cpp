@@ -149,3 +149,63 @@ SCENARIO("User through the command line creates a triangle with not all params")
 		}
 	}
 }
+
+SCENARIO("User through the command line creates a rectangle")
+{
+	GIVEN("A command line")
+	{
+		stringstream input, output;
+		CCommandHandler ch(input, output);
+
+		WHEN("User enters rectangle parameters")
+		{
+			input << "Rectangle 1.2 3.4 10.4 -1.5 9.2 4.1 abcdef 123456";
+			CHECK(ch.HandleCommand());
+
+			THEN("He get a notification")
+			{
+				CHECK(output.str() == "Rectangle is created\n");
+			}
+		}
+	}
+}
+
+SCENARIO("User through the command line creates a rectangle without params")
+{
+	GIVEN("A command line")
+	{
+		stringstream input, output;
+		CCommandHandler ch(input, output);
+
+		WHEN("User enters only a figure name")
+		{
+			input << "Rectangle";
+			CHECK(!ch.HandleCommand());
+
+			THEN("He get an error message")
+			{
+				CHECK(output.str() == "No arguments!\nUsage: Rectangle leftTopVertex.x leftTopVertex.y rightBottomVertex.x rightBottomVertex.y width height lineColor fillColor\n");
+			}
+		}
+	}
+}
+
+SCENARIO("User through the command line creates a rectangle with not all params")
+{
+	GIVEN("A command line")
+	{
+		stringstream input, output;
+		CCommandHandler ch(input, output);
+
+		WHEN("User enters triangle parameters without color")
+		{
+			input << "Rectangle 1.2 3.4 5.6 7.8 9.2 4.1";
+			CHECK(!ch.HandleCommand());
+
+			THEN("He get an error message")
+			{
+				CHECK(output.str() == "Incorrect count of arguments!\nUsage: Rectangle leftTopVertex.x leftTopVertex.y rightBottomVertex.x rightBottomVertex.y width height lineColor fillColor\n");
+			}
+		}
+	}
+}

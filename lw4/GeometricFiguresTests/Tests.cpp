@@ -24,6 +24,7 @@ SCENARIO("User through the command line creates a line segment with mistake")
 	}
 }
 
+//----------LINE SEGMENT----------
 SCENARIO("User through the command line creates a line segment")
 {
 	GIVEN("A command line")
@@ -90,6 +91,7 @@ SCENARIO("User through the command line creates a line segment with not all para
 	}
 }
 
+//---------TRIANGLE----------
 SCENARIO("User through the command line creates a triangle")
 {
 	GIVEN("A command line")
@@ -150,6 +152,7 @@ SCENARIO("User through the command line creates a triangle with not all params")
 	}
 }
 
+//----------RECTANGLE----------
 SCENARIO("User through the command line creates a rectangle")
 {
 	GIVEN("A command line")
@@ -205,6 +208,67 @@ SCENARIO("User through the command line creates a rectangle with not all params"
 			THEN("He get an error message")
 			{
 				CHECK(output.str() == "Incorrect count of arguments!\nUsage: Rectangle leftTopVertex.x leftTopVertex.y rightBottomVertex.x rightBottomVertex.y width height lineColor fillColor\n");
+			}
+		}
+	}
+}
+
+//----------CIRCLE----------
+SCENARIO("User through the command line creates a circle")
+{
+	GIVEN("A command line")
+	{
+		stringstream input, output;
+		CCommandHandler ch(input, output);
+
+		WHEN("User enters circle parameters")
+		{
+			input << "Circle 1.2 3.4 3 abcdef 123456";
+			CHECK(ch.HandleCommand());
+
+			THEN("He get a notification")
+			{
+				CHECK(output.str() == "Circle is created\n");
+			}
+		}
+	}
+}
+
+SCENARIO("User through the command line creates a circle without params")
+{
+	GIVEN("A command line")
+	{
+		stringstream input, output;
+		CCommandHandler ch(input, output);
+
+		WHEN("User enters only a figure name")
+		{
+			input << "Circle";
+			CHECK(!ch.HandleCommand());
+
+			THEN("He get an error message")
+			{
+				CHECK(output.str() == "No arguments!\nUsage: Circle center.x center.y radius lineColor fillColor\n");
+			}
+		}
+	}
+}
+
+SCENARIO("User through the command line creates a circle with not all params")
+{
+	GIVEN("A command line")
+	{
+		stringstream input, output;
+		CCommandHandler ch(input, output);
+
+		WHEN("User enters circle parameters without color")
+		{
+			input << "Circle 1.2 3.4 3";
+			CHECK(!ch.HandleCommand());
+
+			THEN("He get an error message")
+			{
+				CHECK(output.str() == "Incorrect count of arguments!\nUsage: Circle center.x center.y radius lineColor fillColor\n");
 			}
 		}
 	}

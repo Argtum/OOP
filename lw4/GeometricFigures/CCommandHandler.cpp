@@ -16,6 +16,7 @@ CCommandHandler::CCommandHandler(istream& input, ostream& output)
 		  { "LineSegment", bind(&CCommandHandler::CreateLineSegment, this, placeholders::_1) },
 		  { "Triangle", bind(&CCommandHandler::CreateTriangle, this, placeholders::_1) },
 		  { "Rectangle", bind(&CCommandHandler::CreateRectangle, this, placeholders::_1) },
+		  { "Circle", bind(&CCommandHandler::CreateCircle, this, placeholders::_1) },
 
 	  })
 {
@@ -173,6 +174,49 @@ bool CCommandHandler::CreateRectangle(istream& args)
 	auto rectangle = make_unique<CRectangle>("Rectangle", leftTopVertex, rightBottomVertex, width, height, lineColor, fillColor);
 	m_shapeList.push_back(move(rectangle));
 	m_output << "Rectangle is created\n";
+
+	return true;
+}
+
+bool CCommandHandler::CreateCircle(istream& args)
+{
+	vector<string> shapeDescription;
+	string description;
+	getline(args, description);
+
+	if (description.empty())
+	{
+		m_output << "No arguments!\nUsage: Circle center.x center.y radius lineColor fillColor\n";
+		return false;
+	}
+
+	boost::split(shapeDescription, description, boost::is_any_of(" "));
+
+	if (shapeDescription.size() != 6)
+	{
+		m_output << "Incorrect count of arguments!\nUsage: Circle center.x center.y radius lineColor fillColor\n";
+		return false;
+	}
+
+	CPoint center = { stod(shapeDescription[1]), stod(shapeDescription[2]) };
+	double radius = stod(shapeDescription[3]);
+	uint32_t lineColor;
+	uint32_t fillColor;
+
+	try
+	{
+		lineColor = strtoul(shapeDescription[4].substr(0, 2).c_str(), NULL, 16);
+		fillColor = strtoul(shapeDescription[5].substr(0, 2).c_str(), NULL, 16);
+	}
+	catch (CError e)
+	{
+		m_output << e.GetErrorMessage();
+		return false;
+	}
+
+	auto circle = make_unique<CCircle>("Circle", center, radius, lineColor, fillColor);
+	m_shapeList.push_back(move(circle));
+	m_output << "Circle is created\n";
 
 	return true;
 }

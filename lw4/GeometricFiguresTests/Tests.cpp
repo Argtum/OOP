@@ -97,9 +97,9 @@ SCENARIO("User through the command line creates a triangle")
 		stringstream input, output;
 		CCommandHandler ch(input, output);
 
-		WHEN("User enters line segment parameters")
+		WHEN("User enters triangle parameters")
 		{
-			input << "Triamgle 1.2 3.4 5.6 7.8 9.0 1.2 abcdef 123456";
+			input << "Triangle 1.2 3.4 5.6 7.8 9.0 1.2 abcdef 123456";
 			CHECK(ch.HandleCommand());
 
 			THEN("He get a notification")
@@ -124,7 +124,7 @@ SCENARIO("User through the command line creates a triangle without params")
 
 			THEN("He get an error message")
 			{
-				CHECK(output.str() == "No arguments!\nUsage: Triangle point1.x point1.y point2.x point2.y point3.x point3.y lineColor fillColor\n");
+				CHECK(output.str() == "No arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n");
 			}
 		}
 	}
@@ -139,12 +139,12 @@ SCENARIO("User through the command line creates a triangle with not all params")
 
 		WHEN("User enters triangle parameters without color")
 		{
-			input << "LineSegment 1.2 3.4 5.6 7.8 9.0 1.2";
+			input << "Triangle 1.2 3.4 5.6 7.8 9.0 1.2";
 			CHECK(!ch.HandleCommand());
 
 			THEN("He get an error message")
 			{
-				CHECK(output.str() == "Incorrect count of arguments!\nUsage: Triangle point1.x point1.y point2.x point2.y point3.x point3.y lineColor fillColor\n");
+				CHECK(output.str() == "Incorrect count of arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n");
 			}
 		}
 	}

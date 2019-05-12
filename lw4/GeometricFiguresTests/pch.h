@@ -1,6 +1,8 @@
 #ifndef PCH_H
 #define PCH_H
 
+#define _USE_MATH_DEFINES
+
 #include "stdint.h"
 #include <catch2/catch.hpp>
 #include <cmath>
@@ -10,8 +12,10 @@
 #include <istream>
 #include <iterator>
 #include <map>
+#include <math.h>
 #include <sstream>
 #include <string>
 #include <strstream>
+#include <vector>
 
 #endif

@@ -41,11 +41,11 @@ TEST_CASE("CTriangle - create a triangle", "[CTriangle]")
 
 		WHEN("Created triangle with line color #123456 and fill color #987654")
 		{
-			CTriangle triangle("triangle", point1, point2, point3, 123456, 987654);
+			CTriangle triangle("Triangle", point1, point2, point3, 123456, 987654);
 
 			THEN("Can get all parameters of segment")
 			{
-				CHECK(triangle.ToString() == "triangle:\n\tfirst vertex = ( 1.2 , 3.4 ), second vertex = ( 5.6 , 7.8 ), third vertex = ( 9 , 1.2 )\n\tperimeter = 21.75\n\tarea = 22\n\tline color = 123456\n\tfill color = 987654\n");
+				CHECK(triangle.ToString() == "Triangle:\n\tfirst vertex = ( 1.2 , 3.4 ), second vertex = ( 5.6 , 7.8 ), third vertex = ( 9 , 1.2 )\n\tperimeter = 21.75\n\tarea = 22\n\tline color = 123456\n\tfill color = 987654\n");
 			}
 		}
 	}

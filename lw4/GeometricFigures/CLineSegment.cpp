@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CLineSegment.h"
+#include "AdditionFunction.h"
 #include "CPoint.h"
 
 using namespace std;
@@ -41,7 +42,7 @@ CPoint CLineSegment::GetEndPoint() const
 
 double CLineSegment::GetPerimeter() const
 {
-	return sqrt(pow(m_endPoint.GetX() - m_startPoint.GetX(), 2) + pow(m_endPoint.GetY() - m_startPoint.GetY(), 2));
+	return GetSegmentLength(m_endPoint, m_startPoint);
 }
 
 uint32_t CLineSegment::GetOutlineColor() const

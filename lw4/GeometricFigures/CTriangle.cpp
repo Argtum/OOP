@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CTriangle.h"
+#include "AdditionFunction.h"
 #include "CPoint.h"
 
 using namespace std;
@@ -50,16 +51,14 @@ CPoint CTriangle::GetVertex3() const
 
 double CTriangle::GetPerimeter() const
 {
-	return sqrt(pow(m_vertex1.GetX() - m_vertex2.GetX(), 2) + pow(m_vertex1.GetY() - m_vertex2.GetY(), 2))
-		+ sqrt(pow(m_vertex2.GetX() - m_vertex3.GetX(), 2) + pow(m_vertex2.GetY() - m_vertex3.GetY(), 2))
-		+ sqrt(pow(m_vertex3.GetX() - m_vertex1.GetX(), 2) + pow(m_vertex3.GetY() - m_vertex1.GetY(), 2));
+	return GetSegmentLength(m_vertex1, m_vertex2) + GetSegmentLength(m_vertex2, m_vertex3) + GetSegmentLength(m_vertex3, m_vertex1);
 }
 
 double CTriangle::GetArea() const
 {
-	double a = sqrt(pow(m_vertex1.GetX() - m_vertex2.GetX(), 2) + pow(m_vertex1.GetY() - m_vertex2.GetY(), 2));
-	double b = sqrt(pow(m_vertex2.GetX() - m_vertex3.GetX(), 2) + pow(m_vertex2.GetY() - m_vertex3.GetY(), 2));
-	double c = sqrt(pow(m_vertex3.GetX() - m_vertex1.GetX(), 2) + pow(m_vertex3.GetY() - m_vertex1.GetY(), 2));
+	double a = GetSegmentLength(m_vertex1, m_vertex2);
+	double b = GetSegmentLength(m_vertex2, m_vertex3);
+	double c = GetSegmentLength(m_vertex3, m_vertex1);
 	double p = GetPerimeter() / 2;
 	return sqrt(p * (p - a) * (p - b) * (p - c));
 }

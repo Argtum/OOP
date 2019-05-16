@@ -4,10 +4,9 @@
 
 using namespace std;
 
-CRectangle::CRectangle(const std::string& type, const CPoint& leftTop, const CPoint& rightBottom, const double width, const double height, const uint32_t lineColor, const uint32_t fillColor)
+CRectangle::CRectangle(const std::string& type, const CPoint& leftTop, const double width, const double height, const uint32_t lineColor, const uint32_t fillColor)
 	: m_type(type)
 	, m_leftTopVertex(leftTop)
-	, m_rightBottomVertex(rightBottom)
 	, m_width(width)
 	, m_height(height)
 	, m_lineColor(lineColor)
@@ -41,7 +40,8 @@ CPoint CRectangle::GetLeftTop() const
 
 CPoint CRectangle::GetRightBottom() const
 {
-	return m_rightBottomVertex;
+	CPoint rigthBttom(m_leftTopVertex.GetX() + m_width, m_leftTopVertex.GetY() - m_height);
+	return rigthBttom;
 }
 
 double CRectangle::GetWidth() const
@@ -77,6 +77,5 @@ uint32_t CRectangle::GetFillColor() const
 void CRectangle::AppendProperties(ostream& s) const
 {
 	s << "\tleft top vertex = ( " << m_leftTopVertex.GetX() << " , " << m_leftTopVertex.GetY()
-	  << " ), right bottom vertex = ( " << m_rightBottomVertex.GetX() << " , " << m_rightBottomVertex.GetY()
 	  << " ), width = " << m_width << ", height = " << m_height << endl;
 }

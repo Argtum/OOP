@@ -5,7 +5,7 @@
 class CRectangle : public ISolidShape
 {
 public:
-	CRectangle(const std::string& type, const CPoint& leftTop, const CPoint& rightBottom, const double width, const double height, const uint32_t lineColor, const uint32_t fillColor);
+	CRectangle(const std::string& type, const CPoint& rightBottom, const double width, const double height, const uint32_t lineColor, const uint32_t fillColor);
 	double GetPerimeter() const override;
 	std::string ToString() const override;
 	uint32_t GetOutlineColor() const override;
@@ -24,7 +24,6 @@ private:
 
 	std::string m_type;
 	CPoint m_leftTopVertex;
-	CPoint m_rightBottomVertex;
 	double m_width;
 	double m_height;
 	uint32_t m_lineColor;

@@ -167,9 +167,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\GeometricFigures\AdditionFunction.h" />
     <ClInclude Include="..\GeometricFigures\CCircle.h" />
     <ClInclude Include="..\GeometricFigures\CCommandHandler.h" />
-    <ClInclude Include="..\GeometricFigures\CError.h" />
     <ClInclude Include="..\GeometricFigures\CLineSegment.h" />
     <ClInclude Include="..\GeometricFigures\CPoint.h" />
     <ClInclude Include="..\GeometricFigures\CRectangle.h" />
@@ -178,9 +178,9 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\GeometricFigures\AdditionFunction.cpp" />
     <ClCompile Include="..\GeometricFigures\CCircle.cpp" />
     <ClCompile Include="..\GeometricFigures\CCommandHandler.cpp" />
-    <ClCompile Include="..\GeometricFigures\CError.cpp" />
     <ClCompile Include="..\GeometricFigures\CLineSegment.cpp" />
     <ClCompile Include="..\GeometricFigures\CPoint.cpp" />
     <ClCompile Include="..\GeometricFigures\CRectangle.cpp" />

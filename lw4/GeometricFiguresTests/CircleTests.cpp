@@ -8,15 +8,6 @@ TEST_CASE("CCircle - create a circle", "[CCircle]")
 	{
 		CPoint center(1.2, 3.4);
 
-		WHEN("Get the coordinates of the center point")
-		{
-			THEN("Have their coordinates")
-			{
-				CHECK(center.GetX() == 1.2);
-				CHECK(center.GetY() == 3.4);
-			}
-		}
-
 		WHEN("Created circle with radius 3, line color #123456 and fill color #987654")
 		{
 			CCircle circle("Circle", center, 3, 123456, 987654);

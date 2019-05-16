@@ -7,37 +7,8 @@ TEST_CASE("CTriangle - create a triangle", "[CTriangle]")
 	GIVEN("Triangle defined by three points")
 	{
 		CPoint point1(1.2, 3.4);
-
-		WHEN("Get the coordinates of the first point")
-		{
-			THEN("Have their coordinates")
-			{
-				CHECK(point1.GetX() == 1.2);
-				CHECK(point1.GetY() == 3.4);
-			}
-		}
-
 		CPoint point2(5.6, 7.8);
-
-		WHEN("Get the coordinates of the second point")
-		{
-			THEN("Have their coordinates")
-			{
-				CHECK(point2.GetX() == 5.6);
-				CHECK(point2.GetY() == 7.8);
-			}
-		}
-
 		CPoint point3(9.0, 1.2);
-
-		WHEN("Get the coordinates of the third point")
-		{
-			THEN("Have their coordinates")
-			{
-				CHECK(point3.GetX() == 9.0);
-				CHECK(point3.GetY() == 1.2);
-			}
-		}
 
 		WHEN("Created triangle with line color #123456 and fill color #987654")
 		{

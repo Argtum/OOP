@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CCircle.h"
-#include "CPoint.h"
 
 using namespace std;
 

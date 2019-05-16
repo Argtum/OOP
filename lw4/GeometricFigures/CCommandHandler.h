@@ -7,9 +7,8 @@ class CCommandHandler : boost::noncopyable
 public:
 	CCommandHandler(std::istream& input, std::ostream& output);
 	bool HandleCommand();
-	void Info(std::ostream& output);
-	/*void PrintShapeWithMinPerimeter();
-	void PrintShapeWithMaxArea();*/
+	//void PrintShapeWithMinPerimetr();
+	//void PrintShapeWithMaxArea();
 
 private:
 	bool CreateLineSegment(std::istream& args);

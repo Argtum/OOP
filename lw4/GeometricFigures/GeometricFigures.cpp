@@ -4,18 +4,23 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char argv[])
 {
 	CCommandHandler ch(cin, cout);
 	while (!cin.eof() && !cin.fail())
 	{
-		if (!ch.HandleCommand())
+		try
 		{
-			cout << "Unknown command!\nUsage: LineSegment with parameters" << endl;
+			if (!ch.HandleCommand())
+			{
+				cout << "Unknown command!\nUsage: Circle, Trinagle, Rectangle or LineSegment with parameters" << endl;
+			}
+		}
+		catch (const exception& e)
+		{
+			cout << e.what();
 		}
 	}
-	/*shapeInfo.PrintShapeWithMaxArea();
-	shapeInfo.PrintShapeWithMinPerimeter();*/
 
 	return 0;
 }

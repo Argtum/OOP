@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "CCommandHandler.h"
 #include "CCircle.h"
-#include "CError.h"
 #include "CLineSegment.h"
 #include "CRectangle.h"
 #include "CTriangle.h"
@@ -40,14 +39,6 @@ bool CCommandHandler::HandleCommand()
 	return false;
 }
 
-void CCommandHandler::Info(std::ostream& output)
-{
-	for (const auto& shape : m_shapeList)
-	{
-		output << shape->ToString();
-	}
-}
-
 bool CCommandHandler::CreateLineSegment(istream& args)
 {
 	vector<string> shapeDescription;
@@ -56,7 +47,7 @@ bool CCommandHandler::CreateLineSegment(istream& args)
 
 	if (description.empty())
 	{
-		m_output << "No arguments!\nUsage: LineSegment point1.x point1.y point2.x point2.y lineColor\n";
+		throw invalid_argument("No arguments!\nUsage: LineSegment point1.x point1.y point2.x point2.y lineColor\n");
 		return false;
 	}
 
@@ -64,7 +55,7 @@ bool CCommandHandler::CreateLineSegment(istream& args)
 
 	if (shapeDescription.size() != 6)
 	{
-		m_output << "Incorrect count of arguments!\nUsage: LineSegment point1.x point1.y point2.x point2.y lineColor\n";
+		throw invalid_argument("Incorrect count of arguments!\nUsage: LineSegment point1.x point1.y point2.x point2.y lineColor\n");
 		return false;
 	}
 
@@ -76,9 +67,9 @@ bool CCommandHandler::CreateLineSegment(istream& args)
 	{
 		lineColor = strtoul(shapeDescription[5].substr(0, 2).c_str(), NULL, 16);
 	}
-	catch (CError e)
+	catch (const exception& e)
 	{
-		m_output << e.GetErrorMessage();
+		throw invalid_argument("Wrong color format!\n");
 		return false;
 	}
 
@@ -97,7 +88,7 @@ bool CCommandHandler::CreateTriangle(istream& args)
 
 	if (description.empty())
 	{
-		m_output << "No arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n";
+		throw invalid_argument("No arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n");
 		return false;
 	}
 
@@ -105,7 +96,7 @@ bool CCommandHandler::CreateTriangle(istream& args)
 
 	if (shapeDescription.size() != 9)
 	{
-		m_output << "Incorrect count of arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n";
+		throw invalid_argument("Incorrect count of arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n");
 		return false;
 	}
 
@@ -120,9 +111,9 @@ bool CCommandHandler::CreateTriangle(istream& args)
 		lineColor = strtoul(shapeDescription[7].substr(0, 2).c_str(), NULL, 16);
 		fillColor = strtoul(shapeDescription[8].substr(0, 2).c_str(), NULL, 16);
 	}
-	catch (CError e)
+	catch (const exception& e)
 	{
-		m_output << e.GetErrorMessage();
+		throw invalid_argument("Wrong color format!\n");
 		return false;
 	}
 
@@ -141,37 +132,36 @@ bool CCommandHandler::CreateRectangle(istream& args)
 
 	if (description.empty())
 	{
-		m_output << "No arguments!\nUsage: Rectangle leftTopVertex.x leftTopVertex.y rightBottomVertex.x rightBottomVertex.y width height lineColor fillColor\n";
+		throw invalid_argument("No arguments!\nUsage: Rectangle leftTopVertex.x leftTopVertex.y width height lineColor fillColor\n");
 		return false;
 	}
 
 	boost::split(shapeDescription, description, boost::is_any_of(" "));
 
-	if (shapeDescription.size() != 9)
+	if (shapeDescription.size() != 7)
 	{
-		m_output << "Incorrect count of arguments!\nUsage: Rectangle leftTopVertex.x leftTopVertex.y rightBottomVertex.x rightBottomVertex.y width height lineColor fillColor\n";
+		throw invalid_argument("Incorrect count of arguments!\nUsage: Rectangle leftTopVertex.x leftTopVertex.y width height lineColor fillColor\n");
 		return false;
 	}
 
 	CPoint leftTopVertex = { stod(shapeDescription[1]), stod(shapeDescription[2]) };
-	CPoint rightBottomVertex = { stod(shapeDescription[3]), stod(shapeDescription[4]) };
-	double width = stod(shapeDescription[5]);
-	double height = stod(shapeDescription[6]);
+	double width = stod(shapeDescription[3]);
+	double height = stod(shapeDescription[4]);
 	uint32_t lineColor;
 	uint32_t fillColor;
 
 	try
 	{
-		lineColor = strtoul(shapeDescription[7].substr(0, 2).c_str(), NULL, 16);
-		fillColor = strtoul(shapeDescription[8].substr(0, 2).c_str(), NULL, 16);
+		lineColor = strtoul(shapeDescription[5].substr(0, 2).c_str(), NULL, 16);
+		fillColor = strtoul(shapeDescription[6].substr(0, 2).c_str(), NULL, 16);
 	}
-	catch (CError e)
+	catch (const exception& e)
 	{
-		m_output << e.GetErrorMessage();
+		throw invalid_argument("Wrong color format!\n");
 		return false;
 	}
 
-	auto rectangle = make_unique<CRectangle>("Rectangle", leftTopVertex, rightBottomVertex, width, height, lineColor, fillColor);
+	auto rectangle = make_unique<CRectangle>("Rectangle", leftTopVertex, width, height, lineColor, fillColor);
 	m_shapeList.push_back(move(rectangle));
 	m_output << "Rectangle is created\n";
 
@@ -186,7 +176,7 @@ bool CCommandHandler::CreateCircle(istream& args)
 
 	if (description.empty())
 	{
-		m_output << "No arguments!\nUsage: Circle center.x center.y radius lineColor fillColor\n";
+		throw invalid_argument("No arguments!\nUsage: Circle center.x center.y radius lineColor fillColor\n");
 		return false;
 	}
 
@@ -194,7 +184,7 @@ bool CCommandHandler::CreateCircle(istream& args)
 
 	if (shapeDescription.size() != 6)
 	{
-		m_output << "Incorrect count of arguments!\nUsage: Circle center.x center.y radius lineColor fillColor\n";
+		throw invalid_argument("Incorrect count of arguments!\nUsage: Circle center.x center.y radius lineColor fillColor\n");
 		return false;
 	}
 
@@ -208,9 +198,9 @@ bool CCommandHandler::CreateCircle(istream& args)
 		lineColor = strtoul(shapeDescription[4].substr(0, 2).c_str(), NULL, 16);
 		fillColor = strtoul(shapeDescription[5].substr(0, 2).c_str(), NULL, 16);
 	}
-	catch (CError e)
+	catch (const exception& e)
 	{
-		m_output << e.GetErrorMessage();
+		throw invalid_argument("Wrong color format!\n");
 		return false;
 	}
 

@@ -39,7 +39,7 @@
     <ClInclude Include="..\GeometricFigures\CCommandHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\GeometricFigures\CError.h">
+    <ClInclude Include="..\GeometricFigures\AdditionFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,7 +86,7 @@
     <ClCompile Include="..\GeometricFigures\CCommandHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GeometricFigures\CError.cpp">
+    <ClCompile Include="..\GeometricFigures\AdditionFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

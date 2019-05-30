@@ -1,5 +1,6 @@
 #pragma once
 #include "IShape.h"
+#include "ISolidShape.h"
 #include <boost/noncopyable.hpp>
 
 class CCommandHandler : boost::noncopyable
@@ -7,8 +8,8 @@ class CCommandHandler : boost::noncopyable
 public:
 	CCommandHandler(std::istream& input, std::ostream& output);
 	bool HandleCommand();
-	//void PrintShapeWithMinPerimetr();
-	//void PrintShapeWithMaxArea();
+	void PrintShapeWithMinPerimetr();
+	void PrintShapeWithMaxArea();
 
 private:
 	bool CreateLineSegment(std::istream& args);

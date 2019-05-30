@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "lw4/GeometricFigures/AdditionFunction.h"
 #include "lw4/GeometricFigures/CCircle.h"
 #include "lw4/GeometricFigures/CCommandHandler.h"
 #include "lw4/GeometricFigures/CLineSegment.h"
@@ -6,24 +7,12 @@
 
 using namespace std;
 
-SCENARIO("User through the command line creates a line segment with mistake")
+TEST_CASE("GetSegmentLength - mast return a distance between two points")
 {
-	GIVEN("A command line")
-	{
-		stringstream input, output;
-		CCommandHandler ch(input, output);
-
-		WHEN("User enters name non-existent figure with parameters")
-		{
-			input << "Line 1.2 3.4 5.6 7.8 123456";
-			CHECK(!ch.HandleCommand());
-
-			THEN("He get error message")
-			{
-				//CHECK(output.str() == "Line segment is created\n");
-			}
-		}
-	}
+	CPoint point1(1.2, 3.4);
+	CPoint point2(5.6, 7.8);
+	double length = GetSegmentLength(point1, point2);
+	CHECK(round(length * 100) / 100 == 6.22);
 }
 
 //----------LINE SEGMENT----------
@@ -267,3 +256,45 @@ SCENARIO("User through the command line can't creates a circle with not all para
 		}
 	}
 }
+/*
+SCENARIO("When the user finishes entering shapes, information is displayed about the shape with the smallest perimeter and largest area")
+{
+	GIVEN("A command line")
+	{
+		stringstream input, output;
+		CCommandHandler ch(input, output);
+
+		WHEN("User enters circle parameters")
+		{
+			input << "Circle 1.2 3.4 3 abcdef 123456";
+			CHECK(ch.HandleCommand());
+
+			THEN("He get a notification")
+			{
+				CHECK(output.str() == "Circle is created\n");
+			}
+		}
+
+		WHEN("User enters rectangle parameters")
+		{
+			input << "Rectangle 1.2 3.4 9.2 4.1 abcdef 123456";
+			CHECK(ch.HandleCommand());
+
+			THEN("He get a notification")
+			{
+				CHECK(output.str() == "Rectangle is created\n");
+			}
+		}
+
+		WHEN("User enters rectangle parameters")
+		{
+			input << "\0";
+
+			THEN("He get a notification")
+			{
+				CHECK(output.str() == "Min perimeter shape: Circle:\n\tcenter = ( 1.2 , 3.4 ), radius = 3\n\tperimeter = 18.85\n\tarea = 28.27\n\tline color = 123456\n\tfill color = 987654\nMax square shape: Rectangle:\n\tleft top vertex = ( 1.2 , 3.4 ), width = 9.2, height = 4.1\n\tperimeter = 26.6\n\tarea = 37.72\n\tline color = 123456\n\tfill color = 987654\n");
+			}
+		}
+	}
+}
+*/

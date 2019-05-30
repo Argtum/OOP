@@ -2,13 +2,65 @@
 #include "lw4/GeometricFigures/CPoint.h"
 #include "lw4/GeometricFigures/CRectangle.h"
 
+TEST_CASE("The rectangle when created should have a coordinate of left top point, width, height, perimeter, area, line color and fill color", "[CRectangle]")
+{
+	GIVEN("Rectangle defined left top point, width and height")
+	{
+		CPoint leftTopPoint(1.2, 3.4);
+
+		WHEN("Created rectangle with width = 9.2, height = 4.1, line color #123456 and fill color #987654")
+		{
+			CRectangle rectangle("Rectangle", leftTopPoint, 9.2, 4.1, 123456, 987654);
+
+			THEN("Can get type")
+			{
+				CHECK(rectangle.GetType() == "Rectangle");
+			}
+			AND_THEN("Can get coordinate of left top point")
+			{
+				CHECK(rectangle.GetLeftTop().GetX() == 1.2);
+				CHECK(rectangle.GetLeftTop().GetY() == 3.4);
+			}
+			AND_THEN("Can get coordinate of right bottom point")
+			{
+				CHECK(round(rectangle.GetRightBottom().GetX() * 100) / 100 == 10.4);
+				CHECK(round(rectangle.GetRightBottom().GetY() * 100) / 100 == -0.7);
+			}
+			AND_THEN("Can get width")
+			{
+				CHECK(rectangle.GetWidth() == 9.2);
+			}
+			AND_THEN("Can get height")
+			{
+				CHECK(rectangle.GetHeight() == 4.1);
+			}
+			AND_THEN("Can get perimeter")
+			{
+				CHECK(round(rectangle.GetPerimeter() * 100) / 100 == 26.6);
+			}
+			AND_THEN("Can get area")
+			{
+				CHECK(round(rectangle.GetArea() * 100) / 100 == 37.72);
+			}
+			AND_THEN("Can get line color")
+			{
+				CHECK(rectangle.GetOutlineColor() == 123456);
+			}
+			AND_THEN("Can get fill color")
+			{
+				CHECK(rectangle.GetFillColor() == 987654);
+			}
+		}
+	}
+}
+
 TEST_CASE("CRectangle - create a rectangle", "[CRectangle]")
 {
 	GIVEN("Rectangle left top b right bottom points")
 	{
 		CPoint leftTopPoint(1.2, 3.4);
 
-		WHEN("Created triangle with width = 9.2, height = 4.1, line color #123456 and fill color #987654")
+		WHEN("Created rectangle with width = 9.2, height = 4.1, line color #123456 and fill color #987654")
 		{
 			CRectangle rectangle("Rectangle", leftTopPoint, 9.2, 4.1, 123456, 987654);
 

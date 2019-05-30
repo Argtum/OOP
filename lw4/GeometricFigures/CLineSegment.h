@@ -9,6 +9,7 @@ public:
 	CLineSegment(const std::string& type, const CPoint& point1, const CPoint& point2, const uint32_t color);
 
 	double GetPerimeter() const override;
+	double GetArea() const override;
 	std::string ToString() const override;
 	uint32_t GetOutlineColor() const override;
 

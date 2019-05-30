@@ -11,13 +11,10 @@ using namespace std;
 CCommandHandler::CCommandHandler(istream& input, ostream& output)
 	: m_input(input)
 	, m_output(output)
-	, m_actionMap({
-		  { "LineSegment", bind(&CCommandHandler::CreateLineSegment, this, placeholders::_1) },
+	, m_actionMap({ { "LineSegment", bind(&CCommandHandler::CreateLineSegment, this, placeholders::_1) },
 		  { "Triangle", bind(&CCommandHandler::CreateTriangle, this, placeholders::_1) },
 		  { "Rectangle", bind(&CCommandHandler::CreateRectangle, this, placeholders::_1) },
-		  { "Circle", bind(&CCommandHandler::CreateCircle, this, placeholders::_1) },
-
-	  })
+		  { "Circle", bind(&CCommandHandler::CreateCircle, this, placeholders::_1) } })
 {
 }
 
@@ -209,4 +206,28 @@ bool CCommandHandler::CreateCircle(istream& args)
 	m_output << "Circle is created\n";
 
 	return true;
+}
+
+void CCommandHandler::PrintShapeWithMinPerimetr()
+{
+	if (!m_shapeList.empty())
+	{
+		auto shapeMinPerimeter = min_element(m_shapeList.cbegin(), m_shapeList.cend(), [](const auto& arg1, const auto& arg2) {
+			return arg1->GetPerimeter() < arg2->GetPerimeter();
+		});
+
+		m_output << "Min perimeter shape: " << (*shapeMinPerimeter)->ToString() << endl;
+	}
+}
+
+void CCommandHandler::PrintShapeWithMaxArea()
+{
+	if (!m_shapeList.empty())
+	{
+		auto shapeMaxArea = max_element(m_shapeList.begin(), m_shapeList.end(), [](const auto& arg1, const auto& arg2) {
+			return arg1->GetArea() < arg2->GetArea();
+		});
+
+		m_output << "Max area shape: " << (*shapeMaxArea)->ToString() << endl;
+	}
 }

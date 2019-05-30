@@ -6,20 +6,25 @@ using namespace std;
 
 int main(int argc, char argv[])
 {
-	CCommandHandler ch(cin, cout);
-	while (!cin.eof() && !cin.fail())
+	try
 	{
-		try
+		CCommandHandler ch(cin, cout);
+		while (!cin.eof() && !cin.fail())
 		{
+			cout << "> ";
+
 			if (!ch.HandleCommand())
 			{
 				cout << "Unknown command!\nUsage: Circle, Trinagle, Rectangle or LineSegment with parameters" << endl;
 			}
 		}
-		catch (const exception& e)
-		{
-			cout << e.what();
-		}
+		ch.PrintShapeWithMinPerimetr();
+		ch.PrintShapeWithMaxArea();
+	}
+	catch (const exception& e)
+	{
+		cerr << e.what() << endl;
+		return 1;
 	}
 
 	return 0;

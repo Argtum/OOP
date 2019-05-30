@@ -45,6 +45,11 @@ double CLineSegment::GetPerimeter() const
 	return GetSegmentLength(m_endPoint, m_startPoint);
 }
 
+double CLineSegment::GetArea() const
+{
+	return 0;
+}
+
 uint32_t CLineSegment::GetOutlineColor() const
 {
 	return m_color;

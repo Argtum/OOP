@@ -3,9 +3,8 @@
 
 using namespace std;
 
-CCircle::CCircle(const std::string& type, const CPoint& center, const double radius, const uint32_t lineColor, const uint32_t fillColor)
-	: m_type(type)
-	, m_center(center)
+CCircle::CCircle(const CPoint& center, const double radius, const uint32_t lineColor, const uint32_t fillColor)
+	: m_center(center)
 	, m_radius(radius)
 	, m_lineColor(lineColor)
 	, m_fillColor(fillColor)
@@ -15,7 +14,7 @@ CCircle::CCircle(const std::string& type, const CPoint& center, const double rad
 string CCircle::ToString() const
 {
 	ostringstream s;
-	s << m_type << ":" << endl;
+	s << GetType() << ":" << endl;
 	AppendProperties(s);
 	s << setprecision(4)
 	  << "\tperimeter = " << GetPerimeter() << endl
@@ -28,7 +27,7 @@ string CCircle::ToString() const
 
 string CCircle::GetType() const
 {
-	return m_type;
+	return "Circle";
 }
 
 CPoint CCircle::GetCenter() const

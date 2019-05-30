@@ -5,9 +5,8 @@
 
 using namespace std;
 
-CLineSegment::CLineSegment(const string& type, const CPoint& point1, const CPoint& point2, const uint32_t color)
-	: m_type(type)
-	, m_startPoint(point1)
+CLineSegment::CLineSegment(const CPoint& point1, const CPoint& point2, const uint32_t color)
+	: m_startPoint(point1)
 	, m_endPoint(point2)
 	, m_color(color)
 {
@@ -16,7 +15,7 @@ CLineSegment::CLineSegment(const string& type, const CPoint& point1, const CPoin
 string CLineSegment::ToString() const
 {
 	ostringstream s;
-	s << m_type << ":" << endl;
+	s << GetType() << ":" << endl;
 	AppendProperties(s);
 	s << setprecision(3)
 	  << "\tlength = " << GetPerimeter() << endl
@@ -27,7 +26,7 @@ string CLineSegment::ToString() const
 
 string CLineSegment::GetType() const
 {
-	return m_type;
+	return "Line segment";
 }
 
 CPoint CLineSegment::GetStartPoint() const

@@ -256,7 +256,7 @@ SCENARIO("User through the command line can't creates a circle with not all para
 		}
 	}
 }
-/*
+
 SCENARIO("When the user finishes entering shapes, information is displayed about the shape with the smallest perimeter and largest area")
 {
 	GIVEN("A command line")
@@ -274,27 +274,5 @@ SCENARIO("When the user finishes entering shapes, information is displayed about
 				CHECK(output.str() == "Circle is created\n");
 			}
 		}
-
-		WHEN("User enters rectangle parameters")
-		{
-			input << "Rectangle 1.2 3.4 9.2 4.1 abcdef 123456";
-			CHECK(ch.HandleCommand());
-
-			THEN("He get a notification")
-			{
-				CHECK(output.str() == "Rectangle is created\n");
-			}
-		}
-
-		WHEN("User enters rectangle parameters")
-		{
-			input << "\0";
-
-			THEN("He get a notification")
-			{
-				CHECK(output.str() == "Min perimeter shape: Circle:\n\tcenter = ( 1.2 , 3.4 ), radius = 3\n\tperimeter = 18.85\n\tarea = 28.27\n\tline color = 123456\n\tfill color = 987654\nMax square shape: Rectangle:\n\tleft top vertex = ( 1.2 , 3.4 ), width = 9.2, height = 4.1\n\tperimeter = 26.6\n\tarea = 37.72\n\tline color = 123456\n\tfill color = 987654\n");
-			}
-		}
 	}
 }
-*/

@@ -12,7 +12,7 @@ TEST_CASE("The triangle when created should have a three vertex, perimeter, area
 
 		WHEN("Created triangle with line color #123456 and fill color #987654")
 		{
-			CTriangle triangle("Triangle", point1, point2, point3, 123456, 987654);
+			CTriangle triangle(point1, point2, point3, 123456, 987654);
 
 			THEN("Can get type")
 			{
@@ -63,7 +63,7 @@ TEST_CASE("CTriangle - create a triangle", "[CTriangle]")
 
 		WHEN("Created triangle with line color #123456 and fill color #987654")
 		{
-			CTriangle triangle("Triangle", point1, point2, point3, 123456, 987654);
+			CTriangle triangle(point1, point2, point3, 123456, 987654);
 
 			THEN("Can get all parameters of segment")
 			{

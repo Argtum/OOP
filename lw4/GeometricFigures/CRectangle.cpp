@@ -4,9 +4,8 @@
 
 using namespace std;
 
-CRectangle::CRectangle(const std::string& type, const CPoint& leftTop, const double width, const double height, const uint32_t lineColor, const uint32_t fillColor)
-	: m_type(type)
-	, m_leftTopVertex(leftTop)
+CRectangle::CRectangle(const CPoint& leftTop, const double width, const double height, const uint32_t lineColor, const uint32_t fillColor)
+	: m_leftTopVertex(leftTop)
 	, m_width(width)
 	, m_height(height)
 	, m_lineColor(lineColor)
@@ -17,7 +16,7 @@ CRectangle::CRectangle(const std::string& type, const CPoint& leftTop, const dou
 string CRectangle::ToString() const
 {
 	ostringstream s;
-	s << m_type << ":" << endl;
+	s << GetType() << ":" << endl;
 	AppendProperties(s);
 	s << setprecision(4)
 	  << "\tperimeter = " << GetPerimeter() << endl
@@ -30,7 +29,7 @@ string CRectangle::ToString() const
 
 string CRectangle::GetType() const
 {
-	return m_type;
+	return "Rectangle";
 }
 
 CPoint CRectangle::GetLeftTop() const

@@ -6,7 +6,7 @@
 class CCircle : public ISolidShape
 {
 public:
-	CCircle(const std::string& type, const CPoint& center, const double radius, const uint32_t lineColor, const uint32_t fillColor);
+	CCircle(const CPoint& center, const double radius, const uint32_t lineColor, const uint32_t fillColor);
 	double GetPerimeter() const override;
 	std::string ToString() const override;
 	uint32_t GetOutlineColor() const override;
@@ -21,7 +21,6 @@ public:
 private:
 	void AppendProperties(std::ostream& strm) const override;
 
-	std::string m_type;
 	CPoint m_center;
 	double m_radius;
 	uint32_t m_lineColor;

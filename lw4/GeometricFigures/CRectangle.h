@@ -5,7 +5,7 @@
 class CRectangle : public ISolidShape
 {
 public:
-	CRectangle(const std::string& type, const CPoint& rightBottom, const double width, const double height, const uint32_t lineColor, const uint32_t fillColor);
+	CRectangle(const CPoint& rightBottom, const double width, const double height, const uint32_t lineColor, const uint32_t fillColor);
 	double GetPerimeter() const override;
 	std::string ToString() const override;
 	uint32_t GetOutlineColor() const override;
@@ -22,7 +22,6 @@ public:
 private:
 	void AppendProperties(std::ostream& strm) const override;
 
-	std::string m_type;
 	CPoint m_leftTopVertex;
 	double m_width;
 	double m_height;

@@ -70,7 +70,7 @@ bool CCommandHandler::CreateLineSegment(istream& args)
 		return false;
 	}
 
-	auto lineSegment = make_unique<CLineSegment>("LineSegment", point1, point2, lineColor);
+	auto lineSegment = make_unique<CLineSegment>(point1, point2, lineColor);
 	m_shapeList.push_back(move(lineSegment));
 	m_output << "Line segment is created\n";
 
@@ -114,7 +114,7 @@ bool CCommandHandler::CreateTriangle(istream& args)
 		return false;
 	}
 
-	auto triangle = make_unique<CTriangle>("Triangle", vertex1, vertex2, vertex3, lineColor, fillColor);
+	auto triangle = make_unique<CTriangle>(vertex1, vertex2, vertex3, lineColor, fillColor);
 	m_shapeList.push_back(move(triangle));
 	m_output << "Triangle is created\n";
 
@@ -158,7 +158,7 @@ bool CCommandHandler::CreateRectangle(istream& args)
 		return false;
 	}
 
-	auto rectangle = make_unique<CRectangle>("Rectangle", leftTopVertex, width, height, lineColor, fillColor);
+	auto rectangle = make_unique<CRectangle>(leftTopVertex, width, height, lineColor, fillColor);
 	m_shapeList.push_back(move(rectangle));
 	m_output << "Rectangle is created\n";
 
@@ -201,7 +201,7 @@ bool CCommandHandler::CreateCircle(istream& args)
 		return false;
 	}
 
-	auto circle = make_unique<CCircle>("Circle", center, radius, lineColor, fillColor);
+	auto circle = make_unique<CCircle>(center, radius, lineColor, fillColor);
 	m_shapeList.push_back(move(circle));
 	m_output << "Circle is created\n";
 

@@ -10,7 +10,7 @@ TEST_CASE("The rectangle when created should have a coordinate of left top point
 
 		WHEN("Created rectangle with width = 9.2, height = 4.1, line color #123456 and fill color #987654")
 		{
-			CRectangle rectangle("Rectangle", leftTopPoint, 9.2, 4.1, 123456, 987654);
+			CRectangle rectangle(leftTopPoint, 9.2, 4.1, 123456, 987654);
 
 			THEN("Can get type")
 			{
@@ -62,7 +62,7 @@ TEST_CASE("CRectangle - create a rectangle", "[CRectangle]")
 
 		WHEN("Created rectangle with width = 9.2, height = 4.1, line color #123456 and fill color #987654")
 		{
-			CRectangle rectangle("Rectangle", leftTopPoint, 9.2, 4.1, 123456, 987654);
+			CRectangle rectangle(leftTopPoint, 9.2, 4.1, 123456, 987654);
 
 			AND_THEN("Can get all parameters of segment")
 			{

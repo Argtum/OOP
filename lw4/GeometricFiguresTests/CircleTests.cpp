@@ -10,7 +10,7 @@ TEST_CASE("The circle when created should have a perimeter, area, center and rad
 
 		WHEN("Created circle of line color #123456 and fillcolor #987654")
 		{
-			CCircle circle("Circle", point1, 3, 123456, 987654);
+			CCircle circle(point1, 3, 123456, 987654);
 
 			THEN("Can get type")
 			{
@@ -53,7 +53,7 @@ TEST_CASE("CCircle - create a circle", "[CCircle]")
 
 		WHEN("Created circle with radius 3, line color #123456 and fill color #987654")
 		{
-			CCircle circle("Circle", center, 3, 123456, 987654);
+			CCircle circle(center, 3, 123456, 987654);
 
 			THEN("Can get all parameters of segment")
 			{

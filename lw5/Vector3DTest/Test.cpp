@@ -19,3 +19,29 @@ TEST_CASE("Set zero 3D vector, [CVector3D]")
 	CHECK(IsEequal(vector.m_y, 0));
 	CHECK(IsEequal(vector.m_z, 0));
 }
+
+TEST_CASE("Addition of 2 3D vectors, [CVector3D]")
+{
+	CVector3D vector1(1.2, 3.4, 5.6);
+	CVector3D vector2(9.8, 7.6, 4.3);
+	CVector3D resultVector;
+
+	resultVector = vector1.operator+(vector2);
+
+	CHECK(resultVector.m_x == 11);
+	CHECK(resultVector.m_y == 11);
+	CHECK(resultVector.m_z == 9.9);
+}
+
+TEST_CASE("Subtraction of 2 3D vectors, [CVector3D]")
+{
+	CVector3D vector1(9.8, 7.6, 4.3);
+	CVector3D vector2(1.2, 3.4, 5.6);
+	CVector3D resultVector;
+
+	resultVector = vector1.operator+(vector2);
+
+	CHECK(resultVector.m_x == 8.6);
+	CHECK(resultVector.m_y == 4.2);
+	CHECK(resultVector.m_z == -1.3);
+}

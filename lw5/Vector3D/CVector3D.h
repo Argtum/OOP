@@ -11,6 +11,14 @@ public:
 	CVector3D const operator-(CVector3D const& vector2) const;
 	CVector3D const operator*(double scalar) const;
 	CVector3D const operator/(double scalar) const;
+	CVector3D& operator+=(CVector3D const& vector2);
+	CVector3D& operator-=(CVector3D const& vector2);
+	CVector3D& operator*=(double scalar);
+	CVector3D& operator/=(double scalar);
+	CVector3D const operator+() const;
+	CVector3D const operator-() const;
+	bool operator==(CVector3D const& vector2) const;
+	bool operator!=(CVector3D const& vector2) const;
 
 	double m_x, m_y, m_z;
 };

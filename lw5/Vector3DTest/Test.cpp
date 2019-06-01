@@ -39,9 +39,33 @@ TEST_CASE("Subtraction of 2 3D vectors, [CVector3D]")
 	CVector3D vector2(1.2, 3.4, 5.6);
 	CVector3D resultVector;
 
-	resultVector = vector1.operator+(vector2);
+	resultVector = vector1 + vector2;
 
 	CHECK(resultVector.m_x == 8.6);
 	CHECK(resultVector.m_y == 4.2);
 	CHECK(resultVector.m_z == -1.3);
+}
+
+TEST_CASE("3D vector multiplication by scalar, [CVector3D]")
+{
+	CVector3D vector(1.2, 3.4, 5.6);
+	CVector3D resultVector;
+
+	resultVector = vector * 3;
+
+	CHECK(IsEequal(vector.m_x, 3.6));
+	CHECK(IsEequal(vector.m_y, 10.2));
+	CHECK(IsEequal(vector.m_z, 16.8));
+}
+
+TEST_CASE("Scalar multiply by 3D vector, [CVector3D]")
+{
+	CVector3D vector(1.2, 3.4, 5.6);
+	CVector3D resultVector;
+
+	resultVector = 2 * vector;
+
+	CHECK(IsEequal(vector.m_x, 2.4));
+	CHECK(IsEequal(vector.m_y, 6.8));
+	CHECK(IsEequal(vector.m_z, 11.2));
 }

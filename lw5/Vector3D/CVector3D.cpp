@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "CVector3D.h"
 #include "ComparingTwoDouble.h"
+#include <boost/algorithm/string.hpp>
+
+using namespace std;
 
 CVector3D::CVector3D()
 	: m_x(0)
@@ -107,4 +110,40 @@ bool CVector3D::operator==(CVector3D const& vector2) const
 bool CVector3D::operator!=(CVector3D const& vector2) const
 {
 	return !(IsEequal(m_x, vector2.m_x) && IsEequal(m_y, vector2.m_y) && IsEequal(m_z, vector2.m_z));
+}
+
+ostream& operator<<(ostream& output, CVector3D const& vector)
+{
+	output << vector.m_x << " " << vector.m_y << " " << vector.m_z << endl;
+
+	return output;
+}
+
+CVector3D& CVector3D::operator>>(std::istream& input)
+{
+	string inputString;
+	vector<string> coordinates;
+	getline(input, inputString);
+
+	/*
+	if (description.empty())
+	{
+		throw invalid_argument("No arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n");
+		return false;
+	}*/
+
+	boost::split(coordinates, inputString, boost::is_any_of(" "));
+
+	/*
+	if (shapeDescription.size() != 9)
+	{
+		throw invalid_argument("Incorrect count of arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n");
+		return false;
+	}*/
+
+	m_x = stod(coordinates[0]);
+	m_y = stod(coordinates[1]);
+	m_z = stod(coordinates[2]);
+
+	return *this;
 }

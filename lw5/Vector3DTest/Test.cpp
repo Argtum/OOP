@@ -51,11 +51,11 @@ TEST_CASE("3D vector multiplication by scalar, [CVector3D]")
 	CVector3D vector(1.2, 3.4, 5.6);
 	CVector3D resultVector;
 
-	resultVector = vector * 3;
+	resultVector = vector * 3.3;
 
-	CHECK(IsEequal(vector.m_x, 3.6));
-	CHECK(IsEequal(vector.m_y, 10.2));
-	CHECK(IsEequal(vector.m_z, 16.8));
+	CHECK(IsEequal(vector.m_x, 3.96));
+	CHECK(IsEequal(vector.m_y, 11.22));
+	CHECK(IsEequal(vector.m_z, 18.48));
 }
 
 TEST_CASE("Scalar multiply by 3D vector, [CVector3D]")
@@ -63,9 +63,9 @@ TEST_CASE("Scalar multiply by 3D vector, [CVector3D]")
 	CVector3D vector(1.2, 3.4, 5.6);
 	CVector3D resultVector;
 
-	resultVector = 2 * vector;
+	resultVector = -2.2 * vector;
 
-	CHECK(IsEequal(vector.m_x, 2.4));
-	CHECK(IsEequal(vector.m_y, 6.8));
-	CHECK(IsEequal(vector.m_z, 11.2));
+	CHECK(IsEequal(vector.m_x, -2.64));
+	CHECK(IsEequal(vector.m_y, -7.48));
+	CHECK(IsEequal(vector.m_z, -12.32));
 }

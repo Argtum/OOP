@@ -69,3 +69,15 @@ TEST_CASE("Scalar multiply by 3D vector, [CVector3D]")
 	CHECK(IsEequal(vector.m_y, -7.48));
 	CHECK(IsEequal(vector.m_z, -12.32));
 }
+
+TEST_CASE("3D vector division by scalar, [CVector3D]")
+{
+	CVector3D vector(1.2, 3.4, 5.6);
+	CVector3D resultVector;
+
+	resultVector = vector / 2;
+
+	CHECK(IsEequal(vector.m_x, 0.6));
+	CHECK(IsEequal(vector.m_y, 1.7));
+	CHECK(IsEequal(vector.m_z, 2.8));
+}

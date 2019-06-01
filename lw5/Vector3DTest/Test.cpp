@@ -171,3 +171,20 @@ TEST_CASE("Two 3D vectors are not equal to each other, [CVector3D]")
 	CHECK(vector1 != vector3);
 	CHECK(!(vector1 != vector2));
 }
+
+TEST_CASE("3D vectors normalization, [CVector3D]")
+{
+	CVector3D vector(1.2, 3.4, 5.6);
+	vector.Normalize();
+
+	CHECK(IsEequal(vector.m_x, 1));
+	CHECK(IsEequal(vector.m_y, 1));
+	CHECK(IsEequal(vector.m_z, 1));
+}
+
+TEST_CASE("3D vectors length, [CVector3D]")
+{
+	CVector3D vector(1.2, 3.4, 5.6);
+
+	CHECK(IsEequal(vector.GetLength(), 6.660330322138685));
+}

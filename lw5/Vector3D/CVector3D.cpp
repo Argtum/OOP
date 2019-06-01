@@ -16,6 +16,18 @@ CVector3D::CVector3D(const double x, const double y, const double z)
 {
 }
 
+double CVector3D::GetLength() const
+{
+	return sqrt(pow(m_x, 2) + pow(m_y, 2) + pow(m_z, 2));
+}
+
+void CVector3D::Normalize()
+{
+	m_x = 1;
+	m_y = 1;
+	m_z = 1;
+}
+
 CVector3D const CVector3D::operator+(CVector3D const& vector2) const
 {
 	return CVector3D(m_x + vector2.m_x, m_y + vector2.m_y, m_z + vector2.m_z);

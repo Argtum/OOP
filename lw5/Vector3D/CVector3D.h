@@ -21,10 +21,9 @@ public:
 	bool operator==(CVector3D const& vector2) const;
 	bool operator!=(CVector3D const& vector2) const;
 
-	CVector3D& operator>>(std::istream& input);
-
 	double m_x, m_y, m_z;
 };
 
 CVector3D const operator*(double scalar, CVector3D const& vector);
 std::ostream& operator<<(std::ostream& output, CVector3D const& vector);
+std::istream& operator>>(std::istream& input, CVector3D& vector);

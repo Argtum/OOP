@@ -24,6 +24,9 @@
     <ClInclude Include="ComparingTwoDouble.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ComparingTwoDouble.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CError.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

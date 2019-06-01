@@ -151,11 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CError.h" />
     <ClInclude Include="ComparingTwoDouble.h" />
     <ClInclude Include="CVector3D.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CError.cpp" />
     <ClCompile Include="ComparingTwoDouble.cpp" />
     <ClCompile Include="CVector3D.cpp" />
     <ClCompile Include="pch.cpp">

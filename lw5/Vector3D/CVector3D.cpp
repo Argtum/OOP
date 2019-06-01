@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CVector3D.h"
+#include "CError.h"
 #include "ComparingTwoDouble.h"
 #include <boost/algorithm/string.hpp>
 
@@ -119,31 +120,16 @@ ostream& operator<<(ostream& output, CVector3D const& vector)
 	return output;
 }
 
-CVector3D& CVector3D::operator>>(std::istream& input)
+std::istream& operator>>(std::istream& input, CVector3D& vector)
 {
-	string inputString;
-	vector<string> coordinates;
-	getline(input, inputString);
-
-	/*
-	if (description.empty())
+	double x, y, z;
+	if ((input >> x) && (input >> y) && (input >> z))
 	{
-		throw invalid_argument("No arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n");
-		return false;
-	}*/
-
-	boost::split(coordinates, inputString, boost::is_any_of(" "));
-
-	/*
-	if (shapeDescription.size() != 9)
+		vector = CVector3D(x, y, z);
+	}
+	else
 	{
-		throw invalid_argument("Incorrect count of arguments!\nUsage: Triangle vertex1.x vertex1.y vertex2.x vertex2.y vertex3.x vertex3.y lineColor fillColor\n");
-		return false;
-	}*/
-
-	m_x = stod(coordinates[0]);
-	m_y = stod(coordinates[1]);
-	m_z = stod(coordinates[2]);
-
-	return *this;
+		input.setstate(std::ios_base::failbit | input.rdstate());
+	}
+	return input;
 }

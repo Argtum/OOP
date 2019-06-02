@@ -193,6 +193,43 @@ TEST_CASE("Vector operations")
 			CHECK(IsEequal(vector1.GetLength(), 6.660330322138685));
 		}
 	}
+
+	WHEN("Set coordinates 3D vector, [CVector3D]")
+	{
+		stringstream input;
+		input << "9.8 7.6 5.4";
+		input >> resultVector;
+
+		THEN("Have a vector")
+		{
+			CHECK(IsEequal(resultVector.m_x, 9.8));
+			CHECK(IsEequal(resultVector.m_y, 7.6));
+			CHECK(IsEequal(resultVector.m_z, 5.4));
+		}
+	}
+
+	WHEN("Set wrong coordinates 3D vector, [CVector3D]")
+	{
+		stringstream input;
+		ios_base::iostate old_state = input.rdstate();
+		input << "9.8 7.6";
+		input >> resultVector;
+
+		THEN("Have a vector")
+		{
+			CHECK_FALSE(old_state == input.rdstate());
+		}
+	}
+
+	WHEN("Scalar product of two 3D vectors, [CVector3D]")
+	{
+		double result = DotProduct(vector1, vector2);
+
+		THEN("Get the value")
+		{
+			CHECK(IsEequal(result, 61.68));
+		}
+	}
 }
 
 TEST_CASE("Get coordinates 3D vector, [CVector3D]")
@@ -226,49 +263,3 @@ TEST_CASE("Get coordinates 3D vector, [CVector3D]")
 		}
 	}
 }
-
-TEST_CASE("Set coordinates 3D vector, [CVector3D]")
-{
-	stringstream input;
-	input << "9.8 7.6 5.4";
-
-	WHEN("When the 3D vector is empty")
-	{
-		CVector3D vector;
-		vector >> input;
-
-		THEN("Have a vector")
-		{
-			CHECK(IsEequal(vector.m_x, 9.8));
-			CHECK(IsEequal(vector.m_y, 7.6));
-			CHECK(IsEequal(vector.m_z, 5.4));
-		}
-	}
-
-	WHEN("When the 3D vector is already with coordinates")
-	{
-		CVector3D vector(1.2, 3.4, 5.6);
-		vector >> input;
-
-		THEN("Have a vector")
-		{
-			CHECK(IsEequal(vector.m_x, 9.8));
-			CHECK(IsEequal(vector.m_y, 7.6));
-			CHECK(IsEequal(vector.m_z, 5.4));
-		}
-	}
-}
-
-/*
-TEST_CASE("Wrong input data, [CVector3D]")
-{
-	stringstream input;
-	input << "9.8 7.6";
-	CVector3D vector(1.2, 3.4, 5.6);
-
-	vector << input;
-
-	CHECK(IsEequal(vector.m_x, 9.8));
-	CHECK(IsEequal(vector.m_y, 7.6));
-	CHECK(IsEequal(vector.m_z, 5.4));
-}*/

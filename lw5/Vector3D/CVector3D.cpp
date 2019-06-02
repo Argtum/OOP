@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CVector3D.h"
-#include "CError.h"
 #include "ComparingTwoDouble.h"
 #include <boost/algorithm/string.hpp>
 
@@ -120,7 +119,7 @@ ostream& operator<<(ostream& output, CVector3D const& vector)
 	return output;
 }
 
-std::istream& operator>>(std::istream& input, CVector3D& vector)
+istream& operator>>(istream& input, CVector3D& vector)
 {
 	double x, y, z;
 	if ((input >> x) && (input >> y) && (input >> z))
@@ -129,7 +128,12 @@ std::istream& operator>>(std::istream& input, CVector3D& vector)
 	}
 	else
 	{
-		input.setstate(std::ios_base::failbit | input.rdstate());
+		input.setstate(ios_base::failbit | input.rdstate());
 	}
 	return input;
+}
+
+double const DotProduct(CVector3D const& vector1, CVector3D const& vector2)
+{
+	return vector1.m_x * vector2.m_x + vector1.m_y * vector2.m_y + vector1.m_z * vector2.m_z;
 }

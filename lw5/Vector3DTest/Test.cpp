@@ -230,6 +230,18 @@ TEST_CASE("Vector operations")
 			CHECK(IsEequal(result, 61.68));
 		}
 	}
+
+	WHEN("Vector product of two 3D vectors, [CVector3D]")
+	{
+		resultVector = CrossProduct(vector1, vector2);
+
+		THEN("Get the value")
+		{
+			CHECK(IsEequal(resultVector.m_x, -27.94));
+			CHECK(IsEequal(resultVector.m_y, 49.72));
+			CHECK(IsEequal(resultVector.m_z, -24.2));
+		}
+	}
 }
 
 TEST_CASE("Get coordinates 3D vector, [CVector3D]")

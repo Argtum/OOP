@@ -29,3 +29,4 @@ std::ostream& operator<<(std::ostream& output, CVector3D const& vector);
 std::istream& operator>>(std::istream& input, CVector3D& vector);
 double const DotProduct(CVector3D const& vector1, CVector3D const& vector2);
 CVector3D const CrossProduct(CVector3D const& vector1, CVector3D const& vector2);
+CVector3D const Normalize(CVector3D const& vector);

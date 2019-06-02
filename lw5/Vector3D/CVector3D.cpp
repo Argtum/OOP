@@ -144,3 +144,10 @@ CVector3D const CrossProduct(CVector3D const& vector1, CVector3D const& vector2)
 		(vector1.m_x * vector2.m_z - vector1.m_z * vector2.m_x) * -1,
 		vector1.m_x * vector2.m_y - vector1.m_y * vector2.m_x);
 }
+
+CVector3D const Normalize(CVector3D const& vector)
+{
+	double length = vector.GetLength();
+
+	return CVector3D(vector.m_x / length, vector.m_y / length, vector.m_z / length);
+}

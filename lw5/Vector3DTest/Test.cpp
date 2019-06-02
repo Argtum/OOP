@@ -242,6 +242,18 @@ TEST_CASE("Vector operations")
 			CHECK(IsEequal(resultVector.m_z, -24.2));
 		}
 	}
+
+	WHEN("Vector product of two 3D vectors, [CVector3D]")
+	{
+		resultVector = Normalize(vector1);
+
+		THEN("Get the value")
+		{
+			CHECK(IsEequal(resultVector.m_x, 0.180171244061461273));
+			CHECK(IsEequal(resultVector.m_y, 0.510485191507473608));
+			CHECK(IsEequal(resultVector.m_z, 0.840799138953485942));
+		}
+	}
 }
 
 TEST_CASE("Get coordinates 3D vector, [CVector3D]")

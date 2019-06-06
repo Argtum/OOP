@@ -15,9 +15,9 @@ TEST_CASE("Vector operations")
 	{
 		THEN("Have a vector")
 		{
-			CHECK(IsEequal(vector1.m_x, 1.2));
-			CHECK(IsEequal(vector1.m_y, 3.4));
-			CHECK(IsEequal(vector1.m_z, 5.6));
+			CHECK(IsEqual(vector1.x, 1.2));
+			CHECK(IsEqual(vector1.y, 3.4));
+			CHECK(IsEqual(vector1.z, 5.6));
 		}
 	}
 
@@ -25,9 +25,9 @@ TEST_CASE("Vector operations")
 	{
 		THEN("Have a zero vector")
 		{
-			CHECK(IsEequal(vector3.m_x, 0));
-			CHECK(IsEequal(vector3.m_y, 0));
-			CHECK(IsEequal(vector3.m_z, 0));
+			CHECK(IsEqual(vector3.x, 0));
+			CHECK(IsEqual(vector3.y, 0));
+			CHECK(IsEqual(vector3.z, 0));
 		}
 	}
 
@@ -37,9 +37,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have the resulting vector")
 		{
-			CHECK(IsEequal(resultVector.m_x, 11));
-			CHECK(IsEequal(resultVector.m_y, 11));
-			CHECK(IsEequal(resultVector.m_z, 9.9));
+			CHECK(IsEqual(resultVector.x, 11));
+			CHECK(IsEqual(resultVector.y, 11));
+			CHECK(IsEqual(resultVector.z, 9.9));
 		}
 	}
 
@@ -49,9 +49,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have the resulting vector")
 		{
-			CHECK(IsEequal(resultVector.m_x, 8.6));
-			CHECK(IsEequal(resultVector.m_y, 4.2));
-			CHECK(IsEequal(resultVector.m_z, -1.3));
+			CHECK(IsEqual(resultVector.x, 8.6));
+			CHECK(IsEqual(resultVector.y, 4.2));
+			CHECK(IsEqual(resultVector.z, -1.3));
 		}
 	}
 
@@ -61,9 +61,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have the resulting vector")
 		{
-			CHECK(IsEequal(resultVector.m_x, 3.96));
-			CHECK(IsEequal(resultVector.m_y, 11.22));
-			CHECK(IsEequal(resultVector.m_z, 18.48));
+			CHECK(IsEqual(resultVector.x, 3.96));
+			CHECK(IsEqual(resultVector.y, 11.22));
+			CHECK(IsEqual(resultVector.z, 18.48));
 		}
 	}
 
@@ -73,9 +73,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have the resulting vector")
 		{
-			CHECK(IsEequal(resultVector.m_x, -2.64));
-			CHECK(IsEequal(resultVector.m_y, -7.48));
-			CHECK(IsEequal(resultVector.m_z, -12.32));
+			CHECK(IsEqual(resultVector.x, -2.64));
+			CHECK(IsEqual(resultVector.y, -7.48));
+			CHECK(IsEqual(resultVector.z, -12.32));
 		}
 	}
 
@@ -85,9 +85,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have the resulting vector")
 		{
-			CHECK(IsEequal(resultVector.m_x, 0.6));
-			CHECK(IsEequal(resultVector.m_y, 1.7));
-			CHECK(IsEequal(resultVector.m_z, 2.8));
+			CHECK(IsEqual(resultVector.x, 0.6));
+			CHECK(IsEqual(resultVector.y, 1.7));
+			CHECK(IsEqual(resultVector.z, 2.8));
 		}
 	}
 
@@ -97,9 +97,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have a vector")
 		{
-			CHECK(IsEequal(vector1.m_x, 11));
-			CHECK(IsEequal(vector1.m_y, 11));
-			CHECK(IsEequal(vector1.m_z, 9.9));
+			CHECK(IsEqual(vector1.x, 11));
+			CHECK(IsEqual(vector1.y, 11));
+			CHECK(IsEqual(vector1.z, 9.9));
 		}
 	}
 
@@ -109,9 +109,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have a vector")
 		{
-			CHECK(IsEequal(vector2.m_x, 8.6));
-			CHECK(IsEequal(vector2.m_y, 4.2));
-			CHECK(IsEequal(vector2.m_z, -1.3));
+			CHECK(IsEqual(vector2.x, 8.6));
+			CHECK(IsEqual(vector2.y, 4.2));
+			CHECK(IsEqual(vector2.z, -1.3));
 		}
 	}
 
@@ -121,9 +121,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have a vector")
 		{
-			CHECK(IsEequal(vector1.m_x, 3.96));
-			CHECK(IsEequal(vector1.m_y, 11.22));
-			CHECK(IsEequal(vector1.m_z, 18.48));
+			CHECK(IsEqual(vector1.x, 3.96));
+			CHECK(IsEqual(vector1.y, 11.22));
+			CHECK(IsEqual(vector1.z, 18.48));
 		}
 	}
 
@@ -133,9 +133,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have a vector")
 		{
-			CHECK(IsEequal(vector1.m_x, 0.6));
-			CHECK(IsEequal(vector1.m_y, 1.7));
-			CHECK(IsEequal(vector1.m_z, 2.8));
+			CHECK(IsEqual(vector1.x, 0.6));
+			CHECK(IsEqual(vector1.y, 1.7));
+			CHECK(IsEqual(vector1.z, 2.8));
 		}
 	}
 
@@ -145,9 +145,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have inverted coordinates")
 		{
-			CHECK(IsEequal(resultVector.m_x, -1.2));
-			CHECK(IsEequal(resultVector.m_y, -3.4));
-			CHECK(IsEequal(resultVector.m_z, -5.6));
+			CHECK(IsEqual(resultVector.x, -1.2));
+			CHECK(IsEqual(resultVector.y, -3.4));
+			CHECK(IsEqual(resultVector.z, -5.6));
 		}
 	}
 
@@ -157,9 +157,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have same coordinates")
 		{
-			CHECK(IsEequal(resultVector.m_x, 1.2));
-			CHECK(IsEequal(resultVector.m_y, 3.4));
-			CHECK(IsEequal(resultVector.m_z, 5.6));
+			CHECK(IsEqual(resultVector.x, 1.2));
+			CHECK(IsEqual(resultVector.y, 3.4));
+			CHECK(IsEqual(resultVector.z, 5.6));
 		}
 	}
 
@@ -180,9 +180,9 @@ TEST_CASE("Vector operations")
 
 		THEN("We have the resulting vector")
 		{
-			CHECK(IsEequal(vector1.m_x, 1));
-			CHECK(IsEequal(vector1.m_y, 1));
-			CHECK(IsEequal(vector1.m_z, 1));
+			CHECK(IsEqual(vector1.x, 0.180171244061461273));
+			CHECK(IsEqual(vector1.y, 0.510485191507473608));
+			CHECK(IsEqual(vector1.z, 0.840799138953485942));
 		}
 	}
 
@@ -190,7 +190,7 @@ TEST_CASE("Vector operations")
 	{
 		THEN("Have result")
 		{
-			CHECK(IsEequal(vector1.GetLength(), 6.660330322138685));
+			CHECK(IsEqual(vector1.GetLength(), 6.660330322138685));
 		}
 	}
 
@@ -202,9 +202,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Have a vector")
 		{
-			CHECK(IsEequal(resultVector.m_x, 9.8));
-			CHECK(IsEequal(resultVector.m_y, 7.6));
-			CHECK(IsEequal(resultVector.m_z, 5.4));
+			CHECK(IsEqual(resultVector.x, 9.8));
+			CHECK(IsEqual(resultVector.y, 7.6));
+			CHECK(IsEqual(resultVector.z, 5.4));
 		}
 	}
 
@@ -227,7 +227,7 @@ TEST_CASE("Vector operations")
 
 		THEN("Get the value")
 		{
-			CHECK(IsEequal(result, 61.68));
+			CHECK(IsEqual(result, 61.68));
 		}
 	}
 
@@ -237,9 +237,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Get the value")
 		{
-			CHECK(IsEequal(resultVector.m_x, -27.94));
-			CHECK(IsEequal(resultVector.m_y, 49.72));
-			CHECK(IsEequal(resultVector.m_z, -24.2));
+			CHECK(IsEqual(resultVector.x, -27.94));
+			CHECK(IsEqual(resultVector.y, 49.72));
+			CHECK(IsEqual(resultVector.z, -24.2));
 		}
 	}
 
@@ -249,9 +249,9 @@ TEST_CASE("Vector operations")
 
 		THEN("Get the value")
 		{
-			CHECK(IsEequal(resultVector.m_x, 0.180171244061461273));
-			CHECK(IsEequal(resultVector.m_y, 0.510485191507473608));
-			CHECK(IsEequal(resultVector.m_z, 0.840799138953485942));
+			CHECK(IsEqual(resultVector.x, 0.180171244061461273));
+			CHECK(IsEqual(resultVector.y, 0.510485191507473608));
+			CHECK(IsEqual(resultVector.z, 0.840799138953485942));
 		}
 	}
 }

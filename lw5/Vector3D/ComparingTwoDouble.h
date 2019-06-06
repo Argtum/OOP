@@ -1,3 +1,3 @@
 #pragma once
 
-bool IsEequal(double x, double y);
+bool IsEqual(double x, double y);

@@ -6,115 +6,117 @@
 using namespace std;
 
 CVector3D::CVector3D()
-	: m_x(0)
-	, m_y(0)
-	, m_z(0)
+	: x(0)
+	, y(0)
+	, z(0)
 {
 }
 
 CVector3D::CVector3D(const double x, const double y, const double z)
-	: m_x(x)
-	, m_y(y)
-	, m_z(z)
+	: x(x)
+	, y(y)
+	, z(z)
 {
 }
 
 double CVector3D::GetLength() const
 {
-	return sqrt(pow(m_x, 2) + pow(m_y, 2) + pow(m_z, 2));
+	return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
 }
 
 void CVector3D::Normalize()
 {
-	m_x = 1;
-	m_y = 1;
-	m_z = 1;
+	double length = GetLength();
+
+	x = x / length;
+	y = y / length;
+	z = z / length;
 }
 
 CVector3D const CVector3D::operator+(CVector3D const& vector2) const
 {
-	return CVector3D(m_x + vector2.m_x, m_y + vector2.m_y, m_z + vector2.m_z);
+	return CVector3D(x + vector2.x, y + vector2.y, z + vector2.z);
 }
 
 CVector3D const CVector3D::operator-(CVector3D const& vector2) const
 {
-	return CVector3D(m_x - vector2.m_x, m_y - vector2.m_y, m_z - vector2.m_z);
+	return CVector3D(x - vector2.x, y - vector2.y, z - vector2.z);
 }
 
 CVector3D const CVector3D::operator*(double scalar) const
 {
-	return CVector3D(m_x * scalar, m_y * scalar, m_z * scalar);
+	return CVector3D(x * scalar, y * scalar, z * scalar);
 }
 
 CVector3D const operator*(double scalar, CVector3D const& vector)
 {
-	return CVector3D(scalar * vector.m_x, scalar * vector.m_y, scalar * vector.m_z);
+	return CVector3D(scalar * vector.x, scalar * vector.y, scalar * vector.z);
 }
 
 CVector3D const CVector3D::operator/(double scalar) const
 {
-	return CVector3D(m_x / scalar, m_y / scalar, m_z / scalar);
+	return CVector3D(x / scalar, y / scalar, z / scalar);
 }
 
 CVector3D& CVector3D::operator+=(CVector3D const& vector2)
 {
-	m_x += vector2.m_x;
-	m_y += vector2.m_y;
-	m_z += vector2.m_z;
+	x += vector2.x;
+	y += vector2.y;
+	z += vector2.z;
 
 	return *this;
 }
 
 CVector3D& CVector3D::operator-=(CVector3D const& vector2)
 {
-	m_x -= vector2.m_x;
-	m_y -= vector2.m_y;
-	m_z -= vector2.m_z;
+	x -= vector2.x;
+	y -= vector2.y;
+	z -= vector2.z;
 
 	return *this;
 }
 
 CVector3D& CVector3D::operator*=(double scalar)
 {
-	m_x *= scalar;
-	m_y *= scalar;
-	m_z *= scalar;
+	x *= scalar;
+	y *= scalar;
+	z *= scalar;
 
 	return *this;
 }
 
 CVector3D& CVector3D::operator/=(double scalar)
 {
-	m_x /= scalar;
-	m_y /= scalar;
-	m_z /= scalar;
+	x /= scalar;
+	y /= scalar;
+	z /= scalar;
 
 	return *this;
 }
 
 CVector3D const CVector3D::operator+() const
 {
-	return CVector3D(m_x, m_y, m_z);
+	return CVector3D(x, y, z);
 }
 
 CVector3D const CVector3D::operator-() const
 {
-	return CVector3D(-m_x, -m_y, -m_z);
+	return CVector3D(-x, -y, -z);
 }
 
 bool CVector3D::operator==(CVector3D const& vector2) const
 {
-	return IsEequal(m_x, vector2.m_x) && IsEequal(m_y, vector2.m_y) && IsEequal(m_z, vector2.m_z);
+	return IsEqual(x, vector2.x) && IsEqual(y, vector2.y) && IsEqual(z, vector2.z);
 }
 
 bool CVector3D::operator!=(CVector3D const& vector2) const
 {
-	return !(IsEequal(m_x, vector2.m_x) && IsEequal(m_y, vector2.m_y) && IsEequal(m_z, vector2.m_z));
+	return !(IsEqual(x, vector2.x) && IsEqual(y, vector2.y) && IsEqual(z, vector2.z));
 }
 
 ostream& operator<<(ostream& output, CVector3D const& vector)
 {
-	output << vector.m_x << " " << vector.m_y << " " << vector.m_z << endl;
+	output << vector.x << " " << vector.y << " " << vector.z << endl;
 
 	return output;
 }
@@ -135,19 +137,19 @@ istream& operator>>(istream& input, CVector3D& vector)
 
 double const DotProduct(CVector3D const& vector1, CVector3D const& vector2)
 {
-	return vector1.m_x * vector2.m_x + vector1.m_y * vector2.m_y + vector1.m_z * vector2.m_z;
+	return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
 }
 
 CVector3D const CrossProduct(CVector3D const& vector1, CVector3D const& vector2)
 {
-	return CVector3D(vector1.m_y * vector2.m_z - vector1.m_z * vector2.m_y,
-		(vector1.m_x * vector2.m_z - vector1.m_z * vector2.m_x) * -1,
-		vector1.m_x * vector2.m_y - vector1.m_y * vector2.m_x);
+	return CVector3D(vector1.y * vector2.z - vector1.z * vector2.y,
+		(vector1.x * vector2.z - vector1.z * vector2.x) * -1,
+		vector1.x * vector2.y - vector1.y * vector2.x);
 }
 
 CVector3D const Normalize(CVector3D const& vector)
 {
 	double length = vector.GetLength();
 
-	return CVector3D(vector.m_x / length, vector.m_y / length, vector.m_z / length);
+	return CVector3D(vector.x / length, vector.y / length, vector.z / length);
 }

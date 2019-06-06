@@ -21,7 +21,7 @@ public:
 	bool operator==(CVector3D const& vector2) const;
 	bool operator!=(CVector3D const& vector2) const;
 
-	double m_x, m_y, m_z;
+	double x, y, z;
 };
 
 CVector3D const operator*(double scalar, CVector3D const& vector);

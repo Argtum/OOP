@@ -5,6 +5,28 @@ using namespace std;
 
 CHttpUrl::CHttpUrl(string const& url)
 {
+	boost::regex ex("(http|https)://([^/ :]+)(/?[^ #?]*):([^/ ]*)");
+	boost::cmatch what;
+	string protocol, port;
+
+	if (regex_match(url.c_str(), what, ex))
+	{
+		protocol = string(what[1].first, what[1].second);
+		m_domain = string(what[2].first, what[2].second);
+		m_document = string(what[3].first, what[3].second);
+		port = string(what[4].first, what[4].second);
+	}
+
+	if (protocol == "http")
+	{
+		m_protocol = Protocol::HTTP;
+	}
+	else if (protocol == "https")
+	{
+		m_protocol = Protocol::HTTPS;
+	}
+
+	m_port = static_cast<unsigned short>(std::strtoul(port.c_str(), NULL, 0));
 }
 
 CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol)

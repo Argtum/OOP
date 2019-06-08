@@ -97,3 +97,46 @@ TEST_CASE("Save url by parameters with port")
 		}
 	}
 }
+
+TEST_CASE("Save the url")
+{
+	GIVEN("URL")
+	{
+		string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
+		string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
+		string domain = "www.hotelcosmos.ru";
+		string document = "/restaurant";
+		Protocol https = Protocol::HTTPS;
+		Protocol http = Protocol::HTTP;
+		unsigned short httpPort = 80;
+		unsigned short httpsPort = 443;
+
+		WHEN("Save http url")
+		{
+			CHttpUrl url(inputHttpUrl);
+
+			THEN("Can get url parameters")
+			{
+				CHECK(url.GetDomain() == domain);
+				CHECK(url.GetDocument() == document);
+				CHECK(url.GetProtocol() == http);
+				CHECK(url.GetPort() == httpPort);
+				CHECK(url.GetUrl() == inputHttpUrl);
+			}
+		}
+
+		WHEN("Save https url")
+		{
+			CHttpUrl url(inputHttpsUrl);
+
+			THEN("Can get url parameters")
+			{
+				CHECK(url.GetDomain() == domain);
+				CHECK(url.GetDocument() == document);
+				CHECK(url.GetProtocol() == https);
+				CHECK(url.GetPort() == httpsPort);
+				CHECK(url.GetUrl() == inputHttpsUrl);
+			}
+		}
+	}
+}

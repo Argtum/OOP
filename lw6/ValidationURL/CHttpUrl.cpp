@@ -49,7 +49,7 @@ Protocol CHttpUrl::GetProtocol()
 	return m_protocol;
 }
 
-unsigned short CHttpUrl::GrtPort() const
+unsigned short CHttpUrl::GetPort() const
 {
 	return m_port;
 }

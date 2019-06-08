@@ -16,7 +16,7 @@ public:
 	std::string GetDomain() const;
 	std::string GetDocument() const;
 	Protocol GetProtocol();
-	unsigned short GrtPort() const;
+	unsigned short GetPort() const;
 
 private:
 	std::string m_domain;

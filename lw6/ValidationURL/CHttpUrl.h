@@ -12,7 +12,7 @@ public:
 	CHttpUrl(std::string const& url);
 	CHttpUrl(std::string const& domain, std::string const& document, Protocol protocol = Protocol::HTTP);
 	CHttpUrl(std::string const& domain, std::string const& document, Protocol protocol, unsigned short port);
-	std::string GetURL() const;
+	std::string GetUrl() const;
 	std::string GetDomain() const;
 	std::string GetDocument() const;
 	Protocol GetProtocol();

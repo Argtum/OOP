@@ -11,6 +11,7 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 	: m_domain(domain)
 	, m_document(document)
 	, m_protocol(protocol)
+	, m_port(0)
 {
 }
 
@@ -22,16 +23,26 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 {
 }
 
-string CHttpUrl::GetURL() const
+string CHttpUrl::GetUrl() const
 {
 	string protocol = "http";
+	string url;
 
 	if (m_protocol == Protocol::HTTPS)
 	{
 		protocol = "https";
 	}
 
-	return protocol + "://" + m_domain + "/" + m_document + ":" + to_string(m_port);
+	if (m_port != 0)
+	{
+		url = protocol + "://" + m_domain + m_document + ":" + to_string(m_port);
+	}
+	else
+	{
+		url = protocol + "://" + m_domain + m_document;
+	}
+
+	return url;
 }
 
 string CHttpUrl::GetDomain() const

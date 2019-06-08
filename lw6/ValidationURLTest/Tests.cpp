@@ -7,6 +7,8 @@ TEST_CASE("Save url by parameters without port")
 {
 	GIVEN("URL parameters")
 	{
+		string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant";
+		string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant";
 		string domain = "www.hotelcosmos.ru";
 		string document = "/restaurant";
 		Protocol https = Protocol::HTTPS;
@@ -21,6 +23,7 @@ TEST_CASE("Save url by parameters without port")
 				CHECK(url.GetDomain() == domain);
 				CHECK(url.GetDocument() == document);
 				CHECK(url.GetProtocol() == http);
+				CHECK(url.GetUrl() == inputHttpUrl);
 			}
 		}
 
@@ -33,6 +36,7 @@ TEST_CASE("Save url by parameters without port")
 				CHECK(url.GetDomain() == domain);
 				CHECK(url.GetDocument() == document);
 				CHECK(url.GetProtocol() == http);
+				CHECK(url.GetUrl() == inputHttpUrl);
 			}
 		}
 
@@ -45,6 +49,7 @@ TEST_CASE("Save url by parameters without port")
 				CHECK(url.GetDomain() == domain);
 				CHECK(url.GetDocument() == document);
 				CHECK(url.GetProtocol() == https);
+				CHECK(url.GetUrl() == inputHttpsUrl);
 			}
 		}
 	}
@@ -54,6 +59,8 @@ TEST_CASE("Save url by parameters with port")
 {
 	GIVEN("URL parameters")
 	{
+		string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
+		string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
 		string domain = "www.hotelcosmos.ru";
 		string document = "/restaurant";
 		Protocol https = Protocol::HTTPS;
@@ -71,6 +78,7 @@ TEST_CASE("Save url by parameters with port")
 				CHECK(url.GetDocument() == document);
 				CHECK(url.GetProtocol() == http);
 				CHECK(url.GetPort() == httpPort);
+				CHECK(url.GetUrl() == inputHttpUrl);
 			}
 		}
 
@@ -84,47 +92,7 @@ TEST_CASE("Save url by parameters with port")
 				CHECK(url.GetDocument() == document);
 				CHECK(url.GetProtocol() == https);
 				CHECK(url.GetPort() == httpsPort);
-			}
-		}
-	}
-}
-
-TEST_CASE("Save the url")
-{
-	GIVEN("URL")
-	{
-		string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
-		string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
-		string domain = "www.hotelcosmos.ru";
-		string document = "/restaurant";
-		Protocol https = Protocol::HTTPS;
-		Protocol http = Protocol::HTTP;
-		unsigned short httpPort = 80;
-		unsigned short httpsPort = 443;
-
-		WHEN("Save http url")
-		{
-			CHttpUrl url(inputHttpUrl);
-
-			THEN("Can get url parameters")
-			{
-				CHECK(url.GetDomain() == domain);
-				CHECK(url.GetDocument() == document);
-				CHECK(url.GetProtocol() == http);
-				CHECK(url.GetPort() == httpPort);
-			}
-		}
-
-		WHEN("Save https url")
-		{
-			CHttpUrl url(inputHttpsUrl);
-
-			THEN("Can get url parameters")
-			{
-				CHECK(url.GetDomain() == domain);
-				CHECK(url.GetDocument() == document);
-				CHECK(url.GetProtocol() == https);
-				CHECK(url.GetPort() == httpsPort);
+				CHECK(url.GetUrl() == inputHttpsUrl);
 			}
 		}
 	}

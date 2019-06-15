@@ -24,3 +24,7 @@ private:
 	Protocol m_protocol;
 	unsigned short m_port;
 };
+
+void ToLowercase(std::string& str);
+Protocol StringToProtocol(std::string& inpString);
+//unsigned short StringToUnsignedShort(std::string& inpString);

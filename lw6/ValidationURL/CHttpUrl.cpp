@@ -5,8 +5,8 @@ using namespace std;
 
 CHttpUrl::CHttpUrl(string const& url)
 {
-	boost::regex ex("(http|https)://([^/ :]+)(/?[^ #?]*):([^/ ]*)");
-	boost::cmatch what;
+	regex ex("(http|https)://([^/ :]+)(/?[^ #?]*):([^/ ]*)");
+	cmatch what;
 	string protocol, port;
 
 	if (regex_match(url.c_str(), what, ex))
@@ -17,16 +17,20 @@ CHttpUrl::CHttpUrl(string const& url)
 		port = string(what[4].first, what[4].second);
 	}
 
-	if (protocol == "http")
+	try
 	{
-		m_protocol = Protocol::HTTP;
-	}
-	else if (protocol == "https")
-	{
-		m_protocol = Protocol::HTTPS;
-	}
+		if (m_document.empty() || m_domain.empty())
+		{
+			throw invalid_argument("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port (port optional)\n");
+		}
 
-	m_port = static_cast<unsigned short>(std::strtoul(port.c_str(), NULL, 0));
+		m_protocol = StringToProtocol(protocol);
+		m_port = static_cast<unsigned short>(strtoul(port.c_str(), NULL, 0));
+	}
+	catch (invalid_argument const e)
+	{
+		throw invalid_argument(e);
+	}
 }
 
 CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol)
@@ -85,4 +89,27 @@ Protocol CHttpUrl::GetProtocol()
 unsigned short CHttpUrl::GetPort() const
 {
 	return m_port;
+}
+
+void ToLowercase(string& str)
+{
+	transform(str.begin(), str.end(), str.begin(), ::tolower);
+}
+
+Protocol StringToProtocol(string& inpString)
+{
+	ToLowercase(inpString);
+
+	if (inpString == "https")
+	{
+		return Protocol::HTTPS;
+	}
+	else if (inpString == "http")
+	{
+		return Protocol::HTTP;
+	}
+	else
+	{
+		throw invalid_argument("ERROR: wrong protocol value\nProtocol must be http or https\n");
+	}
 }

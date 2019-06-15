@@ -98,12 +98,30 @@ TEST_CASE("Save url by parameters with port")
 	}
 }
 
+TEST_CASE("ToLowercase must translate text to lower case")
+{
+	string input = "hTTP";
+	string input1 = "Http";
+	string input2 = "http";
+
+	string httpResult = "http";
+
+	ToLowercase(input);
+	ToLowercase(input1);
+	ToLowercase(input2);
+
+	CHECK(input == httpResult);
+	CHECK(input1 == httpResult);
+	CHECK(input2 == httpResult);
+}
+
 TEST_CASE("Save the url")
 {
 	GIVEN("URL")
 	{
 		string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
 		string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
+		string inputHttpsUrlUpper = "hTTps://www.hotelcosmos.ru/restaurant:443";
 		string domain = "www.hotelcosmos.ru";
 		string document = "/restaurant";
 		Protocol https = Protocol::HTTPS;
@@ -138,5 +156,19 @@ TEST_CASE("Save the url")
 				CHECK(url.GetUrl() == inputHttpsUrl);
 			}
 		}
+		/*
+		WHEN("Save https url with upper case")
+		{
+			CHttpUrl url(inputHttpsUrlUpper);
+
+			THEN("Can get url parameters")
+			{
+				CHECK(url.GetDomain() == domain);
+				CHECK(url.GetDocument() == document);
+				CHECK(url.GetProtocol() == https);
+				CHECK(url.GetPort() == httpsPort);
+				CHECK(url.GetUrl() == inputHttpsUrl);
+			}
+		}*/
 	}
 }

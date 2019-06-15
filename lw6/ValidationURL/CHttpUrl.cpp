@@ -5,31 +5,34 @@ using namespace std;
 
 CHttpUrl::CHttpUrl(string const& url)
 {
-	regex ex("(http|https)://([^/ :]+)(/?[^ #?]*):([^/ ]*)");
+	regex ex("([^\w]*)://([^/ :]+)(/?[^ #?]*):([^/ ]*)");
 	cmatch what;
-	string protocol, port;
+	string protocol, domain, document, port;
 
 	if (regex_match(url.c_str(), what, ex))
 	{
 		protocol = string(what[1].first, what[1].second);
-		m_domain = string(what[2].first, what[2].second);
-		m_document = string(what[3].first, what[3].second);
+		domain = string(what[2].first, what[2].second);
+		document = string(what[3].first, what[3].second);
 		port = string(what[4].first, what[4].second);
-	}
 
-	try
-	{
-		if (m_document.empty() || m_domain.empty())
+		if (document.empty() || domain.empty())
 		{
 			throw invalid_argument("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port (port optional)\n");
 		}
 
 		m_protocol = StringToProtocol(protocol);
-		m_port = static_cast<unsigned short>(strtoul(port.c_str(), NULL, 0));
-	}
-	catch (invalid_argument const e)
-	{
-		throw invalid_argument(e);
+		m_domain = domain;
+		m_document = document;
+
+		try
+		{
+			m_port = static_cast<unsigned short>(strtoul(port.c_str(), NULL, 0));
+		}
+		catch (invalid_argument const e)
+		{
+			throw invalid_argument(e);
+		}
 	}
 }
 

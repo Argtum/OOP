@@ -156,7 +156,7 @@ TEST_CASE("Save the url")
 				CHECK(url.GetUrl() == inputHttpsUrl);
 			}
 		}
-		/*
+
 		WHEN("Save https url with upper case")
 		{
 			CHttpUrl url(inputHttpsUrlUpper);
@@ -169,6 +169,6 @@ TEST_CASE("Save the url")
 				CHECK(url.GetPort() == httpsPort);
 				CHECK(url.GetUrl() == inputHttpsUrl);
 			}
-		}*/
+		}
 	}
 }

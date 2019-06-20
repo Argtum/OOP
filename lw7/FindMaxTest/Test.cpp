@@ -108,7 +108,7 @@ TEST_CASE("Ñharacter pointer")
 
 			THEN("Get the maximum string in lexicographical order")
 			{
-				CHECK(maxValue == "World");
+				CHECK(string(maxValue) == "World");
 			}
 		}
 	}

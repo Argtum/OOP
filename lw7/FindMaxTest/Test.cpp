@@ -4,6 +4,23 @@
 
 using namespace std;
 
+TEST_CASE("Empty")
+{
+	GIVEN("Empty array")
+	{
+		string maxValue;
+		vector<string> inputVector = {};
+
+		WHEN("FindMax function is called")
+		{
+			THEN("Get false")
+			{
+				CHECK_FALSE(FindMax(inputVector, maxValue));
+			}
+		}
+	}
+}
+
 TEST_CASE("Integer")
 {
 	GIVEN("Array of ineger")
@@ -56,6 +73,42 @@ TEST_CASE("String")
 			THEN("Get the maximum string in lexicographical order")
 			{
 				CHECK(maxValue == "Worldd");
+			}
+		}
+	}
+}
+
+TEST_CASE("Empty character pointer")
+{
+	GIVEN("Empty array of ñharacter pointer")
+	{
+		const char* maxValue;
+		vector<const char*> inputVector = {};
+
+		WHEN("FindMax function is called")
+		{
+			THEN("Get false")
+			{
+				CHECK_FALSE(FindMax(inputVector, maxValue));
+			}
+		}
+	}
+}
+
+TEST_CASE("Ñharacter pointer")
+{
+	GIVEN("Array of ñharacter pointer")
+	{
+		const char* maxValue;
+		vector<const char*> inputVector = { "Hello", "World", "Olleh" };
+
+		WHEN("FindMax function is called")
+		{
+			FindMax(inputVector, maxValue);
+
+			THEN("Get the maximum string in lexicographical order")
+			{
+				CHECK(maxValue == "World");
 			}
 		}
 	}

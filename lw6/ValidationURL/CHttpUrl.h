@@ -27,4 +27,4 @@ private:
 
 void ToLowercase(std::string& str);
 Protocol StringToProtocol(std::string& inpString);
-//unsigned short StringToUnsignedShort(std::string& inpString);
+unsigned short StringToUnsignedShort(std::string& port, Protocol protocol);

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-CUrlParsingError::CUrlParsingError(string const& msg)
+CUrlParsingError::CUrlParsingError(string const& msg = "ERROR: unknown")
 	: invalid_argument(msg)
 {
 }

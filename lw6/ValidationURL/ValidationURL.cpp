@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CHttpUrl.h"
+#include "CUrlParsingError.h"
 #include <boost/algorithm/string.hpp>
 
 using namespace std;
@@ -9,9 +10,9 @@ int main(int argc, char argv[])
 	string input, output;
 	vector<string> urlParameters;
 
-	try
+	while (cin >> input)
 	{
-		while (cin >> input)
+		try
 		{
 			boost::split(urlParameters, input, boost::is_any_of(" "));
 
@@ -34,23 +35,22 @@ int main(int argc, char argv[])
 			else if (urlParameters.size() == 4)
 			{
 				Protocol protocol = StringToProtocol(urlParameters[2]);
-				unsigned short port = static_cast<unsigned short>(strtoul(urlParameters[3].c_str(), NULL, 0));
+				unsigned short port = StringToUnsignedShort(urlParameters[3], protocol);
 				CHttpUrl url(urlParameters[0], urlParameters[1], protocol, port);
 				output = url.GetUrl();
 			}
 			else
 			{
-				output = "ERROR: Wrong number of arguments!\nPlease enter the URL or its parameters: domain document protocol port\n";
+				cout << "ERROR: Wrong number of arguments!\nPlease enter the URL or its parameters: domain document protocol port" << endl;
 			}
 
 			cout << output;
 		}
+		catch (exception const& e)
+		{
+			cout << e.what() << endl;
+		}
+	}
 
-		return 0;
-	}
-	catch (exception const& e)
-	{
-		cout << e.what() << endl;
-		return 1;
-	}
+	return 0;
 }

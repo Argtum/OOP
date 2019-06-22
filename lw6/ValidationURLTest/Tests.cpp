@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "lw6/ValidationURL/CHttpUrl.h"
+#include "lw6/ValidationURL/CUrlParsingError.h"
 
 using namespace std;
 
@@ -9,6 +10,9 @@ TEST_CASE("Save url by parameters without port")
 	{
 		string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant";
 		string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant";
+		string outputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
+		string outputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
+
 		string domain = "www.hotelcosmos.ru";
 		string document = "/restaurant";
 		Protocol https = Protocol::HTTPS;
@@ -23,7 +27,7 @@ TEST_CASE("Save url by parameters without port")
 				CHECK(url.GetDomain() == domain);
 				CHECK(url.GetDocument() == document);
 				CHECK(url.GetProtocol() == http);
-				CHECK(url.GetUrl() == inputHttpUrl);
+				CHECK(url.GetUrl() == outputHttpUrl);
 			}
 		}
 
@@ -36,7 +40,7 @@ TEST_CASE("Save url by parameters without port")
 				CHECK(url.GetDomain() == domain);
 				CHECK(url.GetDocument() == document);
 				CHECK(url.GetProtocol() == http);
-				CHECK(url.GetUrl() == inputHttpUrl);
+				CHECK(url.GetUrl() == outputHttpUrl);
 			}
 		}
 
@@ -49,7 +53,7 @@ TEST_CASE("Save url by parameters without port")
 				CHECK(url.GetDomain() == domain);
 				CHECK(url.GetDocument() == document);
 				CHECK(url.GetProtocol() == https);
-				CHECK(url.GetUrl() == inputHttpsUrl);
+				CHECK(url.GetUrl() == outputHttpsUrl);
 			}
 		}
 	}
@@ -115,60 +119,63 @@ TEST_CASE("ToLowercase must translate text to lower case")
 	CHECK(input2 == httpResult);
 }
 
-TEST_CASE("Save the url")
+TEST_CASE("Http url")
 {
-	GIVEN("URL")
+	string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
+	string domain = "www.hotelcosmos.ru";
+	string document = "/restaurant";
+	Protocol http = Protocol::HTTP;
+	unsigned short httpPort = 80;
+
+	WHEN("Save http url")
 	{
-		string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
-		string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
-		string inputHttpsUrlUpper = "hTTps://www.hotelcosmos.ru/restaurant:443";
-		string domain = "www.hotelcosmos.ru";
-		string document = "/restaurant";
-		Protocol https = Protocol::HTTPS;
-		Protocol http = Protocol::HTTP;
-		unsigned short httpPort = 80;
-		unsigned short httpsPort = 443;
+		CHttpUrl url(inputHttpUrl);
 
-		WHEN("Save http url")
+		THEN("Can get url parameters")
 		{
-			CHttpUrl url(inputHttpUrl);
-
-			THEN("Can get url parameters")
-			{
-				CHECK(url.GetDomain() == domain);
-				CHECK(url.GetDocument() == document);
-				CHECK(url.GetProtocol() == http);
-				CHECK(url.GetPort() == httpPort);
-				CHECK(url.GetUrl() == inputHttpUrl);
-			}
-		}
-
-		WHEN("Save https url")
-		{
-			CHttpUrl url(inputHttpsUrl);
-
-			THEN("Can get url parameters")
-			{
-				CHECK(url.GetDomain() == domain);
-				CHECK(url.GetDocument() == document);
-				CHECK(url.GetProtocol() == https);
-				CHECK(url.GetPort() == httpsPort);
-				CHECK(url.GetUrl() == inputHttpsUrl);
-			}
-		}
-
-		WHEN("Save https url with upper case")
-		{
-			CHttpUrl url(inputHttpsUrlUpper);
-
-			THEN("Can get url parameters")
-			{
-				CHECK(url.GetDomain() == domain);
-				CHECK(url.GetDocument() == document);
-				CHECK(url.GetProtocol() == https);
-				CHECK(url.GetPort() == httpsPort);
-				CHECK(url.GetUrl() == inputHttpsUrl);
-			}
+			CHECK(url.GetDomain() == domain);
+			CHECK(url.GetDocument() == document);
+			CHECK(url.GetProtocol() == http);
+			CHECK(url.GetPort() == httpPort);
+			CHECK(url.GetUrl() == inputHttpUrl);
 		}
 	}
 }
+
+TEST_CASE("Https url")
+{
+	string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
+	string domain = "www.hotelcosmos.ru";
+	string document = "/restaurant";
+	Protocol https = Protocol::HTTPS;
+	unsigned short httpsPort = 443;
+
+	WHEN("Save https url")
+	{
+		CHttpUrl url(inputHttpsUrl);
+
+		THEN("Can get url parameters")
+		{
+			CHECK(url.GetDomain() == domain);
+			CHECK(url.GetDocument() == document);
+			CHECK(url.GetProtocol() == https);
+			CHECK(url.GetPort() == httpsPort);
+			CHECK(url.GetUrl() == inputHttpsUrl);
+		}
+	}
+}
+/*
+TEST_CASE("Https url with upper case")
+{
+	string inputHttpsUrlWithoutPort = "https://www.hotelcosmos.ru/restaurant";
+
+	WHEN("Save https url")
+	{
+		CHttpUrl url(inputHttpsUrlWithoutPort);
+
+		THEN("Can get url parameters")
+		{
+			CHECK_THROWS("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+		}
+	}
+}*/

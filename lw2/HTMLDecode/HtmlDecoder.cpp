@@ -1,16 +1,20 @@
-#include "HtmlDecoder.h"
 #include "pch.h"
+#include "HtmlDecoder.h"
+
+using namespace std;
 
 const string wanted[] = { "&quot;", "&apos;", "&lt;", "&gt;", "&amp;" };
 map<string, string> replacement{
-	{ "&quot;", "\"" }, { "&apos;", "\'" }, { "&lt;", "<" }, { "&gt;", ">" }, { "&amp;", "&" }
+	{ "&quot;", "\"" }, { "&apos;", "'" }, { "&lt;", "<" }, { "&gt;", ">" }, { "&amp;", "&" }
 };
 
 void replaceHtmlEntity(string& html, const string& htmlEntity)
 {
-	for (string::iterator position = html.begin(); *position < html.length(); ++position)
+	int pos;
+
+	while ((pos = html.find(htmlEntity, 0)) != string::npos)
 	{
-		html.replace(*position, htmlEntity.length(), replacement[htmlEntity]);
+		html.replace(pos, htmlEntity.length(), replacement[htmlEntity]);
 	}
 }
 

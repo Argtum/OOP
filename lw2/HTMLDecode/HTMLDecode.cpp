@@ -1,16 +1,17 @@
 #include "pch.h"
 #include "HtmlDecoder.h"
 
+using namespace std;
+
 int main()
 {
 	string html;
 
-	cout << "Enter HTML string: ";
-	cin >> html;
-
-	HtmlDecode(html);
-
-	cout << html << endl;
+	while (cin >> html)
+	{
+		HtmlDecode(html);
+		cout << html << endl;
+	}
 
 	return 0;
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-void replaceHtmlEntity(string& html, const string& htmlEntity);
-void HtmlDecode(string& html);
+void replaceHtmlEntity(std::string& html, const std::string& htmlEntity);
+void HtmlDecode(std::string& html);
 
-string GetReplaceHtmlEntity(string& html, const string& htmlEntity);
+std::string GetReplaceHtmlEntity(std::string& html, const std::string& htmlEntity);

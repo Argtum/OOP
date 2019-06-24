@@ -33,3 +33,11 @@ string GetReplaceHtmlEntity(string& html, const string& htmlEntity)
 	replaceHtmlEntity(newStr, htmlEntity);
 	return newStr;
 }
+
+/*For tests*/
+string GetHtmlDecode(string& html)
+{
+	string newStr = html;
+	HtmlDecode(newStr);
+	return newStr;
+}

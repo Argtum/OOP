@@ -7,7 +7,7 @@ const int UPPER_BOUND_LIMIT = 100000000;
 
 int main(int argc, char* argv[])
 {
-	int upperBound;
+	long upperBound;
 
 	if (argc != 2)
 	{
@@ -16,15 +16,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	try
-	{
-		upperBound = stoi(argv[1]);
-	}
-	catch (...)
-	{
-		cout << "ERROR: Invalid second argument\nUsage: second argument must be integer\n";
-		return 1;
-	}
+	upperBound = stoul(argv[1]);
 
 	if (upperBound > UPPER_BOUND_LIMIT)
 	{

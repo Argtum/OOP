@@ -167,6 +167,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\MyList\CMyList.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

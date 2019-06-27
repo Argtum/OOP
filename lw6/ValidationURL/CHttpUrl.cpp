@@ -6,43 +6,33 @@ using namespace std;
 
 CHttpUrl::CHttpUrl(string const& url)
 {
-	regex ex("([\\w]*)://([^/ :]+)(/?[^ #?]*):([^/ ]*)?");
+	regex ex("([\\w]*)://([^/ :]+)(/[^:#?\\s]*)?(:([0-9]{1,5}))?");
 	cmatch what;
 	string protocol, domain, document, port;
-	CUrlParsingError error("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
 
-	try
+	if (regex_match(url.c_str(), what, ex))
 	{
-		if (regex_match(url.c_str(), what, ex))
-		{
-			protocol = string(what[1].first, what[1].second);
-			domain = string(what[2].first, what[2].second);
-			document = string(what[3].first, what[3].second);
-			port = string(what[4].first, what[4].second);
+		protocol = string(what[1].first, what[1].second);
+		domain = string(what[2].first, what[2].second);
+		document = string(what[3].first, what[3].second);
+		port = string(what[5].first, what[5].second);
 
-			m_protocol = StringToProtocol(protocol);
-			m_domain = !domain.empty() ? domain : throw error;
-			m_document = !document.empty() ? document : throw error;
-			m_port = StringToUnsignedShort(port, m_protocol);
-		}
-		else
-		{
-			throw error;
-		}
+		m_protocol = StringToProtocol(protocol);
+		m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+		m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+		m_port = StringToUnsignedShort(port, m_protocol);
 	}
-	catch (invalid_argument const& e)
+	else
 	{
-		throw e;
+		throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
 	}
 }
 
 CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol)
 	: m_protocol(protocol)
 {
-	CUrlParsingError error("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
-
-	m_domain = domain.empty() ? throw error : domain;
-	m_document = document.empty() ? throw error : document;
+	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
 
 	if (protocol == Protocol::HTTPS)
 	{
@@ -58,10 +48,8 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 	: m_protocol(protocol)
 	, m_port(port)
 {
-	CUrlParsingError error("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
-
-	m_domain = domain.empty() ? throw error : domain;
-	m_document = document.empty() ? throw error : document;
+	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
 }
 
 string CHttpUrl::GetUrl() const
@@ -126,8 +114,7 @@ Protocol StringToProtocol(string& inpString)
 	}
 	else
 	{
-		CUrlParsingError error("ERROR: wrong protocol value\nProtocol must be http or https\n");
-		throw error;
+		throw CUrlParsingError("ERROR: wrong protocol value\nProtocol must be http or https\n");
 	}
 
 	return protocol;

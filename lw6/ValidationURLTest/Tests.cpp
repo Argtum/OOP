@@ -164,18 +164,16 @@ TEST_CASE("Https url")
 		}
 	}
 }
-/*
-TEST_CASE("Https url with upper case")
+
+TEST_CASE("Https url without port")
 {
-	string inputHttpsUrlWithoutPort = "https://www.hotelcosmos.ru/restaurant";
+	string inputHttpsUrlWithoutPort = "https//www.hotelcosmos.ru/restaurant";
 
 	WHEN("Save https url")
 	{
-		CHttpUrl url(inputHttpsUrlWithoutPort);
-
-		THEN("Can get url parameters")
+		THEN("Can get error message")
 		{
-			CHECK_THROWS("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+			CHECK_THROWS_AS(CHttpUrl(inputHttpsUrlWithoutPort), CUrlParsingError);
 		}
 	}
-}*/
+}

@@ -46,7 +46,7 @@ int main(int argc, char argv[])
 
 			cout << output;
 		}
-		catch (exception const& e)
+		catch (invalid_argument const& e)
 		{
 			cout << e.what() << endl;
 		}

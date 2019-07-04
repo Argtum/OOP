@@ -18,7 +18,7 @@ CHttpUrl::CHttpUrl(string const& url)
 		port = string(what[4].first, what[4].second);
 
 		m_protocol = StringToProtocol(protocol);
-		m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
+		m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain:port/documen\n");
 		m_port = StringToUnsignedShort(port, m_protocol);
 	}
 	else
@@ -30,8 +30,10 @@ CHttpUrl::CHttpUrl(string const& url)
 CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol)
 	: m_protocol(protocol)
 {
-	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
-	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
+	string errorMessage = "ERROR: wrong url\nURL must consist of protocol://domain:port/documen\n";
+
+	m_domain = !domain.empty() ? domain : throw CUrlParsingError(errorMessage);
+	m_document = !document.empty() ? document : throw CUrlParsingError(errorMessage);
 
 	if (protocol == Protocol::HTTPS)
 	{
@@ -46,8 +48,10 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol, int port)
 	: m_protocol(protocol)
 {
-	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
-	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
+	string errorMessage = "ERROR: wrong url\nURL must consist of protocol://domain:port/documen\n";
+
+	m_domain = !domain.empty() ? domain : throw CUrlParsingError(errorMessage);
+	m_document = !document.empty() ? document : throw CUrlParsingError(errorMessage);
 
 	m_port = CheckPortRange(port);
 }
@@ -56,13 +60,19 @@ string CHttpUrl::GetUrl() const
 {
 	string protocol = "http";
 	string url;
+	string port = "";
 
 	if (m_protocol == Protocol::HTTPS)
 	{
 		protocol = "https";
 	}
 
-	url = protocol + "://" + m_domain + ":" + to_string(m_port) + m_document;
+	if (!(m_protocol == Protocol::HTTP && m_port == 80) && !(m_protocol == Protocol::HTTPS && m_port == 443))
+	{
+		port = ":" + PortToString(m_port);
+	}
+
+	url = protocol + "://" + m_domain + port + m_document + "\n";
 
 	return url;
 }
@@ -77,7 +87,7 @@ string CHttpUrl::GetDocument() const
 	return m_document;
 }
 
-Protocol CHttpUrl::GetProtocol()
+Protocol CHttpUrl::GetProtocol() const
 {
 	return m_protocol;
 }
@@ -142,4 +152,23 @@ unsigned short CheckPortRange(const int port)
 	}
 
 	return (unsigned short)port;
+}
+
+string ProtocolToString(const Protocol& protocol)
+{
+	return protocol == Protocol::HTTP ? "http" : "https";
+}
+
+string PortToString(unsigned short port)
+{
+	return to_string(port);
+}
+
+string PrintUrlParameters(const CHttpUrl& url)
+{
+	return "\nProtocol: " + ProtocolToString(url.GetProtocol()) + "\n"
+		+ "Domain: " + url.GetDomain() + "\n"
+		+ "Port: " + PortToString(url.GetPort()) + "\n"
+		+ "Document: " + url.GetDocument() + "\n"
+		+ url.GetUrl() + "\n";
 }

@@ -15,7 +15,7 @@ public:
 	std::string GetUrl() const;
 	std::string GetDomain() const;
 	std::string GetDocument() const;
-	Protocol GetProtocol();
+	Protocol GetProtocol() const;
 	unsigned short GetPort() const;
 
 private:
@@ -29,3 +29,7 @@ void ToLowercase(std::string& str);
 Protocol StringToProtocol(std::string& inpString);
 unsigned short StringToUnsignedShort(std::string& port, Protocol protocol);
 unsigned short CheckPortRange(const int port);
+
+std::string ProtocolToString(const Protocol& protocol);
+std::string PortToString(unsigned short port);
+std::string PrintUrlParameters(const CHttpUrl& url);

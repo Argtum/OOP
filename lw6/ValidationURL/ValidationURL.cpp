@@ -16,28 +16,31 @@ int main(int argc, char argv[])
 		{
 			boost::split(urlParameters, input, boost::is_any_of(" "));
 
-			if (urlParameters.size() == 1)
+			if (urlParameters.size() >= 1 && urlParameters.size() <= 5)
 			{
-				CHttpUrl url(urlParameters[0]);
-				output = url.GetUrl();
-			}
-			else if (urlParameters.size() == 2)
-			{
-				CHttpUrl url(urlParameters[0], urlParameters[1]);
-				output = url.GetUrl();
-			}
-			else if (urlParameters.size() == 3)
-			{
-				Protocol protocol = StringToProtocol(urlParameters[2]);
-				CHttpUrl url(urlParameters[0], urlParameters[1], protocol);
-				output = url.GetUrl();
-			}
-			else if (urlParameters.size() == 4)
-			{
-				Protocol protocol = StringToProtocol(urlParameters[2]);
-				unsigned short port = StringToUnsignedShort(urlParameters[3], protocol);
-				CHttpUrl url(urlParameters[0], urlParameters[1], protocol, port);
-				output = url.GetUrl();
+				if (urlParameters.size() == 1)
+				{
+					CHttpUrl url(urlParameters[0]);
+					output = PrintUrlParameters(url);
+				}
+				else if (urlParameters.size() == 2)
+				{
+					CHttpUrl url(urlParameters[0], urlParameters[1]);
+					output = PrintUrlParameters(url);
+				}
+				else if (urlParameters.size() == 3)
+				{
+					Protocol protocol = StringToProtocol(urlParameters[2]);
+					CHttpUrl url(urlParameters[0], urlParameters[1], protocol);
+					output = PrintUrlParameters(url);
+				}
+				else if (urlParameters.size() == 4)
+				{
+					Protocol protocol = StringToProtocol(urlParameters[2]);
+					unsigned short port = StringToUnsignedShort(urlParameters[3], protocol);
+					CHttpUrl url(urlParameters[0], urlParameters[1], protocol, port);
+					output = PrintUrlParameters(url);
+				}
 			}
 			else
 			{

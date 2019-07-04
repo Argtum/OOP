@@ -8,7 +8,7 @@ CHttpUrl::CHttpUrl(string const& url)
 {
 	regex ex("([\\w]*)://([^/ :]+)(/[^:#?\\s]*)?(:([0-9]{1,5}))?");
 	cmatch what;
-	string protocol, domain, document, port;
+	string protocol, domain, port;
 
 	if (regex_match(url.c_str(), what, ex))
 	{
@@ -18,20 +18,20 @@ CHttpUrl::CHttpUrl(string const& url)
 		port = string(what[5].first, what[5].second);
 
 		m_protocol = StringToProtocol(protocol);
-		m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+		m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
 		m_port = StringToUnsignedShort(port, m_protocol);
 	}
 	else
 	{
-		throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+		throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
 	}
 }
 
 CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol)
 	: m_protocol(protocol)
 {
-	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
-	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
+	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
 
 	if (protocol == Protocol::HTTPS)
 	{
@@ -46,8 +46,8 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol, unsigned short port)
 	: m_protocol(protocol)
 {
-	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
-	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
+	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
 
 	if (port != 0)
 	{

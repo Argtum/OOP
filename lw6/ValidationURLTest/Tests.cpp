@@ -300,6 +300,22 @@ TEST_CASE("Save url by parameters with zero port")
 	}
 }
 
+TEST_CASE("Save url by parameters with wrong port")
+{
+	string domain = "www.hotelcosmos.ru";
+	string document = "/restaurant";
+	Protocol https = Protocol::HTTPS;
+	unsigned short port = 0;
+
+	WHEN("Save https url with 0 port")
+	{
+		THEN("Can get error message")
+		{
+			CHECK_THROWS_AS(CHttpUrl(domain, document, https, port), CUrlParsingError);
+		}
+	}
+}
+
 TEST_CASE("Save https url without port and document")
 {
 	string inputHttpsUrl = "https://www.hotelcosmos.ru";
@@ -320,6 +336,19 @@ TEST_CASE("Save https url without port and document")
 			CHECK(url.GetProtocol() == https);
 			CHECK(url.GetPort() == port);
 			CHECK(url.GetUrl() == outputHttpsUrl);
+		}
+	}
+}
+
+TEST_CASE("Save https url without domain")
+{
+	string inputHttpsUrl = "https:///restaurant:65535";
+
+	WHEN("Save https url with 0 port")
+	{
+		THEN("Can get error message")
+		{
+			CHECK_THROWS_AS(CHttpUrl(inputHttpsUrl), CUrlParsingError);
 		}
 	}
 }

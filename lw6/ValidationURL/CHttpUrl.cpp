@@ -46,10 +46,18 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 
 CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol, unsigned short port)
 	: m_protocol(protocol)
-	, m_port(port)
 {
 	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
 	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
+
+	if (port != 0)
+	{
+		m_port = port;
+	}
+	else
+	{
+		throw CUrlParsingError("ERROR: wrong port\nPort can not be zero\n");
+	}
 }
 
 string CHttpUrl::GetUrl() const
@@ -130,7 +138,14 @@ unsigned short StringToUnsignedShort(string& port, Protocol protocol)
 	{
 		try
 		{
-			return static_cast<unsigned short>(strtoul(port.c_str(), NULL, 0));
+			unsigned short p = static_cast<unsigned short>(strtoul(port.c_str(), NULL, 10));
+
+			if (p == 0)
+			{
+				throw CUrlParsingError("ERROR: wrong port\nPort can not be zero\n");
+			}
+
+			return p;
 		}
 		catch (CUrlParsingError error)
 		{

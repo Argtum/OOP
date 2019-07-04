@@ -18,7 +18,7 @@ TEST_CASE("Save url by parameters without port")
 		Protocol https = Protocol::HTTPS;
 		Protocol http = Protocol::HTTP;
 
-		WHEN("Save url without protocol")
+		WHEN("Save url without http protocol")
 		{
 			CHttpUrl url(domain, document);
 
@@ -165,15 +165,121 @@ TEST_CASE("Https url")
 	}
 }
 
+TEST_CASE("Http url without port")
+{
+	string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant";
+	string outputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
+	string domain = "www.hotelcosmos.ru";
+	string document = "/restaurant";
+	Protocol http = Protocol::HTTP;
+	unsigned short httpPort = 80;
+
+	WHEN("Save http url")
+	{
+		CHttpUrl url(inputHttpUrl);
+
+		THEN("Can get url parameters")
+		{
+			CHECK(url.GetDomain() == domain);
+			CHECK(url.GetDocument() == document);
+			CHECK(url.GetProtocol() == http);
+			CHECK(url.GetPort() == httpPort);
+			CHECK(url.GetUrl() == outputHttpUrl);
+		}
+	}
+}
+
 TEST_CASE("Https url without port")
 {
-	string inputHttpsUrlWithoutPort = "https//www.hotelcosmos.ru/restaurant";
+	string inputHttpUrl = "https://www.hotelcosmos.ru/restaurant";
+	string outputHttpUrl = "https://www.hotelcosmos.ru/restaurant:443";
+	string domain = "www.hotelcosmos.ru";
+	string document = "/restaurant";
+	Protocol http = Protocol::HTTPS;
+	unsigned short httpPort = 443;
+
+	WHEN("Save https url")
+	{
+		CHttpUrl url(inputHttpUrl);
+
+		THEN("Can get url parameters")
+		{
+			CHECK(url.GetDomain() == domain);
+			CHECK(url.GetDocument() == document);
+			CHECK(url.GetProtocol() == http);
+			CHECK(url.GetPort() == httpPort);
+			CHECK(url.GetUrl() == outputHttpUrl);
+		}
+	}
+}
+
+TEST_CASE("Wrong https url")
+{
+	string inputHttpsUrlWithoutPort = "httts://www.hotelcosmos.ru/restaurant";
 
 	WHEN("Save https url")
 	{
 		THEN("Can get error message")
 		{
 			CHECK_THROWS_AS(CHttpUrl(inputHttpsUrlWithoutPort), CUrlParsingError);
+		}
+	}
+}
+
+TEST_CASE("https with boundary values port")
+{
+	string inputHttpsUrlWithPort0 = "https://www.hotelcosmos.ru/restaurant:0";
+	string inputHttpsUrlWithPort1 = "https://www.hotelcosmos.ru/restaurant:1";
+	string inputHttpsUrlWithPort65535 = "https://www.hotelcosmos.ru/restaurant:65535";
+	string inputHttpsUrlWithPort65536 = "https://www.hotelcosmos.ru/restaurant:65536";
+
+	string domain = "www.hotelcosmos.ru";
+	string document = "/restaurant";
+	Protocol https = Protocol::HTTPS;
+	unsigned short httpsPort1 = 1;
+	unsigned short httpsPort65535 = 65535;
+
+	WHEN("Save https url with 0 port")
+	{
+		THEN("Can get error message")
+		{
+			CHECK_THROWS_AS(CHttpUrl(inputHttpsUrlWithPort0), CUrlParsingError);
+		}
+	}
+
+	WHEN("Save https url with 65536 port")
+	{
+		THEN("Can get error message")
+		{
+			CHECK_THROWS_AS(CHttpUrl(inputHttpsUrlWithPort65536), CUrlParsingError);
+		}
+	}
+
+	WHEN("Save https url with port 1")
+	{
+		CHttpUrl url(inputHttpsUrlWithPort1);
+
+		THEN("Can get url parameters")
+		{
+			CHECK(url.GetDomain() == domain);
+			CHECK(url.GetDocument() == document);
+			CHECK(url.GetProtocol() == https);
+			CHECK(url.GetPort() == httpsPort1);
+			CHECK(url.GetUrl() == inputHttpsUrlWithPort1);
+		}
+	}
+
+	WHEN("Save https url with port 65535")
+	{
+		CHttpUrl url(inputHttpsUrlWithPort65535);
+
+		THEN("Can get url parameters")
+		{
+			CHECK(url.GetDomain() == domain);
+			CHECK(url.GetDocument() == document);
+			CHECK(url.GetProtocol() == https);
+			CHECK(url.GetPort() == httpsPort65535);
+			CHECK(url.GetUrl() == inputHttpsUrlWithPort65535);
 		}
 	}
 }

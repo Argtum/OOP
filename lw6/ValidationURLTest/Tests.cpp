@@ -10,8 +10,8 @@ TEST_CASE("Save url by parameters without port")
 	{
 		string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant";
 		string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant";
-		string outputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
-		string outputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
+		string outputHttpUrl = "http://www.hotelcosmos.ru:80/restaurant";
+		string outputHttpsUrl = "https://www.hotelcosmos.ru:443/restaurant";
 
 		string domain = "www.hotelcosmos.ru";
 		string document = "/restaurant";
@@ -63,8 +63,8 @@ TEST_CASE("Save url by parameters with port")
 {
 	GIVEN("URL parameters")
 	{
-		string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
-		string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
+		string inputHttpUrl = "http://www.hotelcosmos.ru:80/restaurant";
+		string inputHttpsUrl = "https://www.hotelcosmos.ru:443/restaurant";
 		string domain = "www.hotelcosmos.ru";
 		string document = "/restaurant";
 		Protocol https = Protocol::HTTPS;
@@ -121,7 +121,7 @@ TEST_CASE("ToLowercase must translate text to lower case")
 
 TEST_CASE("Http url")
 {
-	string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
+	string inputHttpUrl = "http://www.hotelcosmos.ru:80/restaurant";
 	string domain = "www.hotelcosmos.ru";
 	string document = "/restaurant";
 	Protocol http = Protocol::HTTP;
@@ -144,7 +144,7 @@ TEST_CASE("Http url")
 
 TEST_CASE("Https url")
 {
-	string inputHttpsUrl = "https://www.hotelcosmos.ru/restaurant:443";
+	string inputHttpsUrl = "https://www.hotelcosmos.ru:443/restaurant";
 	string domain = "www.hotelcosmos.ru";
 	string document = "/restaurant";
 	Protocol https = Protocol::HTTPS;
@@ -168,7 +168,7 @@ TEST_CASE("Https url")
 TEST_CASE("Http url without port")
 {
 	string inputHttpUrl = "http://www.hotelcosmos.ru/restaurant";
-	string outputHttpUrl = "http://www.hotelcosmos.ru/restaurant:80";
+	string outputHttpUrl = "http://www.hotelcosmos.ru:80/restaurant";
 	string domain = "www.hotelcosmos.ru";
 	string document = "/restaurant";
 	Protocol http = Protocol::HTTP;
@@ -192,7 +192,7 @@ TEST_CASE("Http url without port")
 TEST_CASE("Https url without port")
 {
 	string inputHttpUrl = "https://www.hotelcosmos.ru/restaurant";
-	string outputHttpUrl = "https://www.hotelcosmos.ru/restaurant:443";
+	string outputHttpUrl = "https://www.hotelcosmos.ru:443/restaurant";
 	string domain = "www.hotelcosmos.ru";
 	string document = "/restaurant";
 	Protocol http = Protocol::HTTPS;
@@ -228,10 +228,10 @@ TEST_CASE("Wrong https url")
 
 TEST_CASE("https with boundary values port")
 {
-	string inputHttpsUrlWithPort0 = "https://www.hotelcosmos.ru/restaurant:0";
-	string inputHttpsUrlWithPort1 = "https://www.hotelcosmos.ru/restaurant:1";
-	string inputHttpsUrlWithPort65535 = "https://www.hotelcosmos.ru/restaurant:65535";
-	string inputHttpsUrlWithPort65536 = "https://www.hotelcosmos.ru/restaurant:65536";
+	string inputHttpsUrlWithPort0 = "https://www.hotelcosmos.ru:0/restaurant";
+	string inputHttpsUrlWithPort1 = "https://www.hotelcosmos.ru:1/restaurant";
+	string inputHttpsUrlWithPort65535 = "https://www.hotelcosmos.ru:65535/restaurant";
+	string inputHttpsUrlWithPort65536 = "https://www.hotelcosmos.ru:65536/restaurant";
 
 	string domain = "www.hotelcosmos.ru";
 	string document = "/restaurant";

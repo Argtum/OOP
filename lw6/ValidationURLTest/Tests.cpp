@@ -232,6 +232,8 @@ TEST_CASE("https with boundary values port")
 	string inputHttpsUrlWithPort1 = "https://www.hotelcosmos.ru:1/restaurant";
 	string inputHttpsUrlWithPort65535 = "https://www.hotelcosmos.ru:65535/restaurant";
 	string inputHttpsUrlWithPort65536 = "https://www.hotelcosmos.ru:65536/restaurant";
+	string inputHttpsUrlWithPort72000 = "https://www.hotelcosmos.ru:72000/restaurant";
+	string inputHttpsUrlWithPortMinus72000 = "https://www.hotelcosmos.ru:-72000/restaurant";
 
 	string domain = "www.hotelcosmos.ru";
 	string document = "/restaurant";
@@ -280,6 +282,22 @@ TEST_CASE("https with boundary values port")
 			CHECK(url.GetProtocol() == https);
 			CHECK(url.GetPort() == httpsPort65535);
 			CHECK(url.GetUrl() == inputHttpsUrlWithPort65535);
+		}
+	}
+
+	WHEN("Save https url with 72000 port")
+	{
+		THEN("Can get error message")
+		{
+			CHECK_THROWS_AS(CHttpUrl(inputHttpsUrlWithPort72000), CUrlParsingError);
+		}
+	}
+
+	WHEN("Save https url with -72000 port")
+	{
+		THEN("Can get error message")
+		{
+			CHECK_THROWS_AS(CHttpUrl(inputHttpsUrlWithPortMinus72000), CUrlParsingError);
 		}
 	}
 }
@@ -349,6 +367,24 @@ TEST_CASE("Save https url without domain")
 		THEN("Can get error message")
 		{
 			CHECK_THROWS_AS(CHttpUrl(inputHttpsUrl), CUrlParsingError);
+		}
+	}
+}
+
+TEST_CASE("Save url by parameters with port more than unsigned short")
+{
+	string domain = "www.hotelcosmos.ru";
+	string document = "/restaurant";
+	Protocol https = Protocol::HTTPS;
+	int port = 72000;
+	int portMinus = -72000;
+
+	WHEN("Save https url with 72000 port")
+	{
+		THEN("Can get error message")
+		{
+			CHECK_THROWS_AS(CHttpUrl(domain, document, https, port), CUrlParsingError);
+			CHECK_THROWS_AS(CHttpUrl(domain, document, https, portMinus), CUrlParsingError);
 		}
 	}
 }

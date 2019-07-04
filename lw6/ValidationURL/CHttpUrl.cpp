@@ -43,20 +43,13 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 	}
 }
 
-CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol, unsigned short port)
+CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protocol, int port)
 	: m_protocol(protocol)
 {
 	m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
 	m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
 
-	if (port != 0)
-	{
-		m_port = port;
-	}
-	else
-	{
-		throw CUrlParsingError("ERROR: wrong port\nPort can not be zero\n");
-	}
+	m_port = CheckPortRange(port);
 }
 
 string CHttpUrl::GetUrl() const
@@ -130,18 +123,23 @@ unsigned short StringToUnsignedShort(string& port, Protocol protocol)
 	{
 		try
 		{
-			unsigned short p = static_cast<unsigned short>(strtoul(port.c_str(), NULL, 10));
+			int p = static_cast<int>(strtoul(port.c_str(), NULL, 10));
 
-			if (p == 0)
-			{
-				throw CUrlParsingError("ERROR: wrong port\nPort can not be zero\n");
-			}
-
-			return p;
+			return CheckPortRange(p);
 		}
 		catch (CUrlParsingError error)
 		{
 			throw error;
 		}
 	}
+}
+
+unsigned short CheckPortRange(const int port)
+{
+	if (port < 1 || port > USHRT_MAX)
+	{
+		throw CUrlParsingError("ERROR: wrong port\nPort must be in the range of 1 to 65535\n");
+	}
+
+	return (unsigned short)port;
 }

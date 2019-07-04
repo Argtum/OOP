@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <catch2/catch.hpp>
+#include <cstdint>
 #include <iostream>
 #include <limits>
 #include <regex>

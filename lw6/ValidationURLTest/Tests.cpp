@@ -283,3 +283,43 @@ TEST_CASE("https with boundary values port")
 		}
 	}
 }
+
+TEST_CASE("Save url by parameters with zero port")
+{
+	string domain = "www.hotelcosmos.ru";
+	string document = "/restaurant";
+	Protocol https = Protocol::HTTPS;
+	unsigned short port = 0;
+
+	WHEN("Save https url with 0 port")
+	{
+		THEN("Can get error message")
+		{
+			CHECK_THROWS_AS(CHttpUrl(domain, document, https, port), CUrlParsingError);
+		}
+	}
+}
+
+TEST_CASE("Save https url without port and document")
+{
+	string inputHttpsUrl = "https://www.hotelcosmos.ru";
+	string outputHttpsUrl = "https://www.hotelcosmos.ru:443";
+	string domain = "www.hotelcosmos.ru";
+	string document = "";
+	Protocol https = Protocol::HTTPS;
+	unsigned short port = 443;
+
+	WHEN("Save https url")
+	{
+		CHttpUrl url(inputHttpsUrl);
+
+		THEN("Can get url parameters")
+		{
+			CHECK(url.GetDomain() == domain);
+			CHECK(url.GetDocument() == document);
+			CHECK(url.GetProtocol() == https);
+			CHECK(url.GetPort() == port);
+			CHECK(url.GetUrl() == outputHttpsUrl);
+		}
+	}
+}

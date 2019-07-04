@@ -14,12 +14,11 @@ CHttpUrl::CHttpUrl(string const& url)
 	{
 		protocol = string(what[1].first, what[1].second);
 		domain = string(what[2].first, what[2].second);
-		document = string(what[3].first, what[3].second);
+		m_document = string(what[3].first, what[3].second);
 		port = string(what[5].first, what[5].second);
 
 		m_protocol = StringToProtocol(protocol);
 		m_domain = !domain.empty() ? domain : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
-		m_document = !document.empty() ? document : throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/dodumen:port\n");
 		m_port = StringToUnsignedShort(port, m_protocol);
 	}
 	else
@@ -70,14 +69,7 @@ string CHttpUrl::GetUrl() const
 		protocol = "https";
 	}
 
-	if (m_port != 0)
-	{
-		url = protocol + "://" + m_domain + m_document + ":" + to_string(m_port);
-	}
-	else
-	{
-		url = protocol + "://" + m_domain + m_document;
-	}
+	url = protocol + "://" + m_domain + m_document + ":" + to_string(m_port);
 
 	return url;
 }

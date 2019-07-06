@@ -6,7 +6,7 @@ using namespace std;
 
 CHttpUrl::CHttpUrl(string const& url)
 {
-	regex ex("([\\w]*)://([^/ :]+)(:([0-9]{1,5}))?(/[^:#?\\s]*)?");
+	regex ex("([\\w]*)://([^/ :]+)(:([0-9]{1,5}))?(/[\\S]*)?");
 	cmatch what;
 	string protocol, domain, port;
 

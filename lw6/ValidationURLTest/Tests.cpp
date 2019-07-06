@@ -238,6 +238,7 @@ TEST_CASE("https with boundary values port")
 	string inputHttpsUrlWithPort65536 = "https://www.hotelcosmos.ru:65536/restaurant";
 	string inputHttpsUrlWithPort72000 = "https://www.hotelcosmos.ru:72000/restaurant";
 	string inputHttpsUrlWithPortMinus72000 = "https://www.hotelcosmos.ru:-72000/restaurant";
+
 	string outputHttpsUrlWithPort1 = "https://www.hotelcosmos.ru:1/restaurant\n";
 	string outputHttpsUrlWithPort65535 = "https://www.hotelcosmos.ru:65535/restaurant\n";
 
@@ -391,6 +392,30 @@ TEST_CASE("Save url by parameters with port more than unsigned short")
 		{
 			CHECK_THROWS_AS(CHttpUrl(domain, document, https, port), CUrlParsingError);
 			CHECK_THROWS_AS(CHttpUrl(domain, document, https, portMinus), CUrlParsingError);
+		}
+	}
+}
+
+TEST_CASE("Save http url with non standart document")
+{
+	string inputHttpsUrl = "http://ya.ru:123/abc/:8";
+	string outputHttpsUrl = "http://ya.ru:123/abc/:8\n";
+	string domain = "ya.ru";
+	string document = "/abc/:8";
+	Protocol https = Protocol::HTTP;
+	unsigned short port = 123;
+
+	WHEN("Save http url")
+	{
+		CHttpUrl url(inputHttpsUrl);
+
+		THEN("Can get url parameters")
+		{
+			CHECK(url.GetDomain() == domain);
+			CHECK(url.GetDocument() == document);
+			CHECK(url.GetProtocol() == https);
+			CHECK(url.GetPort() == port);
+			CHECK(url.GetUrl() == outputHttpsUrl);
 		}
 	}
 }

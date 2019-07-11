@@ -10,7 +10,7 @@ map<string, string> replacement{
 
 void replaceHtmlEntity(string& html, const string& htmlEntity)
 {
-	int pos;
+	size_t pos;
 
 	while ((pos = html.find(htmlEntity, 0)) != string::npos)
 	{

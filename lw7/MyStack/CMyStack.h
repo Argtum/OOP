@@ -50,6 +50,12 @@ public:
 		return !m_top;
 	}
 
+	void Push(const T& data)
+	{
+		Item* newItem = new Item(data, m_top);
+		m_top = newItem;
+	}
+
 	void Clear()
 	{
 		while (m_top)

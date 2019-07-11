@@ -14,5 +14,15 @@ TEST_CASE("Stack of integer")
 				CHECK(stack.IsEmpty());
 			}
 		}
+
+		WHEN("Push value to stack")
+		{
+			stack.Push(1);
+
+			THEN("Stack is not empty")
+			{
+				CHECK(!stack.IsEmpty());
+			}
+		}
 	}
 }

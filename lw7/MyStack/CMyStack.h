@@ -31,7 +31,7 @@ public:
 
 				if (this->m_top)
 				{
-					newItem->next = this->m_top
+					newItem->next = this->m_top;
 				}
 
 				this->m_top = newItem;
@@ -43,6 +43,11 @@ public:
 			Clear();
 			throw;
 		}
+	}
+
+	bool IsEmpty() const
+	{
+		return !m_top;
 	}
 
 	void Clear()

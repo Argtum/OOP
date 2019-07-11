@@ -50,6 +50,16 @@ public:
 		}
 	}
 
+	CMyStack<T>& operator=(CMyStack const& stack)
+	{
+		if (this != &stack)
+		{
+			CMyStack tmp = CMyStack(stack);
+			std::swap(tmp.m_top, m_top);
+		}
+		return *this;
+	}
+
 	bool IsEmpty() const
 	{
 		return !m_top;

@@ -92,5 +92,25 @@ TEST_CASE("Stack of integer")
 				CHECK(stack.GetTop() == newStack.GetTop());
 			}
 		}
+
+		WHEN("using operator = new stack ")
+		{
+			stack.Push(testValue);
+			stack.Push(value2);
+			CMyStack<int> newStack;
+			newStack = stack;
+
+			THEN("the new stacks are equal old stack")
+			{
+				CHECK(stack.GetTop() == newStack.GetTop());
+				stack.Pop();
+				newStack.Pop();
+				CHECK(stack.GetTop() == newStack.GetTop());
+				stack.Pop();
+				newStack.Pop();
+				CHECK(stack.IsEmpty());
+				CHECK(newStack.IsEmpty());
+			}
+		}
 	}
 }

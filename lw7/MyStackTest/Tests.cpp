@@ -93,14 +93,13 @@ TEST_CASE("Stack of integer")
 			}
 		}
 
-		WHEN("using operator = new stack ")
+		WHEN("Using copy operator = ")
 		{
 			stack.Push(testValue);
 			stack.Push(value2);
-			CMyStack<int> newStack;
-			newStack = stack;
+			CMyStack<int> newStack = stack;
 
-			THEN("the new stacks are equal old stack")
+			THEN("New stack are equal old stack")
 			{
 				CHECK(stack.GetTop() == newStack.GetTop());
 				stack.Pop();
@@ -121,6 +120,26 @@ TEST_CASE("Stack of integer")
 			CMyStack<int> newStack(std::move(stack));
 
 			THEN("Their elements coincide")
+			{
+				CHECK(dublicate.GetTop() == newStack.GetTop());
+				dublicate.Pop();
+				newStack.Pop();
+				CHECK(dublicate.GetTop() == newStack.GetTop());
+				dublicate.Pop();
+				newStack.Pop();
+				CHECK(dublicate.IsEmpty());
+				CHECK(newStack.IsEmpty());
+			}
+		}
+
+		WHEN("Using moving operator = ")
+		{
+			stack.Push(testValue);
+			stack.Push(value2);
+			CMyStack<int> dublicate = stack;
+			CMyStack<int> newStack = std::move(stack);
+
+			THEN("New stack are equal old stack")
 			{
 				CHECK(dublicate.GetTop() == newStack.GetTop());
 				dublicate.Pop();

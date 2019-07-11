@@ -60,10 +60,19 @@ public:
 		return *this;
 	}
 
-	CMyStack(CMyStack&& other)
+	CMyStack(CMyStack&& stack)
 		: CMyStack()
 	{
-		std::swap(this->m_top, other.m_top);
+		std::swap(this->m_top, stack.m_top);
+	}
+
+	CMyStack<T>& operator=(CMyStack&& stack)
+	{
+		if (this != &stack)
+		{
+			this->m_pTop = stack.m_pTop;
+		}
+		return *this;
 	}
 
 	bool IsEmpty() const

@@ -60,6 +60,12 @@ public:
 		return *this;
 	}
 
+	CMyStack(CMyStack&& other)
+		: CMyStack()
+	{
+		std::swap(this->m_top, other.m_top);
+	}
+
 	bool IsEmpty() const
 	{
 		return !m_top;

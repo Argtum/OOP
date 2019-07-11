@@ -112,5 +112,25 @@ TEST_CASE("Stack of integer")
 				CHECK(newStack.IsEmpty());
 			}
 		}
+
+		WHEN("Ñreate a new stack using move constructor")
+		{
+			stack.Push(testValue);
+			stack.Push(value2);
+			CMyStack<int> dublicate = stack;
+			CMyStack<int> newStack(std::move(stack));
+
+			THEN("Their elements coincide")
+			{
+				CHECK(dublicate.GetTop() == newStack.GetTop());
+				dublicate.Pop();
+				newStack.Pop();
+				CHECK(dublicate.GetTop() == newStack.GetTop());
+				dublicate.Pop();
+				newStack.Pop();
+				CHECK(dublicate.IsEmpty());
+				CHECK(newStack.IsEmpty());
+			}
+		}
 	}
 }

@@ -7,6 +7,7 @@ TEST_CASE("Stack of integer")
 	{
 		CMyStack<int> stack;
 		int testValue = 1;
+		int value2 = 10;
 		int reciever;
 
 		WHEN("Ñhecking if the stack is empty")
@@ -74,6 +75,21 @@ TEST_CASE("Stack of integer")
 			THEN("Stack is empty")
 			{
 				CHECK(stack.IsEmpty());
+			}
+		}
+
+		WHEN("Ñreate a new stack copy of the old")
+		{
+			stack.Push(testValue);
+			stack.Push(value2);
+			CMyStack<int> newStack(stack);
+
+			THEN("Their elements coincide")
+			{
+				CHECK(stack.GetTop() == newStack.GetTop());
+				stack.Pop();
+				newStack.Pop();
+				CHECK(stack.GetTop() == newStack.GetTop());
 			}
 		}
 	}

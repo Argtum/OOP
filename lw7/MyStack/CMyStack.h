@@ -27,14 +27,19 @@ public:
 
 			while (stackPtr)
 			{
-				Item* newItem = new Item(stack->data, nullptr);
+				Item* newItem = new Item(stackPtr->data, nullptr);
+				Item* cutItem = this->m_top;
 
-				if (this->m_top)
+				if (!this->m_top)
 				{
-					newItem->next = this->m_top;
+					this->m_top = newItem;
+				}
+				else
+				{
+					cutItem->next = newItem;
 				}
 
-				this->m_top = newItem;
+				cutItem = newItem;
 				stackPtr = stackPtr->next;
 			}
 		}

@@ -28,11 +28,11 @@ public:
 			while (stackPtr)
 			{
 				Item* newItem = new Item(stackPtr->data, nullptr);
-				Item* cutItem = this->m_top;
+				Item* cutItem = m_top;
 
-				if (!this->m_top)
+				if (!m_top)
 				{
-					this->m_top = newItem;
+					m_top = newItem;
 				}
 				else
 				{
@@ -63,14 +63,16 @@ public:
 	CMyStack(CMyStack&& stack)
 		: CMyStack()
 	{
-		std::swap(this->m_top, stack.m_top);
+		std::swap(m_top, stack.m_top);
 	}
 
 	CMyStack<T>& operator=(CMyStack&& stack)
 	{
 		if (this != &stack)
 		{
-			this->m_pTop = stack.m_pTop;
+			Clear();
+			m_top = stack.m_top;
+			stack = nullptr;
 		}
 		return *this;
 	}
@@ -121,7 +123,6 @@ public:
 	~CMyStack()
 	{
 		Clear();
-		free(m_top);
 	}
 
 private:

@@ -56,6 +56,18 @@ public:
 		m_top = newItem;
 	}
 
+	void Pop()
+	{
+		if (IsEmpty())
+		{
+			throw std::logic_error("ERROR: Stack is empty\n");
+		}
+
+		Item* itemPtr = m_top;
+		m_top = m_top->next;
+		delete itemPtr;
+	}
+
 	void Clear()
 	{
 		while (m_top)

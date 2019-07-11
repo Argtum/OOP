@@ -64,5 +64,17 @@ TEST_CASE("Stack of integer")
 				CHECK_THROWS_WITH(reciever = stack.GetTop(), "ERROR: Stack is empty\n");
 			}
 		}
+
+		WHEN("Clear not empty stack")
+		{
+			stack.Push(testValue);
+			stack.Push(testValue);
+			stack.Clear();
+
+			THEN("Stack is empty")
+			{
+				CHECK(stack.IsEmpty());
+			}
+		}
 	}
 }

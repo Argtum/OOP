@@ -68,6 +68,16 @@ public:
 		delete itemPtr;
 	}
 
+	T& GetTop() const
+	{
+		if (IsEmpty())
+		{
+			throw std::logic_error("ERROR: Stack is empty\n");
+		}
+
+		return m_top->data;
+	}
+
 	void Clear()
 	{
 		while (m_top)

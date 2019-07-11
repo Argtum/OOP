@@ -7,6 +7,7 @@ TEST_CASE("Stack of integer")
 	{
 		CMyStack<int> stack;
 		int testValue = 1;
+		int reciever;
 
 		WHEN("Ñhecking if the stack is empty")
 		{
@@ -42,6 +43,25 @@ TEST_CASE("Stack of integer")
 			THEN("Get error message")
 			{
 				CHECK_THROWS_WITH(stack.Pop(), "ERROR: Stack is empty\n");
+			}
+		}
+
+		WHEN("Get value from not empty stack")
+		{
+			stack.Push(testValue);
+			reciever = stack.GetTop();
+
+			THEN("Stack is empty")
+			{
+				CHECK(reciever == testValue);
+			}
+		}
+
+		WHEN("Get value from empty stack")
+		{
+			THEN("Get error message")
+			{
+				CHECK_THROWS_WITH(reciever = stack.GetTop(), "ERROR: Stack is empty\n");
 			}
 		}
 	}

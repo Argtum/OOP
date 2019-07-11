@@ -47,7 +47,7 @@ int main(int argc, char argv[])
 				cout << "ERROR: Wrong number of arguments!\nPlease enter the URL or its parameters: domain document protocol port" << endl;
 			}
 
-			cout << output;
+			cout << output << endl;
 		}
 		catch (invalid_argument const& e)
 		{

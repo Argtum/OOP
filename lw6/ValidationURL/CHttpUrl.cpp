@@ -23,7 +23,7 @@ CHttpUrl::CHttpUrl(string const& url)
 	}
 	else
 	{
-		throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain/documen:port\n");
+		throw CUrlParsingError("ERROR: wrong url\nURL must consist of protocol://domain:port/documen\n");
 	}
 }
 
@@ -59,8 +59,7 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 string CHttpUrl::GetUrl() const
 {
 	string protocol = "http";
-	string url;
-	string port = "";
+	string url, port;
 
 	if (m_protocol == Protocol::HTTPS)
 	{
@@ -72,7 +71,7 @@ string CHttpUrl::GetUrl() const
 		port = ":" + PortToString(m_port);
 	}
 
-	url = protocol + "://" + m_domain + port + m_document + "\n";
+	url = protocol + "://" + m_domain + port + m_document;
 
 	return url;
 }
